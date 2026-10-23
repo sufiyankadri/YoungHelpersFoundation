@@ -1,0 +1,83 @@
+<section class="page-container container">
+  <div class="page-heading">
+    <span class="badge badge-navy">Browse Verified Needs</span>
+    <h1>Explore Verified Causes</h1>
+    <p>Every case listed on Young Helpers Foundation has undergone rigorous background checks, quotation verifications, and Shariah eligibility approval.</p>
+  </div>
+
+  <!-- Filters -->
+  <div class="filter-bar">
+    <div class="filter-chips">
+      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'all'" (click)="setCategory('all')">
+        All Causes ({{ causeService.causes().length }})
+      </button>
+      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'rozgaar'" (click)="setCategory('rozgaar')">
+        Ek Rozgaar Livelihood
+      </button>
+      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'medical'" (click)="setCategory('medical')">
+        Medical Emergency
+      </button>
+      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'education'" (click)="setCategory('education')">
+        Education Scholarships
+      </button>
+      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'emergency'" (click)="setCategory('emergency')">
+        Disaster & Ration Relief
+      </button>
+    </div>
+  </div>
+
+  <!-- Grid -->
+  <div class="causes-cards-grid">
+    @for (cause of causeService.filteredCauses(); track cause.id) {
+      <div class="cause-card">
+        <div class="cause-thumb-wrap">
+          <img [src]="cause.coverImage" [alt]="cause.title" class="cause-thumb" />
+          <span class="cause-badge" [class.badge-green]="cause.category === 'rozgaar'" [class.badge-navy]="cause.category === 'medical'" [class.badge-gold]="cause.category === 'education'" [class.badge-magenta]="cause.category === 'emergency'">
+            {{ cause.category | uppercase }}
+          </span>
+          <span class="cause-fund-badge">{{ cause.fundType }} Fund</span>
+        </div>
+        <div class="cause-card-body">
+          <div class="cause-meta-top">
+            <span><span class="material-symbols-outlined" style="font-size: 14px;">location_on</span> {{ cause.location }}</span>
+            <span>Case #{{ cause.id }}</span>
+          </div>
+          <h4 class="cause-card-title">{{ cause.title }}</h4>
+          <p class="cause-card-desc">{{ cause.story }}</p>
+
+          @if (cause.rozgaarPlan) {
+            <div class="rozgaar-spec-box">
+              <div class="spec-row">
+                <strong>Asset:</strong> <span>{{ cause.rozgaarPlan.toolName }}</span>
+              </div>
+              <div class="spec-row">
+                <strong>Expected Income:</strong> <span class="income-badge">₹{{ cause.rozgaarPlan.expectedMonthlyIncome }}/month</span>
+              </div>
+            </div>
+          }
+
+          <!-- Progress -->
+          <div class="progress-wrap">
+            <div class="progress-labels">
+              <span class="raised-amt">₹{{ cause.raisedAmount.toLocaleString('en-IN') }}</span>
+              <span class="target-amt">Goal: ₹{{ cause.targetAmount.toLocaleString('en-IN') }}</span>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill" [style.width.%]="(cause.raisedAmount / cause.targetAmount) * 100"></div>
+            </div>
+            <div class="progress-sub">
+              <span>{{ Math.round((cause.raisedAmount / cause.targetAmount) * 100) }}% Collected</span>
+              <span>{{ cause.donorCount }} Backers</span>
+            </div>
+          </div>
+
+          <div class="cause-card-footer">
+            <button class="btn btn-primary btn-sm" style="flex: 1;" (click)="onDonate(cause)">
+              Donate Directly
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</section>

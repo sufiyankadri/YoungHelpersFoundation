@@ -1,0 +1,72 @@
+<!-- Top Trust & Transparency Bar -->
+<header class="top-announcement">
+  <div class="container top-bar-content">
+    <div class="top-meta">
+      <span class="badge badge-gold">
+        <span class="material-symbols-outlined icon-filled" style="font-size: 14px;">verified</span> 100% Shariah Verified
+      </span>
+      <span class="meta-item">
+        <span class="material-symbols-outlined" style="font-size: 15px;">lock</span> Strict Zero-Admin-Deduction on Zakat Fund
+      </span>
+      <span class="meta-item highlight-pill">
+        <span class="material-symbols-outlined" style="font-size: 14px;">card_giftcard</span> 80G Tax Exemption Available
+      </span>
+    </div>
+    <div class="top-actions">
+      <button class="top-link-btn" (click)="navigate('admin')">
+        <span class="material-symbols-outlined" style="font-size: 15px;">admin_panel_settings</span> Operations Portal
+      </button>
+      <span class="divider">|</span>
+      <span class="meta-item">Helpline: +91 98765 43210</span>
+      <span class="divider">|</span>
+      <button class="lang-switch">EN / हिंदी</button>
+    </div>
+  </div>
+</header>
+
+<!-- Main Navigation Header -->
+<nav class="main-nav">
+  <div class="container nav-content">
+    <div class="brand" (click)="navigate('home')">
+      <img src="logo.jpeg" alt="Young Helpers Foundation" class="brand-logo" />
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'home'" (click)="navigate('home')">
+        Home
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'causes'" (click)="navigate('causes')">
+        Explore Causes
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'rozgaar'" (click)="navigate('rozgaar')">
+        Ek Zakat Ek Rozgaar
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'calculator'" (click)="navigate('calculator')">
+        Zakat Calculator
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'about'" (click)="navigate('about')">
+        About Us
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'volunteer'" (click)="navigate('volunteer')">
+        Volunteer
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'transparency'" (click)="navigate('transparency')">
+        Audit & Ledger
+      </button>
+      <button class="nav-btn" [class.active]="causeService.activeTab() === 'faq'" (click)="navigate('faq')">
+        FAQ
+      </button>
+    </div>
+
+    <div class="nav-cta">
+      <button class="btn btn-outline btn-sm" (click)="navigate('apply')">
+        <span class="material-symbols-outlined" style="font-size: 18px;">assignment</span>
+        Apply For Help
+      </button>
+      <button class="btn btn-primary btn-sm" (click)="openDonate()">
+        <span class="material-symbols-outlined" style="font-size: 18px;">volunteer_activism</span>
+        Donate Now
+      </button>
+    </div>
+  </div>
+</nav>

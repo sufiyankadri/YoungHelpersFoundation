@@ -1,0 +1,85 @@
+<section class="page-container container">
+  <div class="page-heading text-center">
+    <span class="badge badge-green">Grassroots Community Force</span>
+    <h1>Become a YHF Volunteer</h1>
+    <p>Our volunteers are the backbone of trust. Help conduct physical verifications, mentor micro-enterprises, or manage emergency distributions in your city.</p>
+  </div>
+
+  <div class="volunteer-layout-grid">
+    <div class="vol-roles-card glass-panel">
+      <h3>Volunteer Impact Opportunities</h3>
+      <div class="vol-role-item">
+        <span class="material-symbols-outlined role-icon">home_pin</span>
+        <div>
+          <strong>Field Case Verifier</strong>
+          <p>Visit beneficiary homes in your area, verify quotations with local shops, and check family circumstances with dignity.</p>
+        </div>
+      </div>
+      <div class="vol-role-item">
+        <span class="material-symbols-outlined role-icon">trending_up</span>
+        <div>
+          <strong>Rozgaar Mentor (30/90 Days)</strong>
+          <p>Guide beneficiaries with basic marketing, customer connections, and bookkeeping to ensure their livelihood thrives.</p>
+        </div>
+      </div>
+      <div class="vol-role-item">
+        <span class="material-symbols-outlined role-icon">medical_services</span>
+        <div>
+          <strong>Hospital Desk Coordinator</strong>
+          <p>Assist poor patients in charitable wards to explore Ayushman Bharat discounts and cross-verify hospital estimates.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="vol-form-card glass-panel">
+      @if (!applicationService.volunteerForm.submitted) {
+        <h3>Join Our Volunteer Chapter</h3>
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" [(ngModel)]="applicationService.volunteerForm.fullName" placeholder="Ahmad Farooq" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp *</label>
+            <input type="tel" [(ngModel)]="applicationService.volunteerForm.phone" placeholder="+91 98765 43210" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" [(ngModel)]="applicationService.volunteerForm.email" placeholder="ahmad@example.com" class="form-input" />
+          </div>
+          <div class="form-group">
+            <label>City & State *</label>
+            <input type="text" [(ngModel)]="applicationService.volunteerForm.city" placeholder="e.g. Bhopal / Delhi / Lucknow" class="form-input" />
+          </div>
+          <div class="form-group full-width">
+            <label>Primary Skill / Area of Contribution *</label>
+            <select [(ngModel)]="applicationService.volunteerForm.skills" class="form-select">
+              <option value="Field Verification & Case Visits">Field Verification & Case Visits</option>
+              <option value="Micro-enterprise Business Mentorship">Micro-enterprise Business Mentorship</option>
+              <option value="Medical Hospital Coordination">Medical Hospital Coordination</option>
+              <option value="Digital Media, Accounts & Tech">Digital Media, Accounts & Tech</option>
+            </select>
+          </div>
+          <div class="form-group full-width">
+            <label>Availability *</label>
+            <select [(ngModel)]="applicationService.volunteerForm.availability" class="form-select">
+              <option value="Weekends (4-6 Hours)">Weekends (4-6 Hours)</option>
+              <option value="Flexible Evenings (1-2 Hours/day)">Flexible Evenings (1-2 Hours/day)</option>
+              <option value="On-Call Emergency Crisis Only">On-Call Emergency Crisis Only</option>
+            </select>
+          </div>
+        </div>
+        <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" (click)="submit()">
+          <span class="material-symbols-outlined">badge</span> Register as a Volunteer
+        </button>
+      } @else {
+        <div class="apply-success-box text-center">
+          <div class="success-icon-wrap"><span class="material-symbols-outlined">how_to_reg</span></div>
+          <h3>Registration Received!</h3>
+          <p>Thank you for offering your time. A regional chapter coordinator will contact you on WhatsApp to invite you to the next volunteer orientation.</p>
+          <button class="btn btn-navy btn-sm" (click)="reset()">Register Another Volunteer</button>
+        </div>
+      }
+    </div>
+  </div>
+</section>

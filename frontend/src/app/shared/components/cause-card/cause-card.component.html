@@ -1,0 +1,43 @@
+<div class="cause-card">
+  <div class="card-media">
+    <img [src]="cause.coverImage" [alt]="cause.title" loading="lazy" />
+    <span class="category-tag">{{ cause.category | uppercase }}</span>
+    <span class="fund-badge" [class.zakat-badge]="cause.fundType === 'Zakat'">
+      {{ cause.fundType }}
+    </span>
+  </div>
+
+  <div class="card-body">
+    <div class="beneficiary-meta">
+      <span class="loc">
+        <span class="material-symbols-outlined" style="font-size: 15px;">location_on</span>
+        {{ cause.location }}
+      </span>
+      <span class="id-tag">{{ cause.id }}</span>
+    </div>
+
+    <h3 class="card-title">{{ cause.title }}</h3>
+    <p class="card-desc">{{ cause.tagline }}</p>
+
+    <!-- Funding Progress -->
+    <div class="progress-wrap">
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="Math.min(100, (cause.raisedAmount / cause.targetAmount) * 100)"></div>
+      </div>
+      <div class="progress-stats">
+        <span class="raised">₹{{ cause.raisedAmount.toLocaleString('en-IN') }} <em>raised</em></span>
+        <span class="target">Goal: ₹{{ cause.targetAmount.toLocaleString('en-IN') }}</span>
+      </div>
+    </div>
+
+    <div class="card-footer">
+      <span class="donors-count">
+        <span class="material-symbols-outlined" style="font-size: 16px;">people</span>
+        {{ cause.donorCount }} supporters
+      </span>
+      <button class="btn btn-primary btn-sm" (click)="onDonate()">
+        Contribute
+      </button>
+    </div>
+  </div>
+</div>

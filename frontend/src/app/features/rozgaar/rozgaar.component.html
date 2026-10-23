@@ -1,0 +1,72 @@
+<section class="page-container container">
+  <div class="rozgaar-hero">
+    <span class="badge badge-green">Featured Flagship Model</span>
+    <h1>Ek Zakat → Ek Rozgaar Model</h1>
+    <p class="lead-text">
+      How Young Helpers Foundation bridges the gap between Shariah-compliant Zakat giving and permanent financial independence.
+    </p>
+  </div>
+
+  <!-- 4-Step Lifecycle Graphic -->
+  <div class="lifecycle-grid">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h4>Intake & Skill Assessment</h4>
+      <p>We interview the applicant to understand their existing skills (tailoring, motor mechanics, plumbing, culinary) and assess local market demand.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h4>Quotations & Verification</h4>
+      <p>Two commercial vendor quotations are procured for the heavy-duty machinery. Volunteer verifies household poverty & Shariah eligibility.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h4>Asset Handover (Tamleek)</h4>
+      <p>No cash loans. We purchase the equipment directly and transfer 100% unconditional legal ownership to the beneficiary with signed receipt.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h4>30 / 90 / 180-Day Monitoring</h4>
+      <p>Our field mentors visit the site at 30, 90, and 180 days to review customer flow, resolve obstacles, and confirm monthly earnings growth.</p>
+    </div>
+  </div>
+
+  <!-- Rozgaar Case Showcase -->
+  <div class="rozgaar-spotlight glass-panel">
+    <div class="spotlight-header">
+      <h3>Active Spotlight: {{ causeService.activeRozgaarCase().title }}</h3>
+      <span class="badge badge-navy">Case ID: {{ causeService.activeRozgaarCase().id }}</span>
+    </div>
+    <div class="spotlight-content">
+      <p>{{ causeService.activeRozgaarCase().story }}</p>
+      <div class="milestone-timeline">
+        <div class="milestone-node active">
+          <span class="material-symbols-outlined node-icon">check_circle</span>
+          <div class="node-text">
+            <strong>Day 0: Handover</strong>
+            <span>{{ causeService.activeRozgaarCase().rozgaarPlan?.toolName }}</span>
+          </div>
+        </div>
+        <div class="milestone-node">
+          <span class="material-symbols-outlined node-icon">radio_button_checked</span>
+          <div class="node-text">
+            <strong>Day 30 Checkpoint</strong>
+            <span>{{ causeService.activeRozgaarCase().rozgaarPlan?.day30Status }}</span>
+          </div>
+        </div>
+        <div class="milestone-node">
+          <span class="material-symbols-outlined node-icon">radio_button_unchecked</span>
+          <div class="node-text">
+            <strong>Day 90 Khud-Mukhtari</strong>
+            <span>{{ causeService.activeRozgaarCase().rozgaarPlan?.day90Status }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="spotlight-cta">
+        <button class="btn btn-primary" (click)="sponsorRozgaar()">
+          Sponsor This Rozgaar (₹{{ (causeService.activeRozgaarCase().targetAmount - causeService.activeRozgaarCase().raisedAmount).toLocaleString('en-IN') }} Remaining)
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

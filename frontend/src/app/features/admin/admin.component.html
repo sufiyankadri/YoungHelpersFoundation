@@ -1,0 +1,189 @@
+<section class="admin-wrapper container">
+  <div class="admin-topbar">
+    <div>
+      <span class="badge badge-navy">Operations & Verification Portal</span>
+      <h2>YHF Admin & Field Operations Command</h2>
+    </div>
+    <div class="admin-user-info">
+      <span class="status-pill verified">Super Admin: Active</span>
+      <button class="btn btn-outline btn-sm" (click)="returnHome()">
+        <span class="material-symbols-outlined">arrow_back</span> Back to Website
+      </button>
+    </div>
+  </div>
+
+  <!-- Admin Navigation Tabs -->
+  <div class="admin-subtabs">
+    <button class="admin-tab-btn" [class.active]="applicationService.adminSelectedTab() === 'cases'" (click)="setTab('cases')">
+      <span class="material-symbols-outlined">inbox</span> Case Verification Queue ({{ applicationService.adminApplications().length }})
+    </button>
+    <button class="admin-tab-btn" [class.active]="applicationService.adminSelectedTab() === 'ledger'" (click)="setTab('ledger')">
+      <span class="material-symbols-outlined">receipt_long</span> Recent Donations & Receipts
+    </button>
+    <button class="admin-tab-btn" [class.active]="applicationService.adminSelectedTab() === 'causes'" (click)="setTab('causes')">
+      <span class="material-symbols-outlined">campaign</span> Active Public Causes ({{ causeService.causes().length }})
+    </button>
+  </div>
+
+  <!-- Admin Tab: Cases Queue -->
+  @if (applicationService.adminSelectedTab() === 'cases') {
+    <div class="admin-card glass-panel">
+      <div class="admin-card-header">
+        <h3>Intake & Verification Worklist</h3>
+        <span class="badge badge-green">3-Member Committee Approval Enabled</span>
+      </div>
+
+      <div class="table-responsive">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Tracking ID</th>
+              <th>Applicant Name</th>
+              <th>City</th>
+              <th>Program</th>
+              <th>Quotation / Goal</th>
+              <th>Verification Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (app of applicationService.adminApplications(); track app.id) {
+              <tr>
+                <td><strong>{{ app.trackingNumber }}</strong></td>
+                <td>{{ app.fullName }} <br><small class="text-muted">{{ app.phone }}</small></td>
+                <td>{{ app.city }}</td>
+                <td><span class="badge badge-navy">{{ app.program }}</span></td>
+                <td><strong>₹{{ app.quotationAmount.toLocaleString('en-IN') }}</strong></td>
+                <td>
+                  <span class="status-pill" [class.verified]="app.status === 'Approved'" [class.pending]="app.status === 'Submitted' || app.status === 'FieldVerificationAssigned'" [class.review]="app.status === 'CommitteeReview'">
+                    {{ app.status }}
+                  </span>
+                </td>
+                <td>
+                  <div class="action-buttons-group">
+                    <button class="btn-action" title="View Details" (click)="viewCase(app)">
+                      <span class="material-symbols-outlined">visibility</span>
+                    </button>
+                    @if (app.status !== 'Approved') {
+                      <button class="btn-action approve" title="Approve Case" (click)="updateStatus(app, 'Approved')">
+                        <span class="material-symbols-outlined">check</span>
+                      </button>
+                    }
+                  </div>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Case Inspection Modal in Admin -->
+    @if (applicationService.selectedAdminCase()) {
+      <div class="admin-case-drawer glass-panel">
+        <div class="drawer-header">
+          <h3>Case Facts: {{ applicationService.selectedAdminCase()?.trackingNumber }}</h3>
+          <button class="close-btn" (click)="closeDrawer()">
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-row">
+            <strong>Applicant:</strong> <span>{{ applicationService.selectedAdminCase()?.fullName }} ({{ applicationService.selectedAdminCase()?.phone }})</span>
+          </div>
+          <div class="drawer-row">
+            <strong>City & Address:</strong> <span>{{ applicationService.selectedAdminCase()?.city }}</span>
+          </div>
+          <div class="drawer-row">
+            <strong>Monthly Family Income:</strong> <span>₹{{ applicationService.selectedAdminCase()?.monthlyIncome }} / month</span>
+          </div>
+          <div class="drawer-row">
+            <strong>Equipment Quotation:</strong> <span>₹{{ applicationService.selectedAdminCase()?.quotationAmount?.toLocaleString('en-IN') }}</span>
+          </div>
+          <div class="drawer-row">
+            <strong>Need Details:</strong> <span>{{ applicationService.selectedAdminCase()?.needDetails }}</span>
+          </div>
+          <div class="drawer-row">
+            <strong>Volunteer Field Notes:</strong> <span>{{ applicationService.selectedAdminCase()?.verifierNotes || 'Pending assignment to field volunteer.' }}</span>
+          </div>
+        </div>
+        <div class="drawer-footer">
+          <button class="btn btn-primary btn-sm" (click)="updateStatus(applicationService.selectedAdminCase()!, 'Approved'); closeDrawer();">
+            Approve & Publish to Public Causes
+          </button>
+          <button class="btn btn-outline btn-sm" (click)="closeDrawer()">Close</button>
+        </div>
+      </div>
+    }
+  }
+
+  <!-- Admin Tab: Recent Donations & Receipts -->
+  @if (applicationService.adminSelectedTab() === 'ledger') {
+    <div class="admin-card glass-panel">
+      <div class="admin-card-header">
+        <h3>Recent Donor Inflows & PDF Receipts</h3>
+        <span class="badge badge-gold">Immutable Audit Trail</span>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Receipt ID</th>
+            <th>Donor Name</th>
+            <th>Designated Fund</th>
+            <th>Amount</th>
+            <th>Cause Supported</th>
+            <th>Timestamp</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (don of donationService.recentAdminDonations(); track don.ref) {
+            <tr>
+              <td><code>{{ don.ref }}</code></td>
+              <td><strong>{{ don.donor }}</strong></td>
+              <td><span class="badge badge-green">{{ don.fund }}</span></td>
+              <td class="amt-pos"><strong>+₹{{ don.amount.toLocaleString('en-IN') }}</strong></td>
+              <td>{{ don.cause }}</td>
+              <td>{{ don.date }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+
+  <!-- Admin Tab: Public Causes -->
+  @if (applicationService.adminSelectedTab() === 'causes') {
+    <div class="admin-card glass-panel">
+      <div class="admin-card-header">
+        <h3>Active Crowdfunding Campaigns</h3>
+        <button class="btn btn-primary btn-sm" (click)="viewPublicCauses()">View on Public Site</button>
+      </div>
+
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Cause Code</th>
+            <th>Title</th>
+            <th>Fund Type</th>
+            <th>Goal Amount</th>
+            <th>Raised Amount</th>
+            <th>Progress</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (c of causeService.causes(); track c.id) {
+            <tr>
+              <td><code>{{ c.id }}</code></td>
+              <td><strong>{{ c.title }}</strong></td>
+              <td><span class="badge badge-navy">{{ c.fundType }}</span></td>
+              <td>₹{{ c.targetAmount.toLocaleString('en-IN') }}</td>
+              <td class="amt-pos">₹{{ c.raisedAmount.toLocaleString('en-IN') }}</td>
+              <td>{{ Math.round((c.raisedAmount / c.targetAmount) * 100) }}%</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</section>

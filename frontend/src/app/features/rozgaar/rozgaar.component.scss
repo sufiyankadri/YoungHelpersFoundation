@@ -1,0 +1,164 @@
+.page-container {
+  padding: 4rem 1.5rem 6rem;
+}
+
+.rozgaar-hero {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 3.5rem;
+
+  h1 {
+    font-size: 2.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .lead-text {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+}
+
+.lifecycle-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.75rem;
+  margin-bottom: 4rem;
+
+  .step-card {
+    background: #ffffff;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    padding: 2.25rem 1.75rem;
+    position: relative;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-num {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #e2e8f0;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.65rem;
+    }
+
+    p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+  }
+}
+
+.rozgaar-spotlight {
+  border-radius: var(--radius-xl);
+  padding: 2.5rem;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-md);
+
+  .spotlight-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    h3 {
+      font-size: 1.4rem;
+    }
+  }
+
+  .spotlight-content {
+    p {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+    }
+  }
+
+  .milestone-timeline {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+
+    .milestone-node {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      padding: 1.25rem;
+      background: var(--bg-canvas);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-subtle);
+
+      .node-icon {
+        color: var(--text-subtle);
+        font-size: 24px;
+      }
+
+      &.active {
+        border-color: var(--hope-green-border);
+        background: var(--hope-green-surface);
+
+        .node-icon {
+          color: var(--hope-green);
+        }
+      }
+
+      .node-text {
+        display: flex;
+        flex-direction: column;
+
+        strong {
+          font-size: 0.9rem;
+          color: var(--text-main);
+          margin-bottom: 0.2rem;
+        }
+
+        span {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+        }
+      }
+    }
+  }
+
+  .spotlight-cta {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+@media (max-width: 1024px) {
+  .lifecycle-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .rozgaar-spotlight .milestone-timeline {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .lifecycle-grid {
+    grid-template-columns: 1fr;
+  }
+}

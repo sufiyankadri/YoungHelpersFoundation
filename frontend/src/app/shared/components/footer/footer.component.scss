@@ -1,0 +1,111 @@
+.site-footer {
+  background: #061d36;
+  color: #cbd5e1;
+  padding-top: 4.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1.2fr;
+    gap: 3rem;
+    padding-bottom: 3.5rem;
+  }
+
+  .footer-brand {
+    .brand-row {
+      margin-bottom: 1.25rem;
+      .brand-logo {
+        height: 54px;
+        background: white;
+        padding: 4px;
+        border-radius: var(--radius-sm);
+      }
+    }
+
+    .footer-desc {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: #94a3b8;
+      margin-bottom: 1.5rem;
+      max-width: 360px;
+    }
+
+    .footer-badges {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+  }
+
+  .footer-col {
+    h4 {
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+
+    ul {
+      list-style: none;
+
+      li {
+        margin-bottom: 0.75rem;
+
+        a {
+          color: #94a3b8;
+          font-size: 0.9rem;
+          cursor: pointer;
+          transition: color 0.2s, padding-left 0.2s;
+
+          &:hover {
+            color: #ffffff;
+            padding-left: 4px;
+          }
+        }
+      }
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: #94a3b8;
+      margin-bottom: 0.75rem;
+
+      .material-symbols-outlined {
+        color: var(--hope-green-light);
+        font-size: 18px;
+      }
+    }
+  }
+
+  .footer-bottom {
+    background: #031122;
+    padding: 1.5rem 0;
+    font-size: 0.85rem;
+    color: #64748b;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+
+    .bottom-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .motto-tag {
+      color: var(--hope-green-light);
+      font-weight: 500;
+    }
+  }
+}
+
+@media (max-width: 900px) {
+  .site-footer .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}

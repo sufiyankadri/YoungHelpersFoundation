@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YHF.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+277e3adbfbd1a919f14b6431110752dbe5f39f7d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a3975bc1d2276f2b935a5395f197c7a244e992da")]
 [assembly: System.Reflection.AssemblyProductAttribute("YHF.Api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YHF.Api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,25 @@
+<section class="page-container container">
+  <div class="page-heading text-center">
+    <span class="badge badge-navy">Frequently Asked Questions</span>
+    <h1>Got Questions? We Have Honest Answers</h1>
+    <p>Clear, transparent answers about Shariah eligibility, tax receipts, and our Rozgaar delivery model.</p>
+  </div>
+
+  <div class="faq-accordion-wrap">
+    @for (faq of causeService.faqs(); track faq.q; let idx = $index) {
+      <div class="faq-item glass-panel" [class.expanded]="causeService.expandedFaqIndex() === idx">
+        <div class="faq-question" (click)="toggle(idx)">
+          <h4>{{ faq.q }}</h4>
+          <span class="material-symbols-outlined faq-chevron">
+            {{ causeService.expandedFaqIndex() === idx ? 'expand_less' : 'expand_more' }}
+          </span>
+        </div>
+        @if (causeService.expandedFaqIndex() === idx) {
+          <div class="faq-answer">
+            <p>{{ faq.a }}</p>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</section>

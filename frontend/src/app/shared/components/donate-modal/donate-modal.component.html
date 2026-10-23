@@ -1,0 +1,136 @@
+@if (donationService.isModalOpen()) {
+  <div class="modal-backdrop" (click)="close()">
+    <div class="modal-content glass-panel" (click)="$event.stopPropagation()">
+      <button class="modal-close-btn" (click)="close()">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      @if (!donationService.donationSuccess()) {
+        <!-- Donation Form -->
+        <div class="modal-header">
+          <span class="badge badge-green">Direct Empowerment</span>
+          <h2>
+            {{ donationService.selectedCause() ? 'Support: ' + donationService.selectedCause()?.title : 'Contribute to YHF Foundation' }}
+          </h2>
+          <p class="modal-subtitle">
+            100% of your Zakat reaches verified beneficiaries. Zero administrative cuts.
+          </p>
+        </div>
+
+        <div class="modal-body">
+          <!-- Fund Selection -->
+          <div class="form-group">
+            <label class="form-label">Designate Your Contribution</label>
+            <div class="fund-type-selector">
+              <button 
+                class="fund-btn" 
+                [class.active]="donationService.selectedFundType() === 'Zakat'" 
+                (click)="donationService.selectedFundType.set('Zakat')">
+                <span class="material-symbols-outlined">verified</span>
+                Zakat Fund (100% Tamleek)
+              </button>
+              <button 
+                class="fund-btn" 
+                [class.active]="donationService.selectedFundType() === 'Sadaqah'" 
+                (click)="donationService.selectedFundType.set('Sadaqah')">
+                <span class="material-symbols-outlined">favorite</span>
+                Sadaqah / General Charity
+              </button>
+              <button 
+                class="fund-btn" 
+                [class.active]="donationService.selectedFundType() === 'General'" 
+                (click)="donationService.selectedFundType.set('General')">
+                <span class="material-symbols-outlined">savings</span>
+                Foundation Pool
+              </button>
+            </div>
+          </div>
+
+          <!-- Quick Amounts -->
+          <div class="form-group">
+            <label class="form-label">Select Amount (INR)</label>
+            <div class="amount-pills">
+              <button class="pill-btn" [class.active]="donationService.donationAmount() === 1000" (click)="setAmount(1000)">₹1,000</button>
+              <button class="pill-btn" [class.active]="donationService.donationAmount() === 2500" (click)="setAmount(2500)">₹2,500</button>
+              <button class="pill-btn" [class.active]="donationService.donationAmount() === 5000" (click)="setAmount(5000)">₹5,000</button>
+              <button class="pill-btn" [class.active]="donationService.donationAmount() === 10000" (click)="setAmount(10000)">₹10,000</button>
+              <button class="pill-btn" [class.active]="donationService.donationAmount() === 25000" (click)="setAmount(25000)">₹25,000</button>
+            </div>
+            <div class="custom-amt-input-wrap">
+              <span class="currency">₹</span>
+              <input 
+                type="number" 
+                [ngModel]="donationService.customAmount()" 
+                (ngModelChange)="donationService.customAmount.set($event); onCustomAmountInput($event)"
+                placeholder="Or enter custom contribution amount" 
+                class="form-input" />
+            </div>
+          </div>
+
+          <!-- Donor Info -->
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Your Name *</label>
+              <input 
+                type="text" 
+                [ngModel]="donationService.donorName()" 
+                (ngModelChange)="donationService.donorName.set($event)" 
+                placeholder="Zaid Khan" 
+                class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Phone / WhatsApp *</label>
+              <input 
+                type="tel" 
+                [ngModel]="donationService.donorPhone()" 
+                (ngModelChange)="donationService.donorPhone.set($event)" 
+                placeholder="9876543210" 
+                class="form-input" />
+            </div>
+            <div class="form-group full-width">
+              <label>PAN Number (For tax 80G receipt eligibility)</label>
+              <input 
+                type="text" 
+                [ngModel]="donationService.donorPan()" 
+                (ngModelChange)="donationService.donorPan.set($event)" 
+                placeholder="ABCDE1234F" 
+                class="form-input" />
+            </div>
+          </div>
+
+          <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" (click)="processDonation()">
+            <span class="material-symbols-outlined">lock</span> Complete Donation of ₹{{ donationService.donationAmount().toLocaleString('en-IN') }}
+          </button>
+          <p class="modal-secure-note">
+            <span class="material-symbols-outlined" style="font-size: 14px;">security</span> 256-bit encrypted checkout. Verified instant receipt generated.
+          </p>
+        </div>
+      } @else {
+        <!-- Donation Success Screen -->
+        <div class="modal-success-state text-center">
+          <div class="success-icon-wrap">
+            <span class="material-symbols-outlined">verified</span>
+          </div>
+          <h2>Jazakallah Khair! Donation Captured</h2>
+          <p class="receipt-id">Receipt #<strong>{{ donationService.lastReceiptNumber() }}</strong></p>
+          <div class="success-details-card">
+            <div class="succ-row">
+              <span>Amount Contributed:</span>
+              <strong>₹{{ donationService.donationAmount().toLocaleString('en-IN') }}</strong>
+            </div>
+            <div class="succ-row">
+              <span>Fund Designated:</span>
+              <strong>{{ donationService.selectedFundType() }} Fund</strong>
+            </div>
+            <div class="succ-row">
+              <span>Timestamp:</span>
+              <strong>23 Oct 2026, 12:00 IST</strong>
+            </div>
+          </div>
+          <p class="tax-note">An official audit-compliant 80G PDF receipt has been generated and queued for your records.</p>
+          <button class="btn btn-navy" style="width: 100%;" (click)="close()">Done</button>
+        </div>
+      }
+    </div>
+  </div>
+}

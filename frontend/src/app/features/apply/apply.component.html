@@ -1,0 +1,159 @@
+<section class="page-container container">
+  <div class="page-heading text-center">
+    <span class="badge badge-navy">Beneficiary Intake Portal</span>
+    <h1>Apply for Financial / Rozgaar Assistance</h1>
+    <p>Are you or someone you know in genuine need of livelihood tools or critical medical aid? Submit details below for confidential verification.</p>
+  </div>
+
+  <div class="wizard-container glass-panel">
+    @if (!applicationService.applySubmitted()) {
+      <!-- Progress Steps Header -->
+      <div class="wizard-steps-header">
+        <div class="w-step" [class.active]="applicationService.applyStep() >= 1">
+          <div class="w-step-circle">1</div>
+          <span>Program & Contact</span>
+        </div>
+        <div class="w-line" [class.active]="applicationService.applyStep() >= 2"></div>
+        <div class="w-step" [class.active]="applicationService.applyStep() >= 2">
+          <div class="w-step-circle">2</div>
+          <span>Household & Income</span>
+        </div>
+        <div class="w-line" [class.active]="applicationService.applyStep() >= 3"></div>
+        <div class="w-step" [class.active]="applicationService.applyStep() >= 3">
+          <div class="w-step-circle">3</div>
+          <span>Specific Need & Quotations</span>
+        </div>
+      </div>
+
+      <!-- Step 1 -->
+      @if (applicationService.applyStep() === 1) {
+        <div class="wizard-step-content">
+          <h3>Step 1: Choose Program & Basic Contact</h3>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Assistance Category *</label>
+              <select [(ngModel)]="applicationService.applyData.program" class="form-select">
+                <option value="rozgaar">Ek Rozgaar (Livelihood Equipment / Commercial Tools)</option>
+                <option value="medical">Zindagi Bachao (Emergency Surgery / Critical Medical Bills)</option>
+                <option value="emergency">Emergency Relief (Accident / Disaster / Immediate Crisis)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Applicant Full Name *</label>
+              <input type="text" [(ngModel)]="applicationService.applyData.fullName" placeholder="Mohammad Aadil / Fatima Bi" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>WhatsApp / Mobile Number *</label>
+              <input type="tel" [(ngModel)]="applicationService.applyData.phone" placeholder="9876543210" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>City & State *</label>
+              <input type="text" [(ngModel)]="applicationService.applyData.city" placeholder="e.g. Bhopal, MP" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Residential Address *</label>
+              <input type="text" [(ngModel)]="applicationService.applyData.address" placeholder="House no, Mohalla, Area" class="form-input" />
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <div></div>
+            <button class="btn btn-navy" (click)="nextStep(2)">
+              Next: Household Details <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Step 2 -->
+      @if (applicationService.applyStep() === 2) {
+        <div class="wizard-step-content">
+          <h3>Step 2: Household & Financial Situation</h3>
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Total Family Members / Dependents *</label>
+              <input type="number" [(ngModel)]="applicationService.applyData.dependentsCount" placeholder="e.g. 5" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Total Monthly Family Income (All sources) *</label>
+              <input type="number" [(ngModel)]="applicationService.applyData.monthlyFamilyIncome" placeholder="e.g. 8000" class="form-input" />
+            </div>
+            <div class="form-group full-width">
+              <label>Applicant's Current Trade / Skill / Occupation *</label>
+              <input type="text" [(ngModel)]="applicationService.applyData.occupationSkill" placeholder="e.g. 3 years tailoring experience, ITI Electrician, etc." class="form-input" />
+            </div>
+            <div class="form-group full-width">
+              <label>Do you have Ration Card / Ayushman Card?</label>
+              <select [(ngModel)]="applicationService.applyData.hasGovtCard" class="form-select">
+                <option value="bpl">Yes, BPL / Yellow Ration Card</option>
+                <option value="ayushman">Yes, Ayushman Bharat Card</option>
+                <option value="no">No government cards available</option>
+              </select>
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <button class="btn btn-outline" (click)="nextStep(1)">
+              <span class="material-symbols-outlined">arrow_back</span> Back
+            </button>
+            <button class="btn btn-navy" (click)="nextStep(3)">
+              Next: Need & Quotations <span class="material-symbols-outlined">arrow_forward</span>
+            </button>
+          </div>
+        </div>
+      }
+
+      <!-- Step 3 -->
+      @if (applicationService.applyStep() === 3) {
+        <div class="wizard-step-content">
+          <h3>Step 3: Specific Support Needed & Quotation</h3>
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label>Describe exact equipment, tool, or hospital treatment needed *</label>
+              <textarea rows="4" [(ngModel)]="applicationService.applyData.needDetails" placeholder="Specify brand/model of tool needed, or hospital name and diagnosis..." class="form-textarea"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Estimated Cost (Quotation in ₹) *</label>
+              <input type="number" [(ngModel)]="applicationService.applyData.quotationAmount" placeholder="e.g. 26000" class="form-input" />
+            </div>
+            <div class="form-group">
+              <label>Document Upload (Quotation / Medical Estimate / ID)</label>
+              <div class="mock-upload-box">
+                <span class="material-symbols-outlined">upload_file</span>
+                <span>Click or Drag documents (PDF / JPG up to 10MB)</span>
+              </div>
+            </div>
+            <div class="form-group full-width">
+              <label class="checkbox-label">
+                <input type="checkbox" [(ngModel)]="applicationService.applyData.consentGranted" />
+                <span>I declare that the information provided is truthful. I consent to Young Helpers Foundation volunteers conducting physical verification for Zakat/Charity eligibility.</span>
+              </label>
+            </div>
+          </div>
+          <div class="wizard-actions">
+            <button class="btn btn-outline" (click)="nextStep(2)">
+              <span class="material-symbols-outlined">arrow_back</span> Back
+            </button>
+            <button class="btn btn-primary" [disabled]="!applicationService.applyData.consentGranted" (click)="submit()">
+              <span class="material-symbols-outlined">send</span> Submit Application for Verification
+            </button>
+          </div>
+        </div>
+      }
+    } @else {
+      <!-- Application Submitted Success State -->
+      <div class="apply-success-box text-center">
+        <div class="success-icon-wrap">
+          <span class="material-symbols-outlined">check_circle</span>
+        </div>
+        <h2>Application Registered Successfully!</h2>
+        <p class="case-ticket">Case Tracking ID: <strong>{{ applicationService.lastCaseNumber() }}</strong></p>
+        <p class="success-desc">
+          Your application has been received into our private verification inbox. A designated YHF field volunteer will contact you within 48 to 72 hours for document and home verification.
+        </p>
+        <div class="success-actions">
+          <button class="btn btn-navy" (click)="reset()">Submit Another Case</button>
+          <button class="btn btn-outline" (click)="returnHome()">Return to Home</button>
+        </div>
+      </div>
+    }
+  </div>
+</section>
