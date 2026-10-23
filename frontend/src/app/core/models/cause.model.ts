@@ -3,7 +3,7 @@ export interface Cause {
   slug: string;
   title: string;
   tagline: string;
-  category: 'rozgaar' | 'medical' | 'emergency';
+  category: 'rozgaar' | 'medical' | 'education' | 'emergency';
   fundType: 'Zakat' | 'Sadaqah' | 'General';
   targetAmount: number;
   raisedAmount: number;
@@ -74,6 +74,23 @@ export const MOCK_CAUSES: Cause[] = [
     }
   },
   {
+    id: 'YHF-ED-2026-005',
+    slug: 'higher-education-scholarship-saman',
+    title: 'Taleem Se Taraqqi: Higher Secondary Merit Scholarship for Orphan Girl',
+    tagline: 'Funding college admission, books, and laboratory fee for an aspiring student aiming for MBBS.',
+    category: 'education',
+    fundType: 'Zakat',
+    targetAmount: 34000,
+    raisedAmount: 24500,
+    donorCount: 38,
+    daysLeft: 14,
+    location: 'Hyderabad, Telangana',
+    verifiedDate: '20 Oct 2026',
+    shariahCompliant: true,
+    coverImage: 'cause_education.jpg',
+    story: 'Saman secured 94% marks in 10th standard despite losing her father. Her college fees cannot be paid by her daily-wage mother. Direct college fee settlement verified by YHF Education Committee.'
+  },
+  {
     id: 'YHF-MD-2026-003',
     slug: 'pediatric-cardiac-surgery-baby-arham',
     title: 'Zindagi Bachao: Urgent Pediatric Valve Surgery Assistance',
@@ -107,6 +124,23 @@ export const MOCK_CAUSES: Cause[] = [
     shariahCompliant: true,
     coverImage: 'cause_foodcart.jpg',
     story: 'A sudden market electrical fire gutted Imran’s small cart, cutting off his family’s only daily bread. Field verifier confirmed total loss. The full target was reached within 48 hours and the new cart was handed over on 14th October.'
+  },
+  {
+    id: 'YHF-EM-2026-006',
+    slug: 'family-ration-crisis-relief',
+    title: 'Dignified Ration & Survival Grocery Kit for Destitute Elderly Widows',
+    tagline: 'Essential 30-day nutrition kit with flour, rice, pulses, and oil for destitute families without earning support.',
+    category: 'emergency',
+    fundType: 'Sadaqah',
+    targetAmount: 18000,
+    raisedAmount: 15500,
+    donorCount: 22,
+    daysLeft: 5,
+    location: 'Aligarh, UP',
+    verifiedDate: '19 Oct 2026',
+    shariahCompliant: true,
+    coverImage: 'cause_ration.jpg',
+    story: 'Elderly widows in semi-rural villages with zero family income receive a direct dignified ration kit package ensuring no household sleeps hungry.'
   }
 ];
 
@@ -122,4 +156,33 @@ export const IMPACT_STATS: ImpactStat[] = [
   { label: 'Sustainable Rozgaars Built', value: '185', subtext: 'Asset handover, 0 loans, 100% ownership', icon: 'handshake' },
   { label: '30/90 Day Khud-Mukhtari Rate', value: '94.2%', subtext: 'Beneficiaries earning independent incomes', icon: 'trending_up' },
   { label: 'Transparent Ledger Inflow', value: '₹1.28 Cr', subtext: 'Strict separation of Zakat & Sadaqah', icon: 'account_balance' }
+];
+
+export interface FaqItem {
+  q: string;
+  a: string;
+  category: 'zakat' | 'rozgaar' | 'verification' | 'tax';
+}
+
+export const FAQ_DATA: FaqItem[] = [
+  {
+    q: 'How does Young Helpers Foundation ensure 100% Shariah compliance on Zakat?',
+    a: 'We adhere to the strict principle of Tamleek (direct ownership transfer). In Rozgaar livelihood projects, machines and commercial tools are purchased and handed over directly with signed title to the eligible beneficiary (Mustahiq). Zero administrative fee is deducted from the Zakat fund.',
+    category: 'zakat'
+  },
+  {
+    q: 'What is the difference between Zakat Ek Jagah and Ek Zakat Ek Rozgaar?',
+    a: 'Zakat Ek Jagah is our pooled fund mechanism where individual small donations are consolidated to buy meaningful productive assets. Ek Zakat Ek Rozgaar is the delivery model where those funds transform a destitute family into self-reliant entrepreneurs within 90 days.',
+    category: 'rozgaar'
+  },
+  {
+    q: 'How are applicants verified before a cause goes live?',
+    a: 'A 2-tier process: (1) Document and quotation verification by our verification desk, followed by (2) an in-person physical field visit by local volunteers to verify family income, residence, and urgency. Only after a 3-member committee review is the cause published.',
+    category: 'verification'
+  },
+  {
+    q: 'Do donors get 80G tax exemption receipts?',
+    a: 'Yes, every non-anonymous donor contributing with a valid PAN receives an immediate digital, ledger-backed donation receipt compliant with Indian Income Tax guidelines.',
+    category: 'tax'
+  }
 ];

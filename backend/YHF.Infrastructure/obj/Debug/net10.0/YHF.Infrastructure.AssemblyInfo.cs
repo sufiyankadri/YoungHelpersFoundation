@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("YHF.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+52dfc6177bb4b8055e41869ae1f4391d7ae0c80c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+277e3adbfbd1a919f14b6431110752dbe5f39f7d")]
 [assembly: System.Reflection.AssemblyProductAttribute("YHF.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("YHF.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

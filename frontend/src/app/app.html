@@ -9,9 +9,16 @@
         <span class="meta-item">
           <span class="material-symbols-outlined" style="font-size: 15px;">lock</span> Strict Zero-Admin-Deduction on Zakat Fund
         </span>
+        <span class="meta-item highlight-pill">
+          <span class="material-symbols-outlined" style="font-size: 14px;">card_giftcard</span> 80G Tax Exemption Available
+        </span>
       </div>
       <div class="top-actions">
-        <span class="meta-item">Helpdesk: +91 98765 43210</span>
+        <button class="top-link-btn" (click)="activeTab.set('admin')">
+          <span class="material-symbols-outlined" style="font-size: 15px;">admin_panel_settings</span> Operations Portal
+        </button>
+        <span class="divider">|</span>
+        <span class="meta-item">Helpline: +91 98765 43210</span>
         <span class="divider">|</span>
         <button class="lang-switch">EN / हिंदी</button>
       </div>
@@ -38,8 +45,17 @@
         <button class="nav-btn" [class.active]="activeTab() === 'calculator'" (click)="activeTab.set('calculator')">
           Zakat Calculator
         </button>
+        <button class="nav-btn" [class.active]="activeTab() === 'about'" (click)="activeTab.set('about')">
+          About Us
+        </button>
+        <button class="nav-btn" [class.active]="activeTab() === 'volunteer'" (click)="activeTab.set('volunteer')">
+          Volunteer
+        </button>
         <button class="nav-btn" [class.active]="activeTab() === 'transparency'" (click)="activeTab.set('transparency')">
-          Ledger & Transparency
+          Audit & Ledger
+        </button>
+        <button class="nav-btn" [class.active]="activeTab() === 'faq'" (click)="activeTab.set('faq')">
+          FAQ
         </button>
       </div>
 
@@ -49,14 +65,16 @@
           Apply For Help
         </button>
         <button class="btn btn-primary btn-sm" (click)="openDonateModal()">
-          <span class="material-symbols-outlined" style="font-size: 18px;">favorite</span>
+          <span class="material-symbols-outlined" style="font-size: 18px;">volunteer_activism</span>
           Donate Now
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- TAB: HOME -->
+  <!-- ======================================================== -->
+  <!-- TAB 1: HOME PAGE (Expanded with Rich Sections) -->
+  <!-- ======================================================== -->
   @if (activeTab() === 'home') {
     <!-- Hero Section -->
     <section class="hero-section">
@@ -73,7 +91,7 @@
             Transform Your <span class="gradient-text-green">Zakat</span> Into <span class="gradient-text-navy">Lifelong Rozgaar</span>
           </h1>
           <p class="hero-description">
-            We don’t believe in temporary survival rations. Young Helpers Foundation converts your Zakat and Sadaqah directly into permanent livelihood toolkits, medical life-support, and crisis rehabilitation — tracked transparently at 30, 90, and 180 days.
+            We don’t believe in temporary survival rations that expire in days. Young Helpers Foundation converts your Zakat directly into permanent livelihood machinery, emergency medical relief, and girls' education — tracked transparently at 30, 90, and 180 days.
           </p>
 
           <div class="hero-actions">
@@ -83,7 +101,7 @@
             </button>
             <button class="btn btn-outline" (click)="activeTab.set('causes')">
               <span class="material-symbols-outlined">explore</span>
-              Browse Verified Cases
+              Browse {{ causes().length }} Verified Cases
             </button>
           </div>
 
@@ -92,15 +110,15 @@
             <div class="trust-item">
               <span class="material-symbols-outlined trust-icon">gavel</span>
               <div>
-                <strong>Shariah Compliant</strong>
-                <p>Direct ownership transfer (Tamleek) to eligible Mustahiq</p>
+                <strong>Shariah Compliant Tamleek</strong>
+                <p>Direct unconditional ownership handover to eligible Mustahiq</p>
               </div>
             </div>
             <div class="trust-item">
               <span class="material-symbols-outlined trust-icon">receipt_long</span>
               <div>
-                <strong>Instant Verified Receipt</strong>
-                <p>Separate immutable ledger tracking for every single rupee</p>
+                <strong>Instant 80G Tax Receipt</strong>
+                <p>Double-entry immutable ledger tracking for every single rupee</p>
               </div>
             </div>
           </div>
@@ -169,12 +187,12 @@
     <section class="programs-section">
       <div class="container">
         <div class="section-heading text-center">
-          <span class="badge badge-navy">Our Three Sacred Pillars</span>
+          <span class="badge badge-navy">Our Four Pillars of Upliftment</span>
           <h2>Clear, Transparent & High-Impact Relief</h2>
-          <p>Every rupee is earmarked by your intention. No hidden cuts, no silent mixing.</p>
+          <p>Every rupee is earmarked by your intention. No administrative cuts, no silent mixing.</p>
         </div>
 
-        <div class="programs-grid">
+        <div class="programs-grid-4">
           <!-- Card 1: Rozgaar -->
           <div class="program-card">
             <div class="program-icon-box bg-green">
@@ -182,11 +200,11 @@
             </div>
             <span class="program-tag">Pillar 01</span>
             <h3>Ek Zakat → Ek Rozgaar</h3>
-            <p>We provide verified applicants with tangible production assets (sewing machines, mechanic tools, welding gear, food carts) with 100% legal ownership.</p>
+            <p>We provide verified applicants with tangible production assets (sewing machines, electrician tools, lathe gear, food carts) with 100% legal ownership.</p>
             <ul class="program-features">
               <li><span class="material-symbols-outlined check-icon">check_circle</span> 0% interest, 0 debt — Full Grant</li>
               <li><span class="material-symbols-outlined check-icon">check_circle</span> 30, 90 & 180-day income monitoring</li>
-              <li><span class="material-symbols-outlined check-icon">check_circle</span> Average ₹18k - ₹25k monthly self-reliance</li>
+              <li><span class="material-symbols-outlined check-icon">check_circle</span> Average ₹18k - ₹25k monthly earning</li>
             </ul>
             <button class="program-link" (click)="activeTab.set('rozgaar')">
               Learn Rozgaar Workflow <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
@@ -203,21 +221,39 @@
             <p>Immediate intervention for verified life-saving surgeries, chemotherapy, dialysis, and paediatric emergencies where families face financial collapse.</p>
             <ul class="program-features">
               <li><span class="material-symbols-outlined check-icon">check_circle</span> Hospital estimate cross-verified</li>
-              <li><span class="material-symbols-outlined check-icon">check_circle</span> Direct vendor/pharmacy settlements</li>
-              <li><span class="material-symbols-outlined check-icon">check_circle</span> Fast-tracked 24h approval committee</li>
+              <li><span class="material-symbols-outlined check-icon">check_circle</span> Direct vendor/hospital settlements</li>
+              <li><span class="material-symbols-outlined check-icon">check_circle</span> Fast-tracked 24h review committee</li>
             </ul>
             <button class="program-link" (click)="activeTab.set('causes')">
               Explore Medical Cases <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
             </button>
           </div>
 
-          <!-- Card 3: Emergency -->
+          <!-- Card 3: Education -->
+          <div class="program-card">
+            <div class="program-icon-box bg-gold">
+              <span class="material-symbols-outlined">school</span>
+            </div>
+            <span class="program-tag">Pillar 03</span>
+            <h3>Taleem Se Taraqqi (Education)</h3>
+            <p>Direct fee sponsorship and textbook support for bright underprivileged children and orphan students to ensure no career stops due to fees.</p>
+            <ul class="program-features">
+              <li><span class="material-symbols-outlined check-icon">check_circle</span> Merit & income background verified</li>
+              <li><span class="material-symbols-outlined check-icon">check_circle</span> Direct school/college fee deposit</li>
+              <li><span class="material-symbols-outlined check-icon">check_circle</span> Mentorship & academic monitoring</li>
+            </ul>
+            <button class="program-link" (click)="activeTab.set('causes')">
+              View Scholarships <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
+            </button>
+          </div>
+
+          <!-- Card 4: Emergency -->
           <div class="program-card">
             <div class="program-icon-box bg-magenta">
               <span class="material-symbols-outlined">emergency</span>
             </div>
-            <span class="program-tag">Pillar 03</span>
-            <h3>Crisis & Emergency Relief</h3>
+            <span class="program-tag">Pillar 04</span>
+            <h3>Emergency & Ration Relief</h3>
             <p>Support for sudden catastrophes: home fire damage, natural disasters, or breadwinner loss requiring immediate dignity-preserving family support.</p>
             <ul class="program-features">
               <li><span class="material-symbols-outlined check-icon">check_circle</span> On-ground volunteer physical check</li>
@@ -232,12 +268,56 @@
       </div>
     </section>
 
-    <!-- Featured Verified Causes Section -->
+    <!-- NEW SECTION: How It Works / Crowdfunding Workflow -->
+    <section class="how-it-works-section">
+      <div class="container">
+        <div class="section-heading text-center">
+          <span class="badge badge-green">End-to-End Governance</span>
+          <h2>How Young Helpers Foundation Works</h2>
+          <p>A rigorous, transparent journey from case intake to self-reliant livelihood</p>
+        </div>
+
+        <div class="workflow-steps-grid">
+          <div class="workflow-card">
+            <div class="wf-number">01</div>
+            <div class="wf-icon"><span class="material-symbols-outlined">draw</span></div>
+            <h4>Case Intake</h4>
+            <p>Beneficiary or local volunteer submits identity, household income, and vendor equipment quotation online or through community desk.</p>
+          </div>
+          <div class="workflow-card">
+            <div class="wf-number">02</div>
+            <div class="wf-icon"><span class="material-symbols-outlined">fact_check</span></div>
+            <h4>Field Physical Check</h4>
+            <p>Two assigned field volunteers physically visit the home, check poverty baseline, and verify quotation accuracy with local vendors.</p>
+          </div>
+          <div class="workflow-card">
+            <div class="wf-number">03</div>
+            <div class="wf-icon"><span class="material-symbols-outlined">gavel</span></div>
+            <h4>Committee Approval</h4>
+            <p>3-member Shariah and Finance committee verifies Mustahiq eligibility. Case is published anonymously protecting beneficiary dignity.</p>
+          </div>
+          <div class="workflow-card">
+            <div class="wf-number">04</div>
+            <div class="wf-icon"><span class="material-symbols-outlined">handshake</span></div>
+            <h4>Tamleek Handover</h4>
+            <p>Funds are disbursed directly to machine vendor. 100% unconditional asset ownership transferred to the family with signed handover.</p>
+          </div>
+          <div class="workflow-card">
+            <div class="wf-number">05</div>
+            <div class="wf-icon"><span class="material-symbols-outlined">query_stats</span></div>
+            <h4>30/90/180-Day Audit</h4>
+            <p>Volunteers visit at 30, 90, and 180 days to review customer earnings, solve equipment issues, and confirm sustainable Khud-Mukhtari.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Active Verified Causes Section -->
     <section class="causes-section">
       <div class="container">
         <div class="causes-header-row">
           <div>
-            <span class="badge badge-green">IndiaZakat-Inspired Transparency</span>
+            <span class="badge badge-green">100% Direct Disbursement</span>
             <h2>Active Verified Causes Needing Your Support</h2>
           </div>
           <button class="btn btn-outline" (click)="activeTab.set('causes')">
@@ -250,7 +330,7 @@
             <div class="cause-card">
               <div class="cause-thumb-wrap">
                 <img [src]="cause.coverImage" [alt]="cause.title" class="cause-thumb" />
-                <span class="cause-badge" [class.badge-green]="cause.category === 'rozgaar'" [class.badge-navy]="cause.category === 'medical'" [class.badge-magenta]="cause.category === 'emergency'">
+                <span class="cause-badge" [class.badge-green]="cause.category === 'rozgaar'" [class.badge-navy]="cause.category === 'medical'" [class.badge-gold]="cause.category === 'education'" [class.badge-magenta]="cause.category === 'emergency'">
                   {{ cause.category | uppercase }}
                 </span>
                 <span class="cause-fund-badge">{{ cause.fundType }} Eligible</span>
@@ -293,6 +373,40 @@
       </div>
     </section>
 
+    <!-- NEW SECTION: Why Donors Trust Us (Rahman Foundation / IndiaZakat Benchmark) -->
+    <section class="trust-pillars-section">
+      <div class="container">
+        <div class="section-heading text-center">
+          <span class="badge badge-gold">Zero Doubt Philanthropy</span>
+          <h2>Why Thousands Trust Young Helpers Foundation</h2>
+          <p>We combine deep religious adherence with modern enterprise audit trails.</p>
+        </div>
+
+        <div class="trust-features-grid">
+          <div class="tf-card">
+            <span class="material-symbols-outlined tf-icon">percent</span>
+            <h4>0% Admin Cut on Zakat</h4>
+            <p>Every single rupee donated as Zakat goes 100% to verified Mustahiq assets or hospital bills. Foundation overheads are funded through separate voluntary Lillah.</p>
+          </div>
+          <div class="tf-card">
+            <span class="material-symbols-outlined tf-icon">verified_user</span>
+            <h4>Two-Tier Physical Checks</h4>
+            <p>No desk-only approvals. Every beneficiary home is physically visited by local volunteers to verify genuine destitution before any fund is approved.</p>
+          </div>
+          <div class="tf-card">
+            <span class="material-symbols-outlined tf-icon">account_tree</span>
+            <h4>Permanent Asset Handover</h4>
+            <p>We do not issue micro-debt or small loans. We purchase machinery directly and transfer 100% permanent legal ownership (Tamleek) to the beneficiary.</p>
+          </div>
+          <div class="tf-card">
+            <span class="material-symbols-outlined tf-icon">visibility</span>
+            <h4>Live Double-Entry Ledger</h4>
+            <p>Our public audit ledger tracks every donation inflow and vendor outflow. Donors can view anonymized bank reconciliation receipts in real-time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Zakat & Rozgaar Philosophy Banner -->
     <section class="banner-cta-section">
       <div class="container banner-box glass-dark">
@@ -315,7 +429,9 @@
     </section>
   }
 
-  <!-- TAB: EXPLORE CAUSES -->
+  <!-- ======================================================== -->
+  <!-- TAB 2: EXPLORE CAUSES -->
+  <!-- ======================================================== -->
   @if (activeTab() === 'causes') {
     <section class="page-container container">
       <div class="page-heading">
@@ -336,8 +452,11 @@
           <button class="chip" [class.chip-active]="selectedCategory() === 'medical'" (click)="selectedCategory.set('medical')">
             Medical Emergency
           </button>
+          <button class="chip" [class.chip-active]="selectedCategory() === 'education'" (click)="selectedCategory.set('education')">
+            Education Scholarships
+          </button>
           <button class="chip" [class.chip-active]="selectedCategory() === 'emergency'" (click)="selectedCategory.set('emergency')">
-            Disaster & Crisis Relief
+            Disaster & Ration Relief
           </button>
         </div>
       </div>
@@ -348,7 +467,9 @@
           <div class="cause-card">
             <div class="cause-thumb-wrap">
               <img [src]="cause.coverImage" [alt]="cause.title" class="cause-thumb" />
-              <span class="cause-badge">{{ cause.category | uppercase }}</span>
+              <span class="cause-badge" [class.badge-green]="cause.category === 'rozgaar'" [class.badge-navy]="cause.category === 'medical'" [class.badge-gold]="cause.category === 'education'" [class.badge-magenta]="cause.category === 'emergency'">
+                {{ cause.category | uppercase }}
+              </span>
               <span class="cause-fund-badge">{{ cause.fundType }} Fund</span>
             </div>
             <div class="cause-card-body">
@@ -397,11 +518,13 @@
     </section>
   }
 
-  <!-- TAB: EK ZAKAT EK ROZGAAR DETAIL -->
+  <!-- ======================================================== -->
+  <!-- TAB 3: EK ZAKAT EK ROZGAAR DETAIL -->
+  <!-- ======================================================== -->
   @if (activeTab() === 'rozgaar') {
     <section class="page-container container">
       <div class="rozgaar-hero">
-        <span class="badge badge-green">Featured Mission</span>
+        <span class="badge badge-green">Featured Flagship Model</span>
         <h1>Ek Zakat → Ek Rozgaar Model</h1>
         <p class="lead-text">
           How Young Helpers Foundation bridges the gap between Shariah-compliant Zakat giving and permanent financial independence.
@@ -473,7 +596,9 @@
     </section>
   }
 
-  <!-- TAB: ZAKAT CALCULATOR -->
+  <!-- ======================================================== -->
+  <!-- TAB 4: SHARIAH ZAKAT CALCULATOR (With Nisab Toggle) -->
+  <!-- ======================================================== -->
   @if (activeTab() === 'calculator') {
     <section class="page-container container">
       <div class="page-heading text-center">
@@ -482,13 +607,31 @@
         <p>Calculate your annual 2.5% Zakat obligations easily and accurately according to classic Fiqh principles.</p>
       </div>
 
+      <!-- Nisab Standard Selector -->
+      <div class="nisab-selector-card glass-panel">
+        <div class="nisab-header">
+          <div>
+            <h4>Select Nisab Threshold Standard</h4>
+            <p>Nisab is the minimum wealth you must possess for one full lunar year before Zakat becomes mandatory.</p>
+          </div>
+          <div class="nisab-pill-group">
+            <button class="nisab-btn" [class.active]="nisabStandard() === 'silver'" (click)="nisabStandard.set('silver')">
+              Silver Standard (₹68,000)
+            </button>
+            <button class="nisab-btn" [class.active]="nisabStandard() === 'gold'" (click)="nisabStandard.set('gold')">
+              Gold Standard (₹6,85,000)
+            </button>
+          </div>
+        </div>
+      </div>
+
       <div class="calc-grid">
         <div class="calc-inputs-panel glass-panel">
-          <h3 class="panel-title">Your Assets & Wealth</h3>
+          <h3 class="panel-title">Your Assets & Wealth (Held for 1 Lunar Year)</h3>
           <p class="panel-sub">Enter wealth held in your possession for 1 lunar year (Hawl):</p>
 
           <div class="form-group">
-            <label>Gold Value (Jewellery / Coins / Bars)</label>
+            <label>Gold Value (Jewellery / Coins / Bars in possession)</label>
             <div class="input-with-currency">
               <span>₹</span>
               <input type="number" [(ngModel)]="goldValue" placeholder="0" />
@@ -496,7 +639,7 @@
           </div>
 
           <div class="form-group">
-            <label>Silver Value</label>
+            <label>Silver Value (Jewellery / Utensils / Bars)</label>
             <div class="input-with-currency">
               <span>₹</span>
               <input type="number" [(ngModel)]="silverValue" placeholder="0" />
@@ -504,7 +647,7 @@
           </div>
 
           <div class="form-group">
-            <label>Cash in Bank & Hand</label>
+            <label>Cash in Bank Accounts & In Hand</label>
             <div class="input-with-currency">
               <span>₹</span>
               <input type="number" [(ngModel)]="cashInHand" placeholder="0" />
@@ -521,7 +664,7 @@
 
           <hr class="calc-hr" />
 
-          <h3 class="panel-title">Immediate Liabilities & Debts</h3>
+          <h3 class="panel-title">Immediate Liabilities & Debts Due</h3>
           <div class="form-group">
             <label>Short-term bills & debts due immediately</label>
             <div class="input-with-currency">
@@ -543,29 +686,313 @@
               <strong>₹{{ calculatedNetWealth().toLocaleString('en-IN') }}</strong>
             </div>
             <div class="res-row">
-              <span>Zakat Rate:</span>
-              <strong>2.50%</strong>
+              <span>Nisab Threshold:</span>
+              <strong>₹{{ currentNisab().toLocaleString('en-IN') }}</strong>
+            </div>
+            <div class="res-row">
+              <span>Zakat Applicable?</span>
+              <strong>{{ isZakatEligible() ? 'YES (Above Nisab)' : 'NO (Below Nisab)' }}</strong>
             </div>
             <div class="res-total-box">
-              <span class="res-total-label">Your Total Zakat Payable</span>
+              <span class="res-total-label">Your Total Zakat Payable (2.5%)</span>
               <span class="res-total-value">₹{{ calculatedZakatPayable().toLocaleString('en-IN') }}</span>
             </div>
           </div>
 
           <div class="results-note">
             <span class="material-symbols-outlined" style="font-size: 18px;">info</span>
-            <p>Young Helpers Foundation maintains a dedicated, audit-proof Zakat ledger. 100% of your Zakat funds only eligible beneficiaries (Mustahiqeen) for Rozgaar & Medical needs.</p>
+            <p>Young Helpers Foundation maintains a dedicated, audit-proof Zakat ledger. 100% of your Zakat funds only eligible beneficiaries (Mustahiqeen) for Rozgaar, Medical, & Education needs.</p>
           </div>
 
-          <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" (click)="setAmount(calculatedZakatPayable()); openDonateModal();">
-            Pay Calculated Zakat (₹{{ calculatedZakatPayable().toLocaleString('en-IN') }})
-          </button>
+          @if (calculatedZakatPayable() > 0) {
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" (click)="setAmount(calculatedZakatPayable()); openDonateModal();">
+              Pay Calculated Zakat (₹{{ calculatedZakatPayable().toLocaleString('en-IN') }})
+            </button>
+          } @else {
+            <button class="btn btn-outline" style="width: 100%; margin-top: 1.5rem; color: white; border-color: rgba(255,255,255,0.4);" (click)="openDonateModal();">
+              Give Voluntary Sadaqah Instead
+            </button>
+          }
         </div>
       </div>
     </section>
   }
 
-  <!-- TAB: APPLY FOR HELP WIZARD -->
+  <!-- ======================================================== -->
+  <!-- TAB 5: ABOUT US (Inspired by Rahman Foundation & Blueprint) -->
+  <!-- ======================================================== -->
+  @if (activeTab() === 'about') {
+    <section class="page-container container">
+      <div class="page-heading text-center">
+        <span class="badge badge-navy">Our Mission & Identity</span>
+        <h1>About Young Helpers Foundation</h1>
+        <p class="lead-text">
+          Bridging the gap between poverty and dignified self-reliance through centralized Zakat and targeted sustainable micro-enterprises.
+        </p>
+      </div>
+
+      <div class="about-hero-grid">
+        <div class="about-text-card glass-panel">
+          <h3>"Helping Today for a Better Tomorrow"</h3>
+          <p>
+            Young Helpers Foundation was founded on a simple yet revolutionary truth: <strong>Relief that only feeds for a week keeps poverty alive for a generation.</strong>
+          </p>
+          <p>
+            By channeling Zakat, Sadaqah, and community contributions into productive livelihood assets, hospital bill settlements, and educational sponsorships, we break the cycle of dependency and transform Zakat receivers into future Zakat givers.
+          </p>
+          <div class="about-pillars-box">
+            <div class="ap-item">
+              <strong>Social Service</strong>
+              <span>Immediate medical life-support and disaster crisis rehabilitation.</span>
+            </div>
+            <div class="ap-item">
+              <strong>Economic Khud-Mukhtari</strong>
+              <span>Permanent asset grants with 30/90/180-day milestone follow-ups.</span>
+            </div>
+            <div class="ap-item">
+              <strong>Taleem & Moral Guidance</strong>
+              <span>Scholarships for bright students and ethical community mentoring.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="about-credo-card glass-dark">
+          <span class="badge badge-gold">Governance Oath</span>
+          <h3>Our Zero-Doubt Commitments</h3>
+          <ul class="credo-list">
+            <li>
+              <span class="material-symbols-outlined check-icon">check_circle</span>
+              <div>
+                <strong>100% Zakat Pass-Through</strong>
+                <p>Zero admin fee deductions from the Zakat fund. Operating expenses are supported by separate donor contributions.</p>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-outlined check-icon">check_circle</span>
+              <div>
+                <strong>Strict Tamleek (Ownership)</strong>
+                <p>Assets are bought and legally transferred to the beneficiary. We do not issue micro-loans or debt.</p>
+              </div>
+            </li>
+            <li>
+              <span class="material-symbols-outlined check-icon">check_circle</span>
+              <div>
+                <strong>Two-Person Verification</strong>
+                <p>Every case requires independent physical home checks before any funds are approved or disbursed.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ======================================================== -->
+  <!-- TAB 6: VOLUNTEER WORKSPACE & JOIN FORM -->
+  <!-- ======================================================== -->
+  @if (activeTab() === 'volunteer') {
+    <section class="page-container container">
+      <div class="page-heading text-center">
+        <span class="badge badge-green">Grassroots Community Force</span>
+        <h1>Become a YHF Volunteer</h1>
+        <p>Our volunteers are the backbone of trust. Help conduct physical verifications, mentor micro-enterprises, or manage emergency distributions in your city.</p>
+      </div>
+
+      <div class="volunteer-layout-grid">
+        <div class="vol-roles-card glass-panel">
+          <h3>Volunteer Impact Opportunities</h3>
+          <div class="vol-role-item">
+            <span class="material-symbols-outlined role-icon">home_pin</span>
+            <div>
+              <strong>Field Case Verifier</strong>
+              <p>Visit beneficiary homes in your area, verify quotations with local shops, and check family circumstances with dignity.</p>
+            </div>
+          </div>
+          <div class="vol-role-item">
+            <span class="material-symbols-outlined role-icon">trending_up</span>
+            <div>
+              <strong>Rozgaar Mentor (30/90 Days)</strong>
+              <p>Guide beneficiaries with basic marketing, customer connections, and bookkeeping to ensure their livelihood thrives.</p>
+            </div>
+          </div>
+          <div class="vol-role-item">
+            <span class="material-symbols-outlined role-icon">medical_services</span>
+            <div>
+              <strong>Hospital Desk Coordinator</strong>
+              <p>Assist poor patients in charitable wards to explore Ayushman Bharat discounts and cross-verify hospital estimates.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="vol-form-card glass-panel">
+          @if (!volunteerForm.submitted) {
+            <h3>Join Our Volunteer Chapter</h3>
+            <div class="form-grid">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" [(ngModel)]="volunteerForm.fullName" placeholder="Ahmad Farooq" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Phone / WhatsApp *</label>
+                <input type="tel" [(ngModel)]="volunteerForm.phone" placeholder="+91 98765 43210" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" [(ngModel)]="volunteerForm.email" placeholder="ahmad@example.com" class="form-input" />
+              </div>
+              <div class="form-group">
+                <label>City & State *</label>
+                <input type="text" [(ngModel)]="volunteerForm.city" placeholder="e.g. Bhopal / Delhi / Lucknow" class="form-input" />
+              </div>
+              <div class="form-group full-width">
+                <label>Primary Skill / Area of Contribution *</label>
+                <select [(ngModel)]="volunteerForm.skills" class="form-select">
+                  <option value="Field Verification & Case Visits">Field Verification & Case Visits</option>
+                  <option value="Micro-enterprise Business Mentorship">Micro-enterprise Business Mentorship</option>
+                  <option value="Medical Hospital Coordination">Medical Hospital Coordination</option>
+                  <option value="Digital Media, Accounts & Tech">Digital Media, Accounts & Tech</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label>Availability *</label>
+                <select [(ngModel)]="volunteerForm.availability" class="form-select">
+                  <option value="Weekends (4-6 Hours)">Weekends (4-6 Hours)</option>
+                  <option value="Flexible Evenings (1-2 Hours/day)">Flexible Evenings (1-2 Hours/day)</option>
+                  <option value="On-Call Emergency Crisis Only">On-Call Emergency Crisis Only</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-primary" style="width: 100%; margin-top: 1rem;" (click)="submitVolunteer()">
+              <span class="material-symbols-outlined">badge</span> Register as a Volunteer
+            </button>
+          } @else {
+            <div class="apply-success-box text-center">
+              <div class="success-icon-wrap"><span class="material-symbols-outlined">how_to_reg</span></div>
+              <h3>Registration Received!</h3>
+              <p>Thank you for offering your time. A regional chapter coordinator will contact you on WhatsApp to invite you to the next volunteer orientation.</p>
+              <button class="btn btn-navy btn-sm" (click)="volunteerForm.submitted = false">Register Another Volunteer</button>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  }
+
+  <!-- ======================================================== -->
+  <!-- TAB 7: FAQ (Comprehensive Shariah & Operations) -->
+  <!-- ======================================================== -->
+  @if (activeTab() === 'faq') {
+    <section class="page-container container">
+      <div class="page-heading text-center">
+        <span class="badge badge-navy">Frequently Asked Questions</span>
+        <h1>Got Questions? We Have Honest Answers</h1>
+        <p>Clear, transparent answers about Shariah eligibility, tax receipts, and our Rozgaar delivery model.</p>
+      </div>
+
+      <div class="faq-accordion-wrap">
+        @for (faq of faqs(); track faq.q; let idx = $index) {
+          <div class="faq-item glass-panel" [class.expanded]="expandedFaqIndex() === idx">
+            <div class="faq-question" (click)="toggleFaq(idx)">
+              <h4>{{ faq.q }}</h4>
+              <span class="material-symbols-outlined faq-chevron">
+                {{ expandedFaqIndex() === idx ? 'expand_less' : 'expand_more' }}
+              </span>
+            </div>
+            @if (expandedFaqIndex() === idx) {
+              <div class="faq-answer">
+                <p>{{ faq.a }}</p>
+              </div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+  }
+
+  <!-- ======================================================== -->
+  <!-- TAB 8: AUDIT & LEDGER TRANSPARENCY -->
+  <!-- ======================================================== -->
+  @if (activeTab() === 'transparency') {
+    <section class="page-container container">
+      <div class="page-heading">
+        <span class="badge badge-gold">Double-Entry Audit Proof</span>
+        <h1>Public Transparency & Fund Ledger</h1>
+        <p>In accordance with YHF Blueprint Section 10, every single rupee received and disbursed is recorded in an immutable ledger with zero silent transfers.</p>
+      </div>
+
+      <div class="ledger-summary-grid">
+        <div class="ledger-stat-card">
+          <span class="ledger-label">Zakat Fund (Dedicated Pool)</span>
+          <span class="ledger-amt">₹64,20,000</span>
+          <span class="ledger-note">100% reserved exclusively for Mustahiq Rozgaar & Medical</span>
+        </div>
+        <div class="ledger-stat-card">
+          <span class="ledger-label">Sadaqah & General Pool</span>
+          <span class="ledger-amt">₹48,80,000</span>
+          <span class="ledger-note">Used for emergency relief, disaster response, and logistics</span>
+        </div>
+        <div class="ledger-stat-card">
+          <span class="ledger-label">Direct Disbursements</span>
+          <span class="ledger-amt">₹92,40,000</span>
+          <span class="ledger-note">Transferred directly to machine vendors & hospitals</span>
+        </div>
+      </div>
+
+      <div class="recent-transactions-card glass-panel">
+        <h3>Live Reconciled Ledger Inflow & Disbursements</h3>
+        <table class="ledger-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Transaction Ref</th>
+              <th>Fund Type</th>
+              <th>Description / Purpose</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>22 Oct 2026</td>
+              <td><code>TXN-YHF-84910</code></td>
+              <td><span class="badge badge-green">Zakat</span></td>
+              <td>Industrial Sewing Machine vendor payment (Fatima Bi)</td>
+              <td class="amt-neg">-₹26,000</td>
+              <td><span class="status-pill verified">Disbursed</span></td>
+            </tr>
+            <tr>
+              <td>22 Oct 2026</td>
+              <td><code>TXN-YHF-84909</code></td>
+              <td><span class="badge badge-green">Zakat</span></td>
+              <td>Online Donor Contribution (Case #YHF-RZ-001)</td>
+              <td class="amt-pos">+₹5,000</td>
+              <td><span class="status-pill verified">Settled</span></td>
+            </tr>
+            <tr>
+              <td>21 Oct 2026</td>
+              <td><code>TXN-YHF-84908</code></td>
+              <td><span class="badge badge-magenta">Sadaqah</span></td>
+              <td>Emergency ration & steel cart handover (Imran)</td>
+              <td class="amt-neg">-₹32,000</td>
+              <td><span class="status-pill verified">Disbursed</span></td>
+            </tr>
+            <tr>
+              <td>21 Oct 2026</td>
+              <td><code>TXN-YHF-84907</code></td>
+              <td><span class="badge badge-navy">General</span></td>
+              <td>Anonymous Bank UPI Transfer</td>
+              <td class="amt-pos">+₹10,000</td>
+              <td><span class="status-pill verified">Settled</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  }
+
+  <!-- ======================================================== -->
+  <!-- TAB 9: APPLY FOR HELP WIZARD -->
+  <!-- ======================================================== -->
   @if (activeTab() === 'apply') {
     <section class="page-container container">
       <div class="page-heading text-center">
@@ -714,7 +1141,7 @@
               <span class="material-symbols-outlined">check_circle</span>
             </div>
             <h2>Application Registered Successfully!</h2>
-            <p class="case-ticket">Case Tracking ID: <strong>YHF-REQ-2026-9042</strong></p>
+            <p class="case-ticket">Case Tracking ID: <strong>{{ lastCaseNumber() }}</strong></p>
             <p class="success-desc">
               Your application has been received into our private verification inbox. A designated YHF field volunteer will contact you within 48 to 72 hours for document and home verification.
             </p>
@@ -728,92 +1155,199 @@
     </section>
   }
 
-  <!-- TAB: LEDGER & TRANSPARENCY -->
-  @if (activeTab() === 'transparency') {
-    <section class="page-container container">
-      <div class="page-heading">
-        <span class="badge badge-gold">Double-Entry Audit Proof</span>
-        <h1>Public Transparency & Fund Ledger</h1>
-        <p>In accordance with YHF Blueprint Section 10, every single rupee received and disbursed is recorded in an immutable ledger with zero silent transfers.</p>
-      </div>
-
-      <div class="ledger-summary-grid">
-        <div class="ledger-stat-card">
-          <span class="ledger-label">Zakat Fund (Dedicated Pool)</span>
-          <span class="ledger-amt">₹64,20,000</span>
-          <span class="ledger-note">100% reserved exclusively for Mustahiq Rozgaar & Medical</span>
+  <!-- ======================================================== -->
+  <!-- TAB 10: ADMIN & VOLUNTEER OPERATIONS DASHBOARD -->
+  <!-- ======================================================== -->
+  @if (activeTab() === 'admin') {
+    <section class="admin-wrapper container">
+      <div class="admin-topbar">
+        <div>
+          <span class="badge badge-navy">Operations & Verification Portal</span>
+          <h2>YHF Admin & Field Operations Command</h2>
         </div>
-        <div class="ledger-stat-card">
-          <span class="ledger-label">Sadaqah & General Pool</span>
-          <span class="ledger-amt">₹48,80,000</span>
-          <span class="ledger-note">Used for emergency relief, disaster response, and logistics</span>
-        </div>
-        <div class="ledger-stat-card">
-          <span class="ledger-label">Direct Disbursements</span>
-          <span class="ledger-amt">₹92,40,000</span>
-          <span class="ledger-note">Transferred directly to machine vendors & hospitals</span>
+        <div class="admin-user-info">
+          <span class="status-pill verified">Super Admin: Active</span>
+          <button class="btn btn-outline btn-sm" (click)="activeTab.set('home')">
+            <span class="material-symbols-outlined">arrow_back</span> Back to Website
+          </button>
         </div>
       </div>
 
-      <div class="recent-transactions-card glass-panel">
-        <h3>Live Reconciled Ledger Inflow & Disbursements</h3>
-        <table class="ledger-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Transaction Ref</th>
-              <th>Fund Type</th>
-              <th>Description / Purpose</th>
-              <th>Amount</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>22 Oct 2026</td>
-              <td><code>TXN-YHF-84910</code></td>
-              <td><span class="badge badge-green">Zakat</span></td>
-              <td>Industrial Sewing Machine vendor payment (Fatima Bi)</td>
-              <td class="amt-neg">-₹26,000</td>
-              <td><span class="status-pill verified">Disbursed</span></td>
-            </tr>
-            <tr>
-              <td>22 Oct 2026</td>
-              <td><code>TXN-YHF-84909</code></td>
-              <td><span class="badge badge-green">Zakat</span></td>
-              <td>Online Donor Contribution (Case #YHF-RZ-001)</td>
-              <td class="amt-pos">+₹5,000</td>
-              <td><span class="status-pill verified">Settled</span></td>
-            </tr>
-            <tr>
-              <td>21 Oct 2026</td>
-              <td><code>TXN-YHF-84908</code></td>
-              <td><span class="badge badge-magenta">Sadaqah</span></td>
-              <td>Emergency ration & steel cart handover (Imran)</td>
-              <td class="amt-neg">-₹32,000</td>
-              <td><span class="status-pill verified">Disbursed</span></td>
-            </tr>
-            <tr>
-              <td>21 Oct 2026</td>
-              <td><code>TXN-YHF-84907</code></td>
-              <td><span class="badge badge-navy">General</span></td>
-              <td>Anonymous Bank UPI Transfer</td>
-              <td class="amt-pos">+₹10,000</td>
-              <td><span class="status-pill verified">Settled</span></td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Admin Navigation Tabs -->
+      <div class="admin-subtabs">
+        <button class="admin-tab-btn" [class.active]="adminSelectedTab() === 'cases'" (click)="adminSelectedTab.set('cases')">
+          <span class="material-symbols-outlined">inbox</span> Case Verification Queue ({{ adminApplications().length }})
+        </button>
+        <button class="admin-tab-btn" [class.active]="adminSelectedTab() === 'ledger'" (click)="adminSelectedTab.set('ledger')">
+          <span class="material-symbols-outlined">receipt_long</span> Recent Donations & Receipts
+        </button>
+        <button class="admin-tab-btn" [class.active]="adminSelectedTab() === 'causes'" (click)="adminSelectedTab.set('causes')">
+          <span class="material-symbols-outlined">campaign</span> Active Public Causes ({{ causes().length }})
+        </button>
       </div>
+
+      <!-- Admin Tab: Cases Queue -->
+      @if (adminSelectedTab() === 'cases') {
+        <div class="admin-card glass-panel">
+          <div class="admin-card-header">
+            <h3>Intake & Verification Worklist</h3>
+            <span class="badge badge-green">3-Member Committee Approval Enabled</span>
+          </div>
+
+          <div class="table-responsive">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Tracking ID</th>
+                  <th>Applicant Name</th>
+                  <th>City</th>
+                  <th>Program</th>
+                  <th>Quotation / Goal</th>
+                  <th>Verification Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (app of adminApplications(); track app.id) {
+                  <tr>
+                    <td><strong>{{ app.trackingNumber }}</strong></td>
+                    <td>{{ app.fullName }} <br><small class="text-muted">{{ app.phone }}</small></td>
+                    <td>{{ app.city }}</td>
+                    <td><span class="badge badge-navy">{{ app.program }}</span></td>
+                    <td><strong>₹{{ app.quotationAmount.toLocaleString('en-IN') }}</strong></td>
+                    <td>
+                      <span class="status-pill" [class.verified]="app.status === 'Approved'" [class.pending]="app.status === 'Submitted' || app.status === 'FieldVerificationAssigned'" [class.review]="app.status === 'CommitteeReview'">
+                        {{ app.status }}
+                      </span>
+                    </td>
+                    <td>
+                      <div class="action-buttons-group">
+                        <button class="btn-action" title="View Details" (click)="viewAdminCase(app)">
+                          <span class="material-symbols-outlined">visibility</span>
+                        </button>
+                        @if (app.status !== 'Approved') {
+                          <button class="btn-action approve" title="Approve Case" (click)="updateCaseStatus(app, 'Approved')">
+                            <span class="material-symbols-outlined">check</span>
+                          </button>
+                        }
+                      </div>
+                    </td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Case Inspection Modal in Admin -->
+        @if (selectedAdminCase()) {
+          <div class="admin-case-drawer glass-panel">
+            <div class="drawer-header">
+              <h3>Case Facts: {{ selectedAdminCase()?.trackingNumber }}</h3>
+              <button class="close-btn" (click)="selectedAdminCase.set(null)">
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+            <div class="drawer-body">
+              <div class="drawer-row">
+                <strong>Applicant:</strong> <span>{{ selectedAdminCase()?.fullName }} ({{ selectedAdminCase()?.phone }})</span>
+              </div>
+              <div class="drawer-row">
+                <strong>City & Address:</strong> <span>{{ selectedAdminCase()?.city }}</span>
+              </div>
+              <div class="drawer-row">
+                <strong>Monthly Family Income:</strong> <span>₹{{ selectedAdminCase()?.monthlyIncome }} / month</span>
+              </div>
+              <div class="drawer-row">
+                <strong>Equipment Quotation:</strong> <span>₹{{ selectedAdminCase()?.quotationAmount?.toLocaleString('en-IN') }}</span>
+              </div>
+              <div class="drawer-row">
+                <strong>Need Details:</strong> <span>{{ selectedAdminCase()?.needDetails }}</span>
+              </div>
+              <div class="drawer-row">
+                <strong>Volunteer Field Notes:</strong> <span>{{ selectedAdminCase()?.verifierNotes || 'Pending assignment to field volunteer.' }}</span>
+              </div>
+            </div>
+            <div class="drawer-footer">
+              <button class="btn btn-primary btn-sm" (click)="updateCaseStatus(selectedAdminCase()!, 'Approved'); selectedAdminCase.set(null);">
+                Approve & Publish to Public Causes
+              </button>
+              <button class="btn btn-outline btn-sm" (click)="selectedAdminCase.set(null)">Close</button>
+            </div>
+          </div>
+        }
+      }
+
+      <!-- Admin Tab: Recent Donations & Receipts -->
+      @if (adminSelectedTab() === 'ledger') {
+        <div class="admin-card glass-panel">
+          <div class="admin-card-header">
+            <h3>Recent Donor Inflows & PDF Receipts</h3>
+            <span class="badge badge-gold">Immutable Audit Trail</span>
+          </div>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Receipt ID</th>
+                <th>Donor Name</th>
+                <th>Designated Fund</th>
+                <th>Amount</th>
+                <th>Cause Supported</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (don of recentAdminDonations(); track don.ref) {
+                <tr>
+                  <td><code>{{ don.ref }}</code></td>
+                  <td><strong>{{ don.donor }}</strong></td>
+                  <td><span class="badge badge-green">{{ don.fund }}</span></td>
+                  <td class="amt-pos"><strong>+₹{{ don.amount.toLocaleString('en-IN') }}</strong></td>
+                  <td>{{ don.cause }}</td>
+                  <td>{{ don.date }}</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+
+      <!-- Admin Tab: Public Causes -->
+      @if (adminSelectedTab() === 'causes') {
+        <div class="admin-card glass-panel">
+          <div class="admin-card-header">
+            <h3>Active Crowdfunding Campaigns</h3>
+            <button class="btn btn-primary btn-sm" (click)="activeTab.set('causes')">View on Public Site</button>
+          </div>
+
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Cause Code</th>
+                <th>Title</th>
+                <th>Fund Type</th>
+                <th>Goal Amount</th>
+                <th>Raised Amount</th>
+                <th>Progress</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (c of causes(); track c.id) {
+                <tr>
+                  <td><code>{{ c.id }}</code></td>
+                  <td><strong>{{ c.title }}</strong></td>
+                  <td><span class="badge badge-navy">{{ c.fundType }}</span></td>
+                  <td>₹{{ c.targetAmount.toLocaleString('en-IN') }}</td>
+                  <td class="amt-pos">₹{{ c.raisedAmount.toLocaleString('en-IN') }}</td>
+                  <td>{{ Math.round((c.raisedAmount / c.targetAmount) * 100) }}%</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
     </section>
-  }
-
-  <!-- DONATION MODAL -->
-  @if (selectedCause() !== null || (activeTab() === 'home' && selectedFundType() !== null && selectedCause() === null && donationSuccess() === false && false)) {
-    <!-- modal handled below -->
-  }
-
-  @if (selectedCause() || donationAmount() > 0) {
-    <!-- We open modal when selectedCause() exists or triggered -->
   }
 
   <!-- Universal Donate Modal -->
@@ -893,7 +1427,7 @@
               <span class="material-symbols-outlined">verified</span>
             </div>
             <h2>Jazakallah Khair! Donation Captured</h2>
-            <p class="receipt-id">Receipt #<strong>YHF-REC-2026-{{ Math.floor(Math.random() * 89999 + 10000) }}</strong></p>
+            <p class="receipt-id">Receipt #<strong>{{ lastReceiptNumber() }}</strong></p>
             <div class="success-details-card">
               <div class="succ-row">
                 <span>Amount Contributed:</span>
@@ -905,10 +1439,10 @@
               </div>
               <div class="succ-row">
                 <span>Timestamp:</span>
-                <strong>23 Oct 2026, 02:52 IST</strong>
+                <strong>23 Oct 2026, 12:00 IST</strong>
               </div>
             </div>
-            <p class="tax-note">An official audit-compliant 80G PDF receipt has been sent to your WhatsApp/Phone.</p>
+            <p class="tax-note">An official audit-compliant 80G PDF receipt has been generated and queued for your records.</p>
             <button class="btn btn-navy" style="width: 100%;" (click)="closeDonateModal()">Done</button>
           </div>
         }
@@ -922,10 +1456,9 @@
       <div class="footer-brand">
         <div class="brand-row">
           <img src="logo.jpeg" alt="YHF Logo" class="brand-logo" />
-          <span class="footer-brand-title">YOUNG HELPERS FOUNDATION</span>
         </div>
         <p class="footer-desc">
-          Empowering underprivileged families through sustainable Rozgaar livelihood assets, urgent medical lifelines, and double-entry Zakat ledger transparency.
+          Empowering underprivileged families through sustainable Rozgaar livelihood assets, urgent medical lifelines, orphan education scholarships, and double-entry Zakat ledger transparency.
         </p>
         <div class="footer-badges">
           <span class="badge badge-green">Shariah Supervised</span>
@@ -938,18 +1471,20 @@
         <ul>
           <li><a (click)="activeTab.set('rozgaar')">Ek Zakat Ek Rozgaar</a></li>
           <li><a (click)="activeTab.set('causes')">Zindagi Bachao (Medical)</a></li>
-          <li><a (click)="activeTab.set('causes')">Emergency Relief</a></li>
+          <li><a (click)="activeTab.set('causes')">Taleem Se Taraqqi (Education)</a></li>
+          <li><a (click)="activeTab.set('causes')">Emergency & Ration Relief</a></li>
           <li><a (click)="activeTab.set('calculator')">Zakat Calculator</a></li>
         </ul>
       </div>
 
       <div class="footer-col">
-        <h4>Governance & Trust</h4>
+        <h4>Trust & Governance</h4>
         <ul>
           <li><a (click)="activeTab.set('transparency')">Public Audit Ledger</a></li>
-          <li><a>Shariah Tamleek Policy</a></li>
-          <li><a>Verification Methodology</a></li>
-          <li><a>Grievance & Redressal</a></li>
+          <li><a (click)="activeTab.set('about')">About Us & Credo</a></li>
+          <li><a (click)="activeTab.set('volunteer')">Join as Volunteer</a></li>
+          <li><a (click)="activeTab.set('faq')">Frequently Asked Questions</a></li>
+          <li><a (click)="activeTab.set('admin')">Staff Operations Portal</a></li>
         </ul>
       </div>
 
@@ -964,7 +1499,7 @@
     <div class="footer-bottom">
       <div class="container bottom-content">
         <p>© 2026 Young Helpers Foundation. All rights reserved. Registered Indian Charitable Entity.</p>
-        <p class="motto-tag">Helping Today for a Better Tomorrow</p>
+        <p class="motto-tag">Helping Today for a Better Tomorrow • Aaj Madad, Kal Khud-Mukhtari</p>
       </div>
     </div>
   </footer>
