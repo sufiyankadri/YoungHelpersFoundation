@@ -1,0 +1,12 @@
+D:\YoungHelpersFoundation\backend\YHF.Domain\bin\Debug\net10.0\YHF.Domain.deps.json
+D:\YoungHelpersFoundation\backend\YHF.Domain\bin\Debug\net10.0\YHF.Domain.dll
+D:\YoungHelpersFoundation\backend\YHF.Domain\bin\Debug\net10.0\YHF.Domain.pdb
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.AssemblyInfoInputs.cache
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.AssemblyInfo.cs
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.csproj.CoreCompileInputs.cache
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.sourcelink.json
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.dll
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\refint\YHF.Domain.dll
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\YHF.Domain.pdb
+D:\YoungHelpersFoundation\backend\YHF.Domain\obj\Debug\net10.0\ref\YHF.Domain.dll

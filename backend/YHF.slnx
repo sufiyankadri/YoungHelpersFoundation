@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="YHF.Api/YHF.Api.csproj" />
+  <Project Path="YHF.Application/YHF.Application.csproj" />
+  <Project Path="YHF.Domain/YHF.Domain.csproj" />
+  <Project Path="YHF.Infrastructure/YHF.Infrastructure.csproj" />
+</Solution>

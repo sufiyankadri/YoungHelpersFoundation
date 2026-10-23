@@ -1,0 +1,16 @@
+D:\YoungHelpersFoundation\backend\YHF.Application\bin\Debug\net10.0\YHF.Application.deps.json
+D:\YoungHelpersFoundation\backend\YHF.Application\bin\Debug\net10.0\YHF.Application.dll
+D:\YoungHelpersFoundation\backend\YHF.Application\bin\Debug\net10.0\YHF.Application.pdb
+D:\YoungHelpersFoundation\backend\YHF.Application\bin\Debug\net10.0\YHF.Domain.dll
+D:\YoungHelpersFoundation\backend\YHF.Application\bin\Debug\net10.0\YHF.Domain.pdb
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.csproj.AssemblyReference.cache
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.AssemblyInfoInputs.cache
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.AssemblyInfo.cs
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.csproj.CoreCompileInputs.cache
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.sourcelink.json
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Appl.BCBF7E5B.Up2Date
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.dll
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\refint\YHF.Application.dll
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\YHF.Application.pdb
+D:\YoungHelpersFoundation\backend\YHF.Application\obj\Debug\net10.0\ref\YHF.Application.dll
