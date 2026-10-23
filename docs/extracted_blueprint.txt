@@ -1,0 +1,330 @@
+﻿
+
+Young Helpers Foundation
+FULLY DYNAMIC NGO, ZAKAT & ROZGAAR MANAGEMENT PORTAL
+Complete functional, technical, governance and delivery blueprint | Version 1.0 | 20 October 2026
+Source basis: Foundation original Zakat & Rozgaar proposal and final 3-page proposal; IndiaZakat public website, How It Works and policy pages. This is a proposed design, not an approved Shariah or legal policy.
+1. Executive vision and success criteria
+Build a responsive bilingual NGO website and secure operations platform that connects donors, verified beneficiaries, volunteers and the Foundation. Core mission: Aaj Madad, Kal Khud-Mukhtari. It must work for 3–5 initial volunteers, with modular growth later.
+One platform: public CMS, causes, donations, Zakat ledger, applicant verification, approvals, disbursement and livelihood outcomes.
+Primary outcomes: verified cases supported, transparent fund balances, faster case processing, number of livelihoods started and sustained at 30/90/180 days.
+Non-goals for launch: open multi-NGO marketplace, public personal KYC, automatic AI eligibility decisions, loans, complex ERP or mobile apps.
+2. What is retained from original Foundation program
+Original pillar
+System feature
+Zakat Ek Jagah
+Dedicated Zakat fund and donation pooling
+Ek Zakat → Ek Rozgaar
+Livelihood plans, tools and ownership handover
+Zindagi Bachao
+Medical case intake, estimates, assistance
+Emergency Assistance
+Fast-track verified urgent cases
+Skill Se Rozgaar
+Training, tools, first opportunity, follow-up
+Adopt a Rozgaar
+Donor-supported causes and privacy-safe impact
+Verification
+Evidence, field checks, eligibility and committee
+Separate funds
+Separate Zakat/non-Zakat ledgers and rules
+Transparency
+Donor receipts, reconciliation, public aggregate reports
+Khud-Mukhtari
+30/90/180-day livelihood tracking
+3. IndiaZakat reference: adopt, adapt, avoid
+Observed reference feature
+YHF adaptation
+Raise a Cause with documents
+Applicant or volunteer-assisted case submission; drafts and secure files
+Verified causes and Cause Manager
+Assigned verifier, Shariah review, committee approval before publishing
+Trending/featured causes and progress
+Curated cause cards with goal, verified raised amount, remaining amount, share link
+Live donation dashboard
+Public aggregated metrics; reconcile before publishing; never expose KYC
+Cause withdrawal/disbursement
+Separate approved disbursement requests, partial releases, vendor/hospital payments only when approved
+Education/medical/livelihood categories
+Launch: Rozgaar, Medical, Emergency; education as later approved category
+Donation receipt and donor account
+Payment confirmation, ledger-backed receipt, donor history
+Volunteer support
+Volunteer application, assignment, training and activity log
+Reference evidence: https://indiazakat.com/ ; https://indiazakat.com/HowItWorks ; https://indiazakat.com/Page/OurPolicies . IndiaZakat rules and fee statements are NOT automatically YHF policies. Original visual design, wording and brand identity must be created for YHF.
+4. Users, access and permission matrix
+Role
+Key permissions
+Visitor
+Browse public pages and verified public causes
+Donor
+Donate, see own receipts, preferences, donation history
+Applicant / Case Raiser
+Create application, upload private evidence, view own case status
+Volunteer / Verifier
+View assigned cases, submit evidence and field verification
+Cause Manager
+Coordinate document queries, updates and case readiness
+Committee Member
+Review cases, vote/approve within configured authority
+Finance Officer
+Reconcile donations, post ledger entries, prepare disbursements
+Foundation Admin
+Manage CMS, cases, operations, dashboards
+Super Admin
+Manage roles, policies, system settings; no silent financial edits
+Auditor / Shariah Reviewer
+Read audit evidence; approve Shariah-policy decisions as configured
+Enforce authorization on the API, not only Angular routes. Separation of duties: verifier cannot solely approve own case; finance release needs authorized approval; super admin activity remains auditable.
+5. Public website: complete sitemap and screens
+Page
+Content / actions
+Home
+Hero, mission, Donate/Apply CTAs, featured verified causes, categories, impact numbers, latest updates, volunteer CTA
+About
+Story, vision, mission, team, governance, registration details when verified
+Programs
+Rozgaar, Medical, Emergency; eligibility and process
+Explore Causes
+Search, filters, city, program, fund eligibility, status, sorting
+Cause Detail
+Anonymized story, verification badge, goal/raised/remaining, timeline, donate/share, updates
+Donate
+Fund type, general/cause-linked, amount, contact details, consent, payment
+Apply for Help
+Guidance, eligibility note, multi-step application, save draft, tracking
+Impact
+Aggregated distributions, case outcomes, annual/monthly reports
+Volunteer
+Join form, skills, availability, consent
+Stories/News/Gallery
+Admin-managed media with written consent
+Contact/FAQ/Policies
+Contact, grievance, privacy, terms, donation/refund, Shariah policy (approved only)
+Design language and accessibility
+Original calm teal/emerald + warm off-white visual identity; large typography, generous spacing, clean card layout, subtle motifs, high contrast. Hindi/English localization; mobile-first, keyboard accessible, WCAG 2.2 AA target, optimized images, SEO meta tags, sitemap and Open Graph sharing. Do not reuse IndiaZakat assets or logos.
+6. Donor journey and donations
+Explore verified cause → select Zakat/Sadaqah/General fund and donation amount → donor details and consent → payment order → gateway checkout → signed webhook validation → reconciliation → posted ledger → receipt and donor dashboard. Support one-time first; recurring contributions only after operational readiness.
+Donation status: Created, Pending, Authorized, Captured, Failed, Refunded, PartiallyRefunded, Reconciled.
+Payment gateway fees must be separately recorded. Do not advertise 100% pass-through unless actually funded/verified.
+Cause-linked donations must preserve donor restrictions and prevent inappropriate reallocations.
+Manual UPI/NEFT: upload reference, finance verification, bank reconciliation; never treat screenshot alone as confirmed payment.
+Receipts: unique number, amount, date, payment method, fund type, applicable tax disclosures; 80G only if valid approval and required data exist.
+Refunds and chargebacks reverse the financial effect with audit trail; never delete posted entries.
+7. Applicant intake, verification and approval
+Application wizard: (1) applicant/contact; (2) household and dependents; (3) income/assets/liabilities; (4) program and need; (5) quotations/medical papers/skill evidence; (6) declaration, consent and submit. Volunteer-assisted offline intake is supported.
+Lifecycle: Draft → Submitted → DocumentReview → MoreInfoRequired → VerificationAssigned → FieldVerified → ShariahReview → CommitteeReview → Approved / Rejected / Deferred → Funding → DisbursementApproved → Delivered → FollowUp → Closed. Maintain reason codes and status history. Urgent medical fast-track can shorten queues, not bypass core eligibility controls.
+Duplicate indicators: phone, normalized name, household reference and document fingerprint; human review before merging.
+Verification checklist: identity, family income, dependents, other assets, quotations, references, urgency and program-specific need.
+KYC and medical documents private; only masked, consented cause narratives published. Avoid collecting full Aadhaar numbers unless lawfully necessary.
+Committee: quorum, conflict-of-interest declaration, comments, approval ceiling, recorded decision and re-review appeal.
+Public cause publication is separate from case approval; not every beneficiary should be publicly listed.
+8. Program-specific workflows
+Rozgaar and Skill Se Rozgaar
+Capture existing skill, livelihood plan, local demand, requested tools, 1–2 quotations where practical, approved amount, vendor, delivery evidence, asset ownership transfer and starting income baseline. Track first customer/market connection, equipment use, 30/90/180-day earning and obstacles. Asset grants, not loans, unless written policy permits otherwise.
+Medical
+Record treatment category, hospital/doctor estimate, urgency, government scheme/discount exploration, documents, eligible balance, authorization, permitted payee, invoices and follow-up. Direct hospital/vendor payment is not assumed Shariah-compliant until reviewed.
+Emergency
+Minimal urgent form, proof of crisis, expedited verifier and approval, eligible support type, delivery acknowledgment and short follow-up. Keep Zakat/non-Zakat eligibility and use separate.
+Adopt a Rozgaar
+Donor may support a verified livelihood cause or pooled fund. Show anonymized milestone updates and outcome, not beneficiary contact information. Earmarking must be honored; excess or shortfall treatment requires policy and donor consent where relevant.
+9. CMS and content administration
+Page builder with approved reusable sections: hero, rich text, cards, FAQs, counters, CTA, media, testimonials.
+Banner scheduling, navigation/footer menus, multilingual content, SEO fields, draft/publish/unpublish, preview and revision history.
+Cause publishing moderation; verification badge only when current verification is complete.
+Gallery/news/event CRUD with image compression, alt text, consent status and archival.
+Public forms: contact, volunteer, newsletter opt-in, grievance with spam prevention.
+10. Finance, allocation, disbursement and audit
+Use a double-entry-style immutable ledger with balanced debit/credit entries per transaction; separate fund dimension for Zakat, Sadaqah, General and other approved categories. Track restricted allocations by donation/cause, committed vs available balances, disbursement requests, approval, payee verification, payment evidence and reconciliation.
+Fund balance = posted inflows − posted outflows; available balance further subtracts valid commitments.
+Bank reconciliation imports statement references and matches payment gateway settlements and manual transfers.
+No direct database updates to posted transactions; reversals and adjustments require approval.
+Reports: collection by fund, disbursement by category, outstanding approvals, donor receipts, gateway fees, unmatched payments, opening/closing balances.
+Budget example (not target): 100 donors × ₹10,000 = ₹10 lakh; illustrative allocation 40% Rozgaar, 25% Medical, 15% Emergency, 10% approved education/skills, 10% other eligible needs. All amounts policy-dependent.
+11. Database schema — implementation-ready inventory
+Schema
+Tables and key fields
+Auth
+Users(UserId,Email,Phone,PasswordHash,Status), Roles, Permissions, UserRoles, Sessions, RefreshTokens
+CMS
+Pages(PageId,Slug,Language,Status), PageSections, Banners, Programs, Posts, Galleries, MediaAssets, FAQs, Menus
+Donor
+Donors(DonorId,UserId), Donations(DonationId,DonorId,FundId,CauseId,Amount,Status), PaymentOrders, PaymentEvents, Receipts, Refunds
+Finance
+Funds(FundId,FundType,Restrictions), LedgerAccounts, LedgerTransactions, LedgerLines, Allocations, Commitments, DisbursementRequests, Disbursements, BankReconciliations
+Beneficiary
+Applicants, Households, HouseholdMembers, Applications(ApplicationId,ApplicantId,ProgramId,Status), ApplicationDocuments, Consents
+Workflow
+CaseAssignments, Verifications, VerificationChecks, EligibilityReviews, CommitteeMeetings, Decisions, StatusHistory, Appeals
+Cause
+Causes(CauseId,ApplicationId,Slug,Goal,Status,EndDate), CauseUpdates, CauseMedia, CauseDonations
+Rozgaar
+LivelihoodPlans, EquipmentItems, VendorQuotes, AssetHandovers, LivelihoodFollowUps
+Medical
+MedicalCases, TreatmentEstimates, MedicalInvoices, TreatmentFollowUps
+System
+AuditLogs, Notifications, NotificationTemplates, Settings, Grievances, WebhookInbox, OutboxMessages
+Common fields: Id BIGINT/UNIQUEIDENTIFIER, CreatedAtUtc, CreatedBy, UpdatedAtUtc, RowVersion, IsActive where appropriate. Money DECIMAL(18,2), UTC timestamps, unique indexes for receipts/payment IDs, foreign keys, CHECK constraints and status enums. Encrypt sensitive data at rest and in transit; keep document files in private object storage, store only metadata/keys in SQL.
+Key relationship rules
+One applicant → many applications; one application → zero/one public cause and many verifications/decisions.
+One donation → one fund, optionally one cause; one gateway payment → one or more verified events, processed idempotently.
+One fund → many ledger transactions; each posted ledger transaction → balanced ledger lines.
+One approved application → multiple disbursements (partial releases); total releases cannot exceed approved and available restricted amounts.
+One livelihood plan → many follow-ups; one published cause → multiple anonymized updates.
+12. API contract and validation
+Area
+Representative endpoints
+Auth
+POST /api/auth/login; POST /api/auth/refresh; GET /api/auth/me
+Public/CMS
+GET /api/public/pages/{slug}; GET /api/public/causes; GET /api/public/causes/{slug}
+Donations
+POST /api/donations/orders; POST /api/payments/webhook; GET /api/donors/me/donations
+Applications
+POST /api/applications; PUT /api/applications/{id}/draft; POST /api/applications/{id}/submit
+Verification
+POST /api/cases/{id}/assign; POST /api/cases/{id}/verify; POST /api/cases/{id}/eligibility
+Approval
+POST /api/cases/{id}/decisions; POST /api/cases/{id}/publish
+Finance
+POST /api/disbursements/requests; POST /api/disbursements/{id}/approve; GET /api/finance/funds
+Rozgaar/Medical
+POST /api/livelihood/{id}/followups; GET /api/medical/{id}; POST /api/medical/{id}/updates
+Reports/CMS
+GET /api/reports/impact; GET /api/reports/reconciliation; PUT /api/admin/pages/{id}
+Use DTO validation, policy authorization, problem-details errors, optimistic concurrency, server-side pagination, filtering, idempotency keys and audit context. Never trust frontend totals, status changes or gateway redirect alone.
+13. Angular / .NET solution architecture
+Angular 22: standalone components, lazy-loaded public/admin/donor/applicant routes, typed reactive forms, route guards, interceptors, signals for local state, shared design tokens, i18n, SCSS and responsive tables. .NET 10: modular clean architecture (API, Application, Domain, Infrastructure), EF Core or Dapper with migrations, domain services, validation, background outbox worker and integration tests. SQL Server primary relational store; private file storage; transactional email/SMS provider.
+Folder map: frontend/src/app/{core,shared,public,donor,applicant,admin}; backend/{YHF.Api,YHF.Application,YHF.Domain,YHF.Infrastructure,YHF.Tests}; database/{migrations,seed}; docs/{requirements,api,security,operations}. Environments: local, staging, production with secrets outside Git.
+14. Security, privacy, Shariah and legal release gates
+HTTPS, secure cookie/token handling, MFA for privileged roles, password hashing, account lockout/rate limits, CSRF protection where applicable, CSP and secure file upload scanning.
+Least privilege, database encryption/backup, recovery drills, log redaction, data retention, consent, grievance channel and breach response process.
+Payment gateway merchant onboarding/KYC and permitted donation categories; no card data stored by YHF.
+Verify Society registration, PAN, bank account, 12AB/80G applicability and actual approvals before showing claims or issuing tax-benefit receipts.
+Do not accept foreign contributions without legal/FCRA review; gateway should block unsupported foreign sources.
+Qualified Mufti to approve mustahiq criteria, ownership/tamlik, medical/vendor payments, permissible training/admin expenses, allocation timing, loans vs grants and fund restrictions in writing.
+Obtain consent for photos/stories, minimize ID collection, mask personal data, provide applicant correction and complaint channels.
+15. Reports, KPIs and dashboard widgets
+Dashboard
+Metrics
+Public
+Verified causes, funds raised/distributed, households assisted, privacy-safe stories
+Donor
+My donations, receipts, cause progress, anonymized milestones
+Admin
+Pending reviews, urgent cases, active causes, monthly donation trend
+Finance
+Opening/closing balances, bank mismatches, restricted commitments, gateway fees
+Rozgaar
+Assets delivered, working businesses at 30/90/180 days, income change (self-reported/verified)
+Medical
+Approved cases, treatment stage, verified disbursements
+Audit
+Approvals, reversals, permission changes, unresolved exceptions
+16. Delivery phases, deliverables and acceptance criteria
+Phase
+Scope
+Exit criteria
+0 — Decisions (1–2 weeks)
+Brand, roles, written fund policy, case rules, privacy, compliance review
+Approved scope and sign-off register
+1 — CMS MVP (3–4 weeks)
+Responsive public site, bilingual CMS, auth, contact, volunteer, basic reporting
+Editors can publish pages without code deploy
+2 — Case management (3–4 weeks)
+Applicant forms, private uploads, verification, approval, case tracking
+End-to-end sample case with audit trail
+3 — Donation & finance (3–5 weeks)
+Manual donation ledger first, then gateway, receipts, fund balances, reconciliation
+Sandbox payment tests, zero unmatched ledger errors
+4 — Causes & programs (3–4 weeks)
+Verified public causes, progress, Rozgaar/Medical, disbursement, follow-ups
+Donation-to-disbursement trace and 30-day tracking
+5 — Hardening/launch (2–3 weeks)
+UAT, accessibility, backups, monitoring, staff training
+Critical defects closed; finance/legal/Shariah sign-offs
+Indicative 15–22+ weeks for one developer with part-time reviewers; actual duration depends on approvals, content, payments and testing. Ship CMS + offline records first; enable payment gateway only after reconciliation controls are proven.
+17. End-to-end test and UAT checklist
+Responsive website on mobile/tablet/desktop, Hindi/English, accessibility, SEO and page speed.
+Role isolation: donors cannot see others’ records; volunteers only assigned cases; rejected applications cannot be published.
+Duplicate submission, upload validation, document permissions, consent withdrawal and retention.
+Gateway success/failure/timeout/duplicate webhook/refund/chargeback and bank settlement reconciliation.
+Fund restriction checks: Zakat cannot silently fund non-eligible expense; disbursement never exceeds approved/available.
+Committee quorum, conflict-of-interest, override, reversal and audit log tests.
+Backup restore test, production rollback plan, monitoring alerts and user training sign-off.
+18. Operations and launch readiness
+Daily: review urgent cases, payment failures, pending verifications and security alerts.
+Weekly: committee approvals, bank reconciliation, content review, follow-up queue.
+Monthly: fund balance reconciliation, donor aggregate report, beneficiary outcome review, backup restore spot-check.
+Define accountable owners: Program Lead, Verification Lead, Finance Officer, CMS Admin, Shariah Adviser; same person may hold operational roles but approval separation must remain.
+Document SOPs: donation correction, emergency case, rejected case appeal, incident response, refund, beneficiary complaint and data removal request.
+19. Open decisions before coding
+Decision
+Owner / output
+Registration and compliance status
+Foundation + legal/accounting adviser; evidence before public claims
+Shariah-approved Zakat policies
+Mufti Sahab; signed rules and exceptions
+Donation model
+Pooled funds vs restricted cause-linked donations, shortfall/excess handling
+Gateway and bank accounts
+Finance + payment provider onboarding
+Languages and brand
+Foundation: English/Hindi content, logo, domain
+Who may publish public causes
+Foundation committee; consent and redaction checklist
+Volunteer team size and roles
+Admin; separation-of-duties mapping
+Hosting, backups, data residency
+Technical lead; deployment and recovery plan
+20. Suggested first 30 development tasks
+01. Finalize project charter
+02. Verify legal/Shariah release constraints
+03. Approve public sitemap
+04. Approve role matrix
+05. Define case state machine
+06. Define fund types and restrictions
+07. Design UI tokens and components
+08. Build Angular workspace
+09. Build .NET solution
+10. Configure SQL migrations
+11. Create CI checks
+12. Implement auth/MFA plan
+13. Build public shell and footer
+14. Build CMS pages
+15. Build banner/media admin
+16. Build programs pages
+17. Build public cause listing UI
+18. Build cause detail UI
+19. Build applicant wizard
+20. Build secure document upload
+21. Build verifier work queue
+22. Build eligibility review
+23. Build committee decision screen
+24. Build fund ledger
+25. Build manual donation reconciliation
+26. Build gateway sandbox integration
+27. Build donor receipt history
+28. Build disbursement workflow
+29. Build follow-up forms
+30. Run end-to-end UAT and launch checklist
+Appendix A — minimum forms and registers
+Form / register
+Essential fields
+Donor receipt
+Receipt ID, date, donor, fund, amount, method, payment reference, tax status
+Case intake
+Case ID, program, applicant contact, household, need, documents, consent
+Verification
+Assigned verifier, date, checks, evidence, eligibility recommendation
+Committee decision
+Meeting/quorum, conflict declarations, decision, amount, conditions
+Disbursement
+Case, fund, payee, amount, approval, bank ref, proof, delivery acknowledgment
+Rozgaar follow-up
+Case, date, asset status, customers, income band, problems, next action
+Monthly finance
+Opening, received, spent, committed, closing, unmatched, reviewer sign-off
+Appendix B — source and assumption notes
+Foundation source: Young_Helpers_Foundation_Zakat_Rozgaar_Program_Detailed.pdf and Young_Helpers_Zakat_Rozgaar_FINAL.docx (user supplied). IndiaZakat sources accessed 20 Oct 2026: https://indiazakat.com/ ; https://indiazakat.com/HowItWorks ; https://indiazakat.com/Page/OurPolicies ; https://indiazakat.com/About/WhyIndiaZakat .
+Original program details are preserved in section 2; IndiaZakat-derived inspiration is identified in section 3. All other screen, architecture, database, budget, staffing, scheduling and controls are YHF recommendations and require Foundation approval. Website claims and tax/Shariah compliance must be independently verified.
