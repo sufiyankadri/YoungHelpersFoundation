@@ -3,7 +3,7 @@
   <app-navbar></app-navbar>
 
   <!-- Modular Active Tab Feature Routing -->
-  <main class="main-content">
+  <main class="main-content" id="main-content" tabindex="-1">
     @switch (causeService.activeTab()) {
       @case ('home') {
         <app-home></app-home>

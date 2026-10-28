@@ -1,72 +1,51 @@
-<!-- Top Trust & Transparency Bar -->
-<header class="top-announcement">
-  <div class="container top-bar-content">
-    <div class="top-meta">
-      <span class="badge badge-gold">
-        <span class="material-symbols-outlined icon-filled" style="font-size: 14px;">verified</span> 100% Shariah Verified
-      </span>
-      <span class="meta-item">
-        <span class="material-symbols-outlined" style="font-size: 15px;">lock</span> Strict Zero-Admin-Deduction on Zakat Fund
-      </span>
-      <span class="meta-item highlight-pill">
-        <span class="material-symbols-outlined" style="font-size: 14px;">card_giftcard</span> 80G Tax Exemption Available
-      </span>
-    </div>
-    <div class="top-actions">
-      <button class="top-link-btn" (click)="navigate('admin')">
-        <span class="material-symbols-outlined" style="font-size: 15px;">admin_panel_settings</span> Operations Portal
+<a class="skip-nav" href="#main-content">Skip to content</a>
+<div class="top-announcement">
+  <div class="container utility-content">
+    <p><span class="utility-dot" aria-hidden="true"></span>Helping today. Building livelihoods for tomorrow.</p>
+    <button type="button" class="portal-link" (click)="navigate('admin')">Operations portal <span aria-hidden="true">↗</span></button>
+  </div>
+</div>
+<header class="main-nav" (focusout)="onFocusOut($event)">
+  <div class="container nav-content">
+    <button type="button" class="brand" aria-label="Young Helpers Foundation home" (click)="navigate('home')">
+      <img src="logo.jpeg" alt="" class="brand-logo" width="1280" height="853">
+      <span class="brand-name">Young Helpers<small>FOUNDATION</small></span>
+    </button>
+    <nav class="nav-links" aria-label="Main navigation" [class.mobile-expanded]="mobileOpen()" id="primary-navigation">
+      <button type="button" class="nav-btn" [class.active]="causeService.activeTab() === 'home'" [attr.aria-current]="causeService.activeTab() === 'home' ? 'page' : null" (click)="navigate('home')">Home</button>
+      <button type="button" class="nav-btn" [class.active]="causeService.activeTab() === 'causes'" (click)="explore()">Explore causes</button>
+      @for (group of groups; track group.id) {
+        <div class="nav-group" [class.is-open]="openGroup() === group.id">
+          <button type="button" class="nav-btn group-trigger" [class.active]="groupActive(group)"
+            [attr.aria-expanded]="openGroup() === group.id" [attr.aria-controls]="'submenu-' + group.id"
+            (click)="toggleGroup(group.id, $event)" (keydown)="openWithKeyboard(group.id, $event)">
+            {{ group.label }}<span class="chevron" aria-hidden="true"></span>
+          </button>
+          @if (openGroup() === group.id) {
+            <div class="nav-dropdown" [id]="'submenu-' + group.id">
+              <p class="dropdown-heading">{{ group.label }}</p>
+              @for (item of group.items; track item.label) {
+                <button type="button" class="dropdown-link" (click)="select(item)">
+                  <span class="dropdown-icon material-symbols-outlined" aria-hidden="true">{{ item.icon }}</span>
+                  <span><strong>{{ item.label }}</strong><small>{{ item.description }}</small></span>
+                  <span class="dropdown-arrow" aria-hidden="true">↗</span>
+                </button>
+              }
+            </div>
+          }
+        </div>
+      }
+      <div class="mobile-actions">
+        <button type="button" class="btn btn-outline" (click)="navigate('apply')">Apply for help</button>
+        <button type="button" class="btn btn-primary" (click)="openDonate()">Support our work</button>
+      </div>
+    </nav>
+    <div class="nav-cta">
+      <button type="button" class="btn btn-outline btn-sm apply-action" (click)="navigate('apply')">Apply for help</button>
+      <button type="button" class="btn btn-primary btn-sm donate-action" (click)="openDonate()">Donate <span aria-hidden="true">↗</span></button>
+      <button type="button" class="mobile-toggle" aria-controls="primary-navigation" [attr.aria-expanded]="mobileOpen()" [attr.aria-label]="mobileOpen() ? 'Close navigation' : 'Open navigation'" (click)="toggleMobile()">
+        <span class="material-symbols-outlined" aria-hidden="true">{{ mobileOpen() ? 'close' : 'menu' }}</span>
       </button>
-      <span class="divider">|</span>
-      <span class="meta-item">Helpline: +91 98765 43210</span>
-      <span class="divider">|</span>
-      <button class="lang-switch">EN / हिंदी</button>
     </div>
   </div>
 </header>
-
-<!-- Main Navigation Header -->
-<nav class="main-nav">
-  <div class="container nav-content">
-    <div class="brand" (click)="navigate('home')">
-      <img src="logo.jpeg" alt="Young Helpers Foundation" class="brand-logo" />
-    </div>
-
-    <div class="nav-links">
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'home'" (click)="navigate('home')">
-        Home
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'causes'" (click)="navigate('causes')">
-        Explore Causes
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'rozgaar'" (click)="navigate('rozgaar')">
-        Ek Zakat Ek Rozgaar
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'calculator'" (click)="navigate('calculator')">
-        Zakat Calculator
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'about'" (click)="navigate('about')">
-        About Us
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'volunteer'" (click)="navigate('volunteer')">
-        Volunteer
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'transparency'" (click)="navigate('transparency')">
-        Audit & Ledger
-      </button>
-      <button class="nav-btn" [class.active]="causeService.activeTab() === 'faq'" (click)="navigate('faq')">
-        FAQ
-      </button>
-    </div>
-
-    <div class="nav-cta">
-      <button class="btn btn-outline btn-sm" (click)="navigate('apply')">
-        <span class="material-symbols-outlined" style="font-size: 18px;">assignment</span>
-        Apply For Help
-      </button>
-      <button class="btn btn-primary btn-sm" (click)="openDonate()">
-        <span class="material-symbols-outlined" style="font-size: 18px;">volunteer_activism</span>
-        Donate Now
-      </button>
-    </div>
-  </div>
-</nav>

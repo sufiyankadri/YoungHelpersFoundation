@@ -1,192 +1,109 @@
-<!-- Hero Section -->
-<section class="hero-section">
-  <div class="container hero-grid">
-    <div class="hero-left">
-      <div class="hero-badge-row">
-        <span class="badge badge-green">
-          <span class="material-symbols-outlined" style="font-size: 15px;">stars</span>
-          Transforming Lives Through Tamleek
-        </span>
-        <span class="badge badge-navy">100% Asset Ownership</span>
+<!-- Full-width hero banner -->
+<section class="hero-section banner-hero" aria-labelledby="hero-title">
+  <img class="banner-image" src="cause_electrician.jpg" alt="" fetchpriority="high" decoding="async">
+  <div class="banner-shade" aria-hidden="true"></div>
+  <div class="container banner-inner">
+    <div class="banner-copy">
+      <span class="banner-eyebrow"><span aria-hidden="true"></span>ONE MISSION. OPPORTUNITIES TO EARN.</span>
+      <h1 id="hero-title" class="banner-heading">Helping unemployed people<br>build a <em>livelihood.</em></h1>
+      <p class="banner-description">In our city and nearby communities, many people want to work but need the right opportunity. Together, we can help them take a step towards independence—with just ₹100 a month.</p>
+      <div class="banner-actions">
+        <a class="btn banner-primary" href="#monthly-mission">Join the ₹100/month mission <span aria-hidden="true">↗</span></a>
+        <button type="button" class="btn banner-secondary" (click)="causeService.navigateTo('apply')">Need livelihood support? <span aria-hidden="true">→</span></button>
       </div>
-      <h1 class="hero-headline">
-        Transform Your <span class="gradient-text-green">Zakat</span> Into <span class="gradient-text-navy">Lifelong Rozgaar</span>
-      </h1>
-      <p class="hero-description">
-        We don’t believe in temporary survival rations that expire in days. Young Helpers Foundation converts your Zakat directly into permanent livelihood machinery, emergency medical relief, and girls' education — tracked transparently at 30, 90, and 180 days.
-      </p>
-
-      <div class="hero-actions">
-        <button class="btn btn-primary" (click)="onDonate()">
-          <span class="material-symbols-outlined">volunteer_activism</span>
-          Give Zakat / Sadaqah
-        </button>
-        <button class="btn btn-outline" (click)="causeService.navigateTo('causes')">
-          <span class="material-symbols-outlined">explore</span>
-          Browse {{ causeService.causes().length }} Verified Cases
-        </button>
-      </div>
-
-      <!-- Trust Proof -->
-      <div class="hero-trust">
-        <div class="trust-item">
-          <span class="material-symbols-outlined trust-icon">gavel</span>
-          <div>
-            <strong>Shariah Compliant Tamleek</strong>
-            <p>Direct unconditional ownership handover to eligible Mustahiq</p>
-          </div>
-        </div>
-        <div class="trust-item">
-          <span class="material-symbols-outlined trust-icon">receipt_long</span>
-          <div>
-            <strong>Instant 80G Tax Receipt</strong>
-            <p>Double-entry immutable ledger tracking for every single rupee</p>
-          </div>
-        </div>
-      </div>
+      <div class="banner-principles"><span>₹100 a month</span><span>Give more if you wish</span><span>Local livelihoods</span></div>
     </div>
+    <p class="banner-caption">Your small contribution.<br><strong>A better beginning.</strong></p>
+  </div>
+  <span class="image-disclosure">Illustrative image · Not a verified beneficiary record</span>
+</section>
 
-    <div class="hero-right">
-      <!-- Featured Live Cause Card -->
-      <div class="featured-card glass-panel">
-        <div class="featured-header">
-          <span class="badge badge-magenta">Urgent Verified Cause</span>
-          <span class="featured-time"><span class="material-symbols-outlined" style="font-size: 14px;">timer</span> 3 Days Left</span>
-        </div>
-        <div class="featured-img-wrap">
-          <img src="cause_electrician.jpg" alt="Rozgaar toolkit" class="featured-img" />
-          <span class="featured-tag">Ek Rozgaar</span>
-        </div>
-        <div class="featured-body">
-          <h3 class="featured-title">Certified Electrician Commercial Toolkit Setup</h3>
-          <p class="featured-meta">Old Delhi • Verified by YHF Field Volunteer • 42 Donors</p>
-          
-          <!-- Progress Bar -->
-          <div class="progress-wrap">
-            <div class="progress-labels">
-              <span class="raised-amt">₹31,200 raised</span>
-              <span class="target-amt">Goal: ₹38,500</span>
-            </div>
-            <div class="progress-track">
-              <div class="progress-fill" style="width: 81%;"></div>
-            </div>
-            <div class="progress-sub">81% Funded • ₹7,300 Remaining</div>
-          </div>
-
-          <div class="featured-card-actions">
-            <button class="btn btn-navy btn-sm" style="flex: 1;" (click)="onDonate(causeService.causes()[0])">
-              Contribute Zakat
-            </button>
-            <button class="btn btn-outline btn-sm" (click)="causeService.navigateTo('causes')">
-              View Details
-            </button>
-          </div>
-        </div>
+<!-- The foundation's primary community livelihood mission -->
+<section class="monthly-mission" id="monthly-mission" aria-labelledby="mission-title">
+  <div class="container mission-grid">
+    <div class="mission-story">
+      <span class="section-kicker">OUR MAIN MISSION · LOCAL LIVELIHOODS</span>
+      <h2 id="mission-title">Just ₹100 a month.<br><span>A better beginning.</span></h2>
+      <p class="mission-lead">One purpose: helping unemployed people find a way to earn.</p>
+      <p>Across our city and nearby communities, people want to work but do not always have the right opportunity. Your monthly contribution can help us connect them with opportunities and support their journey towards standing on their own feet.</p>
+      <div class="mission-possibilities">
+        <div><span class="mission-step" aria-hidden="true">01</span><div><h3>Open a door to work</h3><p>Help create a pathway to employment or self-employment.</p></div></div>
+        <div><span class="mission-step" aria-hidden="true">02</span><div><h3>Support a household's new beginning</h3><p>A chance to earn can help a family take its next step forward.</p></div></div>
+        <div><span class="mission-step" aria-hidden="true">03</span><div><h3>Make small contributions count</h3><p>Together, regular support can strengthen this local mission.</p></div></div>
       </div>
+      <p class="mission-closing">Your ₹100 today could help build someone's better tomorrow.</p>
+    </div>
+    <div class="mission-panel">
+      <span class="mission-panel-label">BE PART OF THE MISSION</span>
+      <div class="mission-price"><strong>₹100</strong><span>per month</span></div>
+      <p>Our request is just ₹100 a month. You are welcome to contribute more, according to your wishes and means.</p>
+      <fieldset class="mission-amounts"><legend>Choose an amount to explore</legend>
+        <div class="mission-presets">
+          @for (amount of [100, 200, 500]; track amount) {
+            <button type="button" [class.selected]="missionChoice() === amount" [attr.aria-pressed]="missionChoice() === amount" (click)="chooseMissionAmount(amount)">₹{{ amount }}</button>
+          }
+          <button type="button" [class.selected]="missionChoice() === 'custom'" [attr.aria-pressed]="missionChoice() === 'custom'" (click)="chooseMissionAmount('custom')">Other</button>
+        </div>
+        @if (missionChoice() === 'custom') {
+          <label for="mission-custom-amount">Your amount (INR)</label>
+          <input id="mission-custom-amount" type="number" inputmode="numeric" min="1" step="1" [value]="missionCustomAmount()" (input)="setMissionCustomAmount($event)" [attr.aria-invalid]="missionError() ? 'true' : null" aria-describedby="mission-amount-help mission-amount-error">
+          <small id="mission-amount-help">Enter a positive whole-rupee amount.</small>
+        }
+        @if (missionError()) { <p id="mission-amount-error" class="mission-error" role="alert">{{ missionError() }}</p> }
+      </fieldset>
+      <button type="button" class="mission-contribute" (click)="reviewMissionContribution()">Review my contribution <span aria-hidden="true">↗</span></button>
+      @if (missionReview()) {
+        <div class="mission-review" role="status">
+          <strong>Your choice: ₹{{ missionFormattedAmount() }} towards the livelihood mission.</strong>
+          <p>Online contributions are not open yet. No payment has been taken and no monthly debit has been set up.</p>
+        </div>
+      }
+      <p class="mission-payment-note">This is an invitation to contribute each month, not an automatic subscription.</p>
+      <div class="mission-panel-footer"><span class="material-symbols-outlined" aria-hidden="true">diversity_1</span><span>A community effort.<br><strong>A shared hope for independence.</strong></span></div>
     </div>
   </div>
 </section>
 
-<!-- Impact Numbers Section -->
-<section class="stats-section">
-  <div class="container stats-grid">
-    @for (stat of causeService.stats(); track stat.label) {
-      <div class="stat-card">
-        <div class="stat-icon-wrap">
-          <span class="material-symbols-outlined stat-icon">{{ stat.icon }}</span>
-        </div>
-        <div class="stat-content">
-          <span class="stat-value">{{ stat.value }}</span>
-          <span class="stat-label">{{ stat.label }}</span>
-          <span class="stat-subtext">{{ stat.subtext }}</span>
-        </div>
-      </div>
-    }
+<!-- Compact support pathways, without unverified impact numbers -->
+<section class="pathways-section" aria-label="Areas of support">
+  <div class="container pathways-grid">
+    <button type="button" class="pathway" (click)="causeService.navigateTo('rozgaar')">
+      <span class="pathway-icon material-symbols-outlined" aria-hidden="true">handyman</span>
+      <span><strong>Build a livelihood</strong><small>Skills, tools and a first opportunity</small></span><span class="pathway-arrow" aria-hidden="true">↗</span>
+    </button>
+    <button type="button" class="pathway" (click)="exploreProgram('medical')">
+      <span class="pathway-icon material-symbols-outlined" aria-hidden="true">health_and_safety</span>
+      <span><strong>Support a medical need</strong><small>Care begins with understanding</small></span><span class="pathway-arrow" aria-hidden="true">↗</span>
+    </button>
+    <button type="button" class="pathway" (click)="exploreProgram('emergency')">
+      <span class="pathway-icon material-symbols-outlined" aria-hidden="true">emergency</span>
+      <span><strong>Stand together in a crisis</strong><small>A thoughtful response to urgent needs</small></span><span class="pathway-arrow" aria-hidden="true">↗</span>
+    </button>
   </div>
 </section>
 
-<!-- Core Programs Matrix -->
-<section class="programs-section">
+<!-- Image-led programs overview -->
+<section class="programs-overview" aria-labelledby="programs-title">
   <div class="container">
-    <div class="section-heading text-center">
-      <span class="badge badge-navy">Our Four Pillars of Upliftment</span>
-      <h2>Clear, Transparent & High-Impact Relief</h2>
-      <p>Every rupee is earmarked by your intention. No administrative cuts, no silent mixing.</p>
+    <div class="overview-heading">
+      <div><span class="section-kicker">WHERE HELP BECOMES POSSIBILITY</span><h2 id="programs-title">Livelihoods at the heart.<br><span>Care alongside.</span></h2></div>
+      <div class="overview-intro"><p>Helping unemployed people earn is our main mission. Explore Rozgaar first, alongside information about medical and emergency support.</p><button type="button" class="overview-link" (click)="causeService.navigateTo('about')">Get to know our foundation <span aria-hidden="true">↗</span></button></div>
     </div>
-
-    <div class="programs-grid-4">
-      <!-- Card 1: Rozgaar -->
-      <div class="program-card">
-        <div class="program-icon-box bg-green">
-          <span class="material-symbols-outlined">handshake</span>
-        </div>
-        <span class="program-tag">Pillar 01</span>
-        <h3>Ek Zakat → Ek Rozgaar</h3>
-        <p>We provide verified applicants with tangible production assets (sewing machines, electrician tools, lathe gear, food carts) with 100% legal ownership.</p>
-        <ul class="program-features">
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> 0% interest, 0 debt — Full Grant</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> 30, 90 & 180-day income monitoring</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Average ₹18k - ₹25k monthly earning</li>
-        </ul>
-        <button class="program-link" (click)="causeService.navigateTo('rozgaar')">
-          Learn Rozgaar Workflow <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
-        </button>
-      </div>
-
-      <!-- Card 2: Medical -->
-      <div class="program-card">
-        <div class="program-icon-box bg-navy">
-          <span class="material-symbols-outlined">health_and_safety</span>
-        </div>
-        <span class="program-tag">Pillar 02</span>
-        <h3>Zindagi Bachao (Medical)</h3>
-        <p>Immediate intervention for verified life-saving surgeries, chemotherapy, dialysis, and paediatric emergencies where families face financial collapse.</p>
-        <ul class="program-features">
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Hospital estimate cross-verified</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Direct vendor/hospital settlements</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Fast-tracked 24h review committee</li>
-        </ul>
-        <button class="program-link" (click)="causeService.navigateTo('causes')">
-          Explore Medical Cases <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
-        </button>
-      </div>
-
-      <!-- Card 3: Education -->
-      <div class="program-card">
-        <div class="program-icon-box bg-gold">
-          <span class="material-symbols-outlined">school</span>
-        </div>
-        <span class="program-tag">Pillar 03</span>
-        <h3>Taleem Se Taraqqi (Education)</h3>
-        <p>Direct fee sponsorship and textbook support for bright underprivileged children and orphan students to ensure no career stops due to fees.</p>
-        <ul class="program-features">
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Merit & income background verified</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Direct school/college fee deposit</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Mentorship & academic monitoring</li>
-        </ul>
-        <button class="program-link" (click)="causeService.navigateTo('causes')">
-          View Scholarships <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
-        </button>
-      </div>
-
-      <!-- Card 4: Emergency -->
-      <div class="program-card">
-        <div class="program-icon-box bg-magenta">
-          <span class="material-symbols-outlined">emergency</span>
-        </div>
-        <span class="program-tag">Pillar 04</span>
-        <h3>Emergency & Ration Relief</h3>
-        <p>Support for sudden catastrophes: home fire damage, natural disasters, or breadwinner loss requiring immediate dignity-preserving family support.</p>
-        <ul class="program-features">
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> On-ground volunteer physical check</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Sadaqah & General fund deployment</li>
-          <li><span class="material-symbols-outlined check-icon">check_circle</span> Immediate 48-hour delivery record</li>
-        </ul>
-        <button class="program-link" (click)="causeService.navigateTo('causes')">
-          View Emergency Relief <span class="material-symbols-outlined" style="font-size: 16px;">arrow_forward</span>
-        </button>
-      </div>
+    <div class="overview-grid">
+      <article class="overview-card livelihood">
+        <div class="overview-image"><img src="cause_tailoring.jpg" alt="Illustrative tailoring workspace" loading="lazy" decoding="async" width="1536" height="1024"><span class="overview-tag">LIVELIHOODS</span></div>
+        <div class="overview-body"><span class="program-number">01 / ROZGAAR</span><h3>A skill. The right tools.<br>A new beginning.</h3><p>Explore an approach to practical skills, livelihood equipment and follow-up towards independence.</p><button type="button" class="overview-link" (click)="causeService.navigateTo('rozgaar')">Explore Rozgaar <span aria-hidden="true">↗</span></button></div>
+      </article>
+      <article class="overview-card medical">
+        <div class="overview-image"><img src="cause_medical.jpg" alt="Illustrative medical support scene" loading="lazy" decoding="async" width="1536" height="1024"><span class="overview-tag">MEDICAL SUPPORT</span></div>
+        <div class="overview-body"><span class="program-number">02 / MEDICAL</span><h3>Care when it<br>matters most.</h3><p>Understanding treatment needs, available assistance and the support a family may require.</p><button type="button" class="overview-link" (click)="exploreProgram('medical')">Explore medical support <span aria-hidden="true">↗</span></button></div>
+      </article>
+      <article class="overview-card emergency">
+        <div class="overview-image"><img src="cause_ration.jpg" alt="Illustrative essential supplies and relief scene" loading="lazy" decoding="async" width="1536" height="1024"><span class="overview-tag">EMERGENCY ASSISTANCE</span></div>
+        <div class="overview-body"><span class="program-number">03 / EMERGENCY</span><h3>A little stability.<br>When life changes.</h3><p>A considered response to sudden hardship, with privacy, review and responsible support.</p><button type="button" class="overview-link" (click)="exploreProgram('emergency')">Explore emergency assistance <span aria-hidden="true">↗</span></button></div>
+      </article>
     </div>
+    <p class="programs-footnote">Program images are illustrative. Support depends on assessment, availability and approved policies.</p>
   </div>
 </section>
 
@@ -294,9 +211,9 @@
   <div class="container banner-box glass-dark">
     <div class="banner-content">
       <span class="badge badge-gold">The YHF Difference</span>
-      <h2>"Aaj Madad, Kal Khud-Mukhtari"</h2>
+      <h2>"Help today. Independence tomorrow."</h2>
       <p>
-        When you give a ration bag, a family eats for 15 days. When you fund a sewing machine, lathe tools, or a refrigeration cart through Zakat, that family never asks for charity again. Join hands to end poverty through sustained livelihoods.
+        A small monthly contribution can help strengthen a community effort to connect people with livelihoods. Our request is ₹100 a month, and you are welcome to give more according to your wishes and means. Together, we can work towards a future with more opportunities to earn.
       </p>
       <div class="banner-actions">
         <button class="btn btn-primary" (click)="causeService.navigateTo('calculator')">
