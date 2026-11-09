@@ -1,0 +1,68 @@
+<div class="yhf-page">
+  @if (page(); as p) {
+    <section class="page-intro">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <button type="button" (click)="nav.navigateTo('home')">Home</button><span>/</span
+          ><span>{{ p.kicker }}</span>
+        </nav>
+        <div class="intro-split">
+          <div>
+            <span class="eyebrow">{{ p.kicker }}</span>
+            <h1>{{ p.title }}</h1>
+          </div>
+          <p>{{ p.intro }}</p>
+        </div>
+      </div>
+    </section>
+    <section class="container info-layout">
+      <aside class="info-navigation" aria-label="Foundation information">
+        @for (
+          link of [
+            ['about', 'Our story'],
+            ['process', 'Our process'],
+            ['advisory', 'Advisory board'],
+            ['council', 'Our council'],
+            ['legal', 'Legal & finance'],
+            ['audit', 'Audit & reports'],
+            ['dashboard', 'Public dashboard'],
+            ['policies', 'Policies'],
+            ['faq', 'FAQs'],
+            ['contact', 'Contact'],
+          ];
+          track link[0]
+        ) {
+          <button
+            type="button"
+            [class.current]="nav.infoPage() === link[0]"
+            [attr.aria-current]="nav.infoPage() === link[0] ? 'page' : null"
+            (click)="nav.openInfo(link[0])"
+          >
+            {{ link[1] }} <span aria-hidden="true">↗</span>
+          </button>
+        }
+      </aside>
+      <div class="info-content">
+        <aside class="preview-disclosure">
+          <span class="material-symbols-outlined" aria-hidden="true">info</span>
+          <p>{{ p.status }}</p>
+        </aside>
+        @for (section of p.sections; track section.title) {
+          <article>
+            <h2>{{ section.title }}</h2>
+            <p>{{ section.body }}</p>
+          </article>
+        }
+        <div class="community-callout compact">
+          <div>
+            <span class="eyebrow">OPPORTUNITY STARTS WITH UNDERSTANDING</span>
+            <h2>Find out how the livelihood mission works.</h2>
+          </div>
+          <button type="button" class="public-button" (click)="nav.navigateTo('home')">
+            Our main mission ↗
+          </button>
+        </div>
+      </div>
+    </section>
+  }
+</div>

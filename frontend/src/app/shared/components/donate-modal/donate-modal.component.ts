@@ -1,37 +1,57 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Component, ElementRef, HostListener, effect, inject } from '@angular/core';
 import { DonationService } from '../../../core/services/donation.service';
-
-/**
- * Universal donation modal handling preset amounts, custom values, fund allocation, and instant receipt generation.
- */
+import { CauseService } from '../../../core/services/cause.service';
 @Component({
   selector: 'app-donate-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './donate-modal.component.html',
-  styleUrl: './donate-modal.component.scss'
+  styleUrl: './donate-modal.component.scss',
 })
 export class DonateModalComponent {
-  constructor(public donationService: DonationService) {}
-
-  close(): void {
+  readonly donationService = inject(DonationService);
+  readonly nav = inject(CauseService);
+  private host = inject(ElementRef);
+  private previous: HTMLElement | null = null;
+  constructor() {
+    effect(() => {
+      if (this.donationService.isModalOpen()) {
+        this.previous = document.activeElement as HTMLElement | null;
+        setTimeout(() => this.host.nativeElement.querySelector('.availability-close')?.focus());
+      }
+    });
+  }
+  close() {
     this.donationService.closeDonateModal();
+    this.previous?.focus();
   }
-
-  setAmount(amt: number): void {
-    this.donationService.setAmount(amt);
+  mission() {
+    this.close();
+    this.nav.navigateTo('home');
+    setTimeout(() =>
+      document
+        .getElementById('monthly-mission')
+        ?.scrollIntoView({ block: 'start', behavior: 'auto' }),
+    );
   }
-
-  onCustomAmountInput(val: string): void {
-    const num = Number(val);
-    if (num > 0) {
-      this.donationService.donationAmount.set(num);
+  @HostListener('document:keydown', ['$event']) keys(event: KeyboardEvent) {
+    if (!this.donationService.isModalOpen()) return;
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      this.close();
     }
-  }
-
-  processDonation(): void {
-    this.donationService.processDonation();
+    if (event.key === 'Tab') {
+      const controls = Array.from(
+        this.host.nativeElement.querySelectorAll('button'),
+      ) as HTMLButtonElement[];
+      const first = controls[0],
+        last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last?.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first?.focus();
+      }
+    }
   }
 }

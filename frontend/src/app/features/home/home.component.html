@@ -1,65 +1,208 @@
-<!-- Full-width hero banner -->
-<section class="hero-section banner-hero" aria-labelledby="hero-title">
-  <img class="banner-image" src="cause_electrician.jpg" alt="" fetchpriority="high" decoding="async">
-  <div class="banner-shade" aria-hidden="true"></div>
-  <div class="container banner-inner">
-    <div class="banner-copy">
-      <span class="banner-eyebrow"><span aria-hidden="true"></span>ONE MISSION. OPPORTUNITIES TO EARN.</span>
-      <h1 id="hero-title" class="banner-heading">Helping unemployed people<br>build a <em>livelihood.</em></h1>
-      <p class="banner-description">In our city and nearby communities, many people want to work but need the right opportunity. Together, we can help them take a step towards independence—with just ₹100 a month.</p>
-      <div class="banner-actions">
-        <a class="btn banner-primary" href="#monthly-mission">Join the ₹100/month mission <span aria-hidden="true">↗</span></a>
-        <button type="button" class="btn banner-secondary" (click)="causeService.navigateTo('apply')">Need livelihood support? <span aria-hidden="true">→</span></button>
+<!-- YHF original, controllable banner carousel. Autoplay is opt-in. -->
+<section
+  class="hero-section banner-hero"
+  aria-labelledby="hero-title"
+  aria-roledescription="carousel"
+  aria-label="Young Helpers mission highlights"
+  (mouseenter)="stopSlides()"
+  (focusin)="stopSlides()"
+  (keydown)="slideKey($event)"
+>
+  @for (slide of slides; track $index; let i = $index) {
+    @if (activeSlide() === i) {
+      <img class="banner-image" [src]="slide.image" alt="" fetchpriority="high" decoding="async" />
+      <div class="banner-shade" aria-hidden="true"></div>
+      <div
+        class="container banner-inner"
+        role="group"
+        aria-roledescription="slide"
+        [attr.aria-label]="i + 1 + ' of ' + slides.length"
+      >
+        <div class="banner-copy">
+          <span class="banner-eyebrow"><span aria-hidden="true"></span>{{ slide.eyebrow }}</span>
+          <h1 id="hero-title" class="banner-heading">
+            {{ slide.title }}<br /><em>{{ slide.emphasis }}</em>
+          </h1>
+          <p class="banner-description">{{ slide.body }}</p>
+          <div class="banner-actions">
+            @if (i === 0) {
+              <a class="btn banner-primary" href="#monthly-mission"
+                >Join the ₹100/month mission <span aria-hidden="true">↗</span></a
+              >
+            } @else {
+              <button type="button" class="btn banner-primary" (click)="heroAction()">
+                {{ slide.action }} <span aria-hidden="true">↗</span>
+              </button>
+            }
+            <button
+              type="button"
+              class="btn banner-secondary"
+              (click)="causeService.navigateTo('categories')"
+            >
+              Our programme guides <span aria-hidden="true">→</span>
+            </button>
+          </div>
+          <div class="banner-principles">
+            <span>₹100 a month</span><span>Give more if you wish</span
+            ><span>Local livelihoods</span>
+          </div>
+        </div>
+        <p class="banner-caption">
+          {{ slide.caption }}<br /><strong>{{ slide.captionStrong }}</strong>
+        </p>
       </div>
-      <div class="banner-principles"><span>₹100 a month</span><span>Give more if you wish</span><span>Local livelihoods</span></div>
+    }
+  }
+  <div class="container slider-controls">
+    <button
+      type="button"
+      class="slider-arrow"
+      aria-label="Previous banner slide"
+      (click)="selectSlide(activeSlide() - 1)"
+    >
+      ←
+    </button>
+    <div class="slider-dots" role="group" aria-label="Choose banner slide">
+      @for (slide of slides; track $index; let i = $index) {
+        <button
+          type="button"
+          [class.current]="activeSlide() === i"
+          [attr.aria-pressed]="activeSlide() === i"
+          [attr.aria-label]="'Show slide ' + (i + 1) + ': ' + slide.title"
+          (click)="selectSlide(i)"
+        >
+          <span></span>
+        </button>
+      }
     </div>
-    <p class="banner-caption">Your small contribution.<br><strong>A better beginning.</strong></p>
+    <button
+      type="button"
+      class="slider-arrow"
+      aria-label="Next banner slide"
+      (click)="selectSlide(activeSlide() + 1)"
+    >
+      →</button
+    ><button
+      type="button"
+      class="slider-play"
+      [attr.aria-pressed]="playing()"
+      [disabled]="reduceMotion()"
+      [attr.aria-label]="playing() ? 'Pause banner rotation' : 'Play banner rotation'"
+      (click)="toggleSlides()"
+    >
+      {{ playing() ? 'Pause' : 'Play' }} slides</button
+    ><span class="slide-position" aria-live="polite"
+      >{{ activeSlide() + 1 }} / {{ slides.length }}</span
+    >
   </div>
-  <span class="image-disclosure">Illustrative image · Not a verified beneficiary record</span>
+  <span class="image-disclosure">Illustrative images · Not beneficiary records</span>
 </section>
-
 <!-- The foundation's primary community livelihood mission -->
 <section class="monthly-mission" id="monthly-mission" aria-labelledby="mission-title">
   <div class="container mission-grid">
     <div class="mission-story">
       <span class="section-kicker">OUR MAIN MISSION · LOCAL LIVELIHOODS</span>
-      <h2 id="mission-title">Just ₹100 a month.<br><span>A better beginning.</span></h2>
+      <h2 id="mission-title">Just ₹100 a month.<br /><span>A better beginning.</span></h2>
       <p class="mission-lead">One purpose: helping unemployed people find a way to earn.</p>
-      <p>Across our city and nearby communities, people want to work but do not always have the right opportunity. Your monthly contribution can help us connect them with opportunities and support their journey towards standing on their own feet.</p>
+      <p>
+        Across our city and nearby communities, people want to work but do not always have the right
+        opportunity. Your monthly contribution can help us connect them with opportunities and
+        support their journey towards standing on their own feet.
+      </p>
       <div class="mission-possibilities">
-        <div><span class="mission-step" aria-hidden="true">01</span><div><h3>Open a door to work</h3><p>Help create a pathway to employment or self-employment.</p></div></div>
-        <div><span class="mission-step" aria-hidden="true">02</span><div><h3>Support a household's new beginning</h3><p>A chance to earn can help a family take its next step forward.</p></div></div>
-        <div><span class="mission-step" aria-hidden="true">03</span><div><h3>Make small contributions count</h3><p>Together, regular support can strengthen this local mission.</p></div></div>
+        <div>
+          <span class="mission-step" aria-hidden="true">01</span>
+          <div>
+            <h3>Open a door to work</h3>
+            <p>Help create a pathway to employment or self-employment.</p>
+          </div>
+        </div>
+        <div>
+          <span class="mission-step" aria-hidden="true">02</span>
+          <div>
+            <h3>Support a household's new beginning</h3>
+            <p>A chance to earn can help a family take its next step forward.</p>
+          </div>
+        </div>
+        <div>
+          <span class="mission-step" aria-hidden="true">03</span>
+          <div>
+            <h3>Make small contributions count</h3>
+            <p>Together, regular support can strengthen this local mission.</p>
+          </div>
+        </div>
       </div>
       <p class="mission-closing">Your ₹100 today could help build someone's better tomorrow.</p>
     </div>
     <div class="mission-panel">
       <span class="mission-panel-label">BE PART OF THE MISSION</span>
       <div class="mission-price"><strong>₹100</strong><span>per month</span></div>
-      <p>Our request is just ₹100 a month. You are welcome to contribute more, according to your wishes and means.</p>
-      <fieldset class="mission-amounts"><legend>Choose an amount to explore</legend>
+      <p>
+        Our request is just ₹100 a month. You are welcome to contribute more, according to your
+        wishes and means.
+      </p>
+      <fieldset class="mission-amounts">
+        <legend>Choose an amount to explore</legend>
         <div class="mission-presets">
           @for (amount of [100, 200, 500]; track amount) {
-            <button type="button" [class.selected]="missionChoice() === amount" [attr.aria-pressed]="missionChoice() === amount" (click)="chooseMissionAmount(amount)">₹{{ amount }}</button>
+            <button
+              type="button"
+              [class.selected]="missionChoice() === amount"
+              [attr.aria-pressed]="missionChoice() === amount"
+              (click)="chooseMissionAmount(amount)"
+            >
+              ₹{{ amount }}
+            </button>
           }
-          <button type="button" [class.selected]="missionChoice() === 'custom'" [attr.aria-pressed]="missionChoice() === 'custom'" (click)="chooseMissionAmount('custom')">Other</button>
+          <button
+            type="button"
+            [class.selected]="missionChoice() === 'custom'"
+            [attr.aria-pressed]="missionChoice() === 'custom'"
+            (click)="chooseMissionAmount('custom')"
+          >
+            Other
+          </button>
         </div>
         @if (missionChoice() === 'custom') {
           <label for="mission-custom-amount">Your amount (INR)</label>
-          <input id="mission-custom-amount" type="number" inputmode="numeric" min="1" step="1" [value]="missionCustomAmount()" (input)="setMissionCustomAmount($event)" [attr.aria-invalid]="missionError() ? 'true' : null" aria-describedby="mission-amount-help mission-amount-error">
+          <input
+            id="mission-custom-amount"
+            type="number"
+            inputmode="numeric"
+            min="1"
+            step="1"
+            [value]="missionCustomAmount()"
+            (input)="setMissionCustomAmount($event)"
+            [attr.aria-invalid]="missionError() ? 'true' : null"
+            aria-describedby="mission-amount-help mission-amount-error"
+          />
           <small id="mission-amount-help">Enter a positive whole-rupee amount.</small>
         }
-        @if (missionError()) { <p id="mission-amount-error" class="mission-error" role="alert">{{ missionError() }}</p> }
+        @if (missionError()) {
+          <p id="mission-amount-error" class="mission-error" role="alert">{{ missionError() }}</p>
+        }
       </fieldset>
-      <button type="button" class="mission-contribute" (click)="reviewMissionContribution()">Review my contribution <span aria-hidden="true">↗</span></button>
+      <button type="button" class="mission-contribute" (click)="reviewMissionContribution()">
+        Review my contribution <span aria-hidden="true">↗</span>
+      </button>
       @if (missionReview()) {
         <div class="mission-review" role="status">
-          <strong>Your choice: ₹{{ missionFormattedAmount() }} towards the livelihood mission.</strong>
-          <p>Online contributions are not open yet. No payment has been taken and no monthly debit has been set up.</p>
+          <strong
+            >Your choice: ₹{{ missionFormattedAmount() }} towards the livelihood mission.</strong
+          >
+          <p>
+            Online contributions are not open yet. No payment has been taken and no monthly debit
+            has been set up.
+          </p>
         </div>
       }
-      <p class="mission-payment-note">This is an invitation to contribute each month, not an automatic subscription.</p>
-      <div class="mission-panel-footer"><span class="material-symbols-outlined" aria-hidden="true">diversity_1</span><span>A community effort.<br><strong>A shared hope for independence.</strong></span></div>
+      <p class="mission-payment-note">
+        This is an invitation to contribute each month, not an automatic subscription.
+      </p>
+      <div class="mission-panel-footer">
+        <span class="material-symbols-outlined" aria-hidden="true">diversity_1</span
+        ><span>A community effort.<br /><strong>A shared hope for independence.</strong></span>
+      </div>
     </div>
   </div>
 </section>
@@ -67,17 +210,27 @@
 <!-- Compact support pathways, without unverified impact numbers -->
 <section class="pathways-section" aria-label="Areas of support">
   <div class="container pathways-grid">
-    <button type="button" class="pathway" (click)="causeService.navigateTo('rozgaar')">
+    <button type="button" class="pathway" (click)="causeService.openCategory('rozgaar')">
       <span class="pathway-icon material-symbols-outlined" aria-hidden="true">handyman</span>
-      <span><strong>Build a livelihood</strong><small>Skills, tools and a first opportunity</small></span><span class="pathway-arrow" aria-hidden="true">↗</span>
+      <span
+        ><strong>Build a livelihood</strong
+        ><small>Skills, tools and a first opportunity</small></span
+      ><span class="pathway-arrow" aria-hidden="true">↗</span>
     </button>
     <button type="button" class="pathway" (click)="exploreProgram('medical')">
-      <span class="pathway-icon material-symbols-outlined" aria-hidden="true">health_and_safety</span>
-      <span><strong>Support a medical need</strong><small>Care begins with understanding</small></span><span class="pathway-arrow" aria-hidden="true">↗</span>
+      <span class="pathway-icon material-symbols-outlined" aria-hidden="true"
+        >health_and_safety</span
+      >
+      <span
+        ><strong>Support a medical need</strong><small>Care begins with understanding</small></span
+      ><span class="pathway-arrow" aria-hidden="true">↗</span>
     </button>
     <button type="button" class="pathway" (click)="exploreProgram('emergency')">
       <span class="pathway-icon material-symbols-outlined" aria-hidden="true">emergency</span>
-      <span><strong>Stand together in a crisis</strong><small>A thoughtful response to urgent needs</small></span><span class="pathway-arrow" aria-hidden="true">↗</span>
+      <span
+        ><strong>Stand together in a crisis</strong
+        ><small>A thoughtful response to urgent needs</small></span
+      ><span class="pathway-arrow" aria-hidden="true">↗</span>
     </button>
   </div>
 </section>
@@ -86,143 +239,173 @@
 <section class="programs-overview" aria-labelledby="programs-title">
   <div class="container">
     <div class="overview-heading">
-      <div><span class="section-kicker">WHERE HELP BECOMES POSSIBILITY</span><h2 id="programs-title">Livelihoods at the heart.<br><span>Care alongside.</span></h2></div>
-      <div class="overview-intro"><p>Helping unemployed people earn is our main mission. Explore Rozgaar first, alongside information about medical and emergency support.</p><button type="button" class="overview-link" (click)="causeService.navigateTo('about')">Get to know our foundation <span aria-hidden="true">↗</span></button></div>
+      <div>
+        <span class="section-kicker">WHERE HELP BECOMES POSSIBILITY</span>
+        <h2 id="programs-title">Livelihoods at the heart.<br /><span>Care alongside.</span></h2>
+      </div>
+      <div class="overview-intro">
+        <p>
+          Helping unemployed people earn is our main mission. Explore Rozgaar first, alongside
+          information about medical and emergency support.
+        </p>
+        <button type="button" class="overview-link" (click)="causeService.navigateTo('categories')">
+          All programme guides <span aria-hidden="true">↗</span>
+        </button>
+      </div>
     </div>
     <div class="overview-grid">
       <article class="overview-card livelihood">
-        <div class="overview-image"><img src="cause_tailoring.jpg" alt="Illustrative tailoring workspace" loading="lazy" decoding="async" width="1536" height="1024"><span class="overview-tag">LIVELIHOODS</span></div>
-        <div class="overview-body"><span class="program-number">01 / ROZGAAR</span><h3>A skill. The right tools.<br>A new beginning.</h3><p>Explore an approach to practical skills, livelihood equipment and follow-up towards independence.</p><button type="button" class="overview-link" (click)="causeService.navigateTo('rozgaar')">Explore Rozgaar <span aria-hidden="true">↗</span></button></div>
+        <div class="overview-image">
+          <img
+            src="cause_tailoring.jpg"
+            alt="Illustrative tailoring workspace"
+            loading="lazy"
+            decoding="async"
+            width="1536"
+            height="1024"
+          /><span class="overview-tag">LIVELIHOODS</span>
+        </div>
+        <div class="overview-body">
+          <span class="program-number">01 / ROZGAAR</span>
+          <h3>A skill. The right tools.<br />A new beginning.</h3>
+          <p>
+            Explore an approach to practical skills, livelihood equipment and follow-up towards
+            independence.
+          </p>
+          <button
+            type="button"
+            class="overview-link"
+            (click)="causeService.openCategory('rozgaar')"
+          >
+            Explore Rozgaar <span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </article>
       <article class="overview-card medical">
-        <div class="overview-image"><img src="cause_medical.jpg" alt="Illustrative medical support scene" loading="lazy" decoding="async" width="1536" height="1024"><span class="overview-tag">MEDICAL SUPPORT</span></div>
-        <div class="overview-body"><span class="program-number">02 / MEDICAL</span><h3>Care when it<br>matters most.</h3><p>Understanding treatment needs, available assistance and the support a family may require.</p><button type="button" class="overview-link" (click)="exploreProgram('medical')">Explore medical support <span aria-hidden="true">↗</span></button></div>
+        <div class="overview-image">
+          <img
+            src="cause_medical.jpg"
+            alt="Illustrative medical support scene"
+            loading="lazy"
+            decoding="async"
+            width="1536"
+            height="1024"
+          /><span class="overview-tag">MEDICAL SUPPORT</span>
+        </div>
+        <div class="overview-body">
+          <span class="program-number">02 / MEDICAL</span>
+          <h3>Care when it<br />matters most.</h3>
+          <p>
+            Understanding treatment needs, available assistance and the support a family may
+            require.
+          </p>
+          <button type="button" class="overview-link" (click)="exploreProgram('medical')">
+            Explore medical support <span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </article>
       <article class="overview-card emergency">
-        <div class="overview-image"><img src="cause_ration.jpg" alt="Illustrative essential supplies and relief scene" loading="lazy" decoding="async" width="1536" height="1024"><span class="overview-tag">EMERGENCY ASSISTANCE</span></div>
-        <div class="overview-body"><span class="program-number">03 / EMERGENCY</span><h3>A little stability.<br>When life changes.</h3><p>A considered response to sudden hardship, with privacy, review and responsible support.</p><button type="button" class="overview-link" (click)="exploreProgram('emergency')">Explore emergency assistance <span aria-hidden="true">↗</span></button></div>
+        <div class="overview-image">
+          <img
+            src="cause_ration.jpg"
+            alt="Illustrative essential supplies and relief scene"
+            loading="lazy"
+            decoding="async"
+            width="1536"
+            height="1024"
+          /><span class="overview-tag">EMERGENCY ASSISTANCE</span>
+        </div>
+        <div class="overview-body">
+          <span class="program-number">03 / EMERGENCY</span>
+          <h3>A little stability.<br />When life changes.</h3>
+          <p>
+            A considered response to sudden hardship, with privacy, review and responsible support.
+          </p>
+          <button type="button" class="overview-link" (click)="exploreProgram('emergency')">
+            Explore emergency assistance <span aria-hidden="true">↗</span>
+          </button>
+        </div>
       </article>
     </div>
-    <p class="programs-footnote">Program images are illustrative. Support depends on assessment, availability and approved policies.</p>
+    <p class="programs-footnote">
+      Program images are illustrative. Support depends on assessment, availability and approved
+      policies.
+    </p>
   </div>
 </section>
 
-<!-- How It Works / Crowdfunding Workflow -->
-<section class="how-it-works-section">
+<section class="home-discovery">
   <div class="container">
-    <div class="section-heading text-center">
-      <span class="badge badge-green">End-to-End Governance</span>
-      <h2>How Young Helpers Foundation Works</h2>
-      <p>A rigorous, transparent journey from case intake to self-reliant livelihood</p>
-    </div>
-
-    <div class="workflow-steps-grid">
-      <div class="workflow-card">
-        <div class="wf-number">01</div>
-        <div class="wf-icon"><span class="material-symbols-outlined">draw</span></div>
-        <h4>Case Intake</h4>
-        <p>Beneficiary or local volunteer submits identity, household income, and vendor equipment quotation online or through community desk.</p>
-      </div>
-      <div class="workflow-card">
-        <div class="wf-number">02</div>
-        <div class="wf-icon"><span class="material-symbols-outlined">fact_check</span></div>
-        <h4>Field Physical Check</h4>
-        <p>Two assigned field volunteers physically visit the home, check poverty baseline, and verify quotation accuracy with local vendors.</p>
-      </div>
-      <div class="workflow-card">
-        <div class="wf-number">03</div>
-        <div class="wf-icon"><span class="material-symbols-outlined">gavel</span></div>
-        <h4>Committee Approval</h4>
-        <p>3-member Shariah and Finance committee verifies Mustahiq eligibility. Case is published anonymously protecting beneficiary dignity.</p>
-      </div>
-      <div class="workflow-card">
-        <div class="wf-number">04</div>
-        <div class="wf-icon"><span class="material-symbols-outlined">handshake</span></div>
-        <h4>Tamleek Handover</h4>
-        <p>Funds are disbursed directly to machine vendor. 100% unconditional asset ownership transferred to the family with signed handover.</p>
-      </div>
-      <div class="workflow-card">
-        <div class="wf-number">05</div>
-        <div class="wf-icon"><span class="material-symbols-outlined">query_stats</span></div>
-        <h4>30/90/180-Day Audit</h4>
-        <p>Volunteers visit at 30, 90, and 180 days to review customer earnings, solve equipment issues, and confirm sustainable Khud-Mukhtari.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Active Verified Causes Section -->
-<section class="causes-section">
-  <div class="container">
-    <div class="causes-header-row">
+    <div class="home-discovery-heading">
       <div>
-        <span class="badge badge-green">100% Direct Disbursement</span>
-        <h2>Active Verified Causes Needing Your Support</h2>
+        <span class="section-kicker">UNDERSTAND THE NEED AND THE NEXT STEP</span>
+        <h2>A closer look at<br />the possibilities.</h2>
       </div>
-      <button class="btn btn-outline" (click)="causeService.navigateTo('causes')">
-        View All {{ causeService.causes().length }} Causes <span class="material-symbols-outlined">arrow_forward</span>
-      </button>
+      <div>
+        <p>
+          Read the story, explore a sample budget and see how a future cause could explain its
+          proposed support.
+        </p>
+        <button type="button" class="overview-link" (click)="causeService.explore('featured')">
+          Explore featured causes <span aria-hidden="true">↗</span>
+        </button>
+      </div>
     </div>
-
-    <div class="causes-cards-grid">
-      @for (cause of causeService.causes(); track cause.id) {
-        <app-cause-card [cause]="cause" (donate)="onDonate($event)"></app-cause-card>
+    <aside class="home-preview-note">
+      Illustrative examples only. These are not verified beneficiary appeals or live fundraising
+      campaigns.
+    </aside>
+    <div class="home-example-grid">
+      @for (cause of featuredExamples(); track cause.id) {
+        <app-cause-card [cause]="cause" />
       }
     </div>
   </div>
 </section>
-
-<!-- Why Donors Trust Us Section -->
-<section class="trust-pillars-section">
+<section class="home-process">
   <div class="container">
-    <div class="section-heading text-center">
-      <span class="badge badge-gold">Zero Doubt Philanthropy</span>
-      <h2>Why Thousands Trust Young Helpers Foundation</h2>
-      <p>We combine deep religious adherence with modern enterprise audit trails.</p>
+    <span class="section-kicker">A PROPOSED APPROACH. PEOPLE FIRST.</span>
+    <div class="home-process-heading">
+      <h2>Care is part<br />of every step.</h2>
+      <p>
+        Our blueprint separates understanding a need, reviewing support and following progress.
+        Policies and services must be approved before operations open.
+      </p>
     </div>
-
-    <div class="trust-features-grid">
-      <div class="tf-card">
-        <span class="material-symbols-outlined tf-icon">percent</span>
-        <h4>0% Admin Cut on Zakat</h4>
-        <p>Every single rupee donated as Zakat goes 100% to verified Mustahiq assets or hospital bills. Foundation overheads are funded through separate voluntary Lillah.</p>
-      </div>
-      <div class="tf-card">
-        <span class="material-symbols-outlined tf-icon">verified_user</span>
-        <h4>Two-Tier Physical Checks</h4>
-        <p>No desk-only approvals. Every beneficiary home is physically visited by local volunteers to verify genuine destitution before any fund is approved.</p>
-      </div>
-      <div class="tf-card">
-        <span class="material-symbols-outlined tf-icon">account_tree</span>
-        <h4>Permanent Asset Handover</h4>
-        <p>We do not issue micro-debt or small loans. We purchase machinery directly and transfer 100% permanent legal ownership (Tamleek) to the beneficiary.</p>
-      </div>
-      <div class="tf-card">
-        <span class="material-symbols-outlined tf-icon">visibility</span>
-        <h4>Live Double-Entry Ledger</h4>
-        <p>Our public audit ledger tracks every donation inflow and vendor outflow. Donors can view anonymized bank reconciliation receipts in real-time.</p>
-      </div>
-    </div>
+    <ol>
+      <li>
+        <span>01</span>
+        <h3>Listen carefully</h3>
+        <p>Understand the person, the skills and the opportunity.</p>
+      </li>
+      <li>
+        <span>02</span>
+        <h3>Review responsibly</h3>
+        <p>Consider appropriate evidence and authorised decisions.</p>
+      </li>
+      <li>
+        <span>03</span>
+        <h3>Follow through</h3>
+        <p>Plan delivery and programme-appropriate follow-up.</p>
+      </li>
+    </ol>
+    <button type="button" class="overview-link" (click)="causeService.openInfo('process')">
+      Read the proposed process <span aria-hidden="true">↗</span>
+    </button>
   </div>
 </section>
-
-<!-- Zakat & Rozgaar Philosophy Banner -->
-<section class="banner-cta-section">
-  <div class="container banner-box glass-dark">
-    <div class="banner-content">
-      <span class="badge badge-gold">The YHF Difference</span>
-      <h2>"Help today. Independence tomorrow."</h2>
+<section class="home-volunteer">
+  <div class="container">
+    <div>
+      <span class="section-kicker">SMALL ACTS. SHARED POSSIBILITY.</span>
+      <h2>Your time could be<br />someone’s new beginning.</h2>
       <p>
-        A small monthly contribution can help strengthen a community effort to connect people with livelihoods. Our request is ₹100 a month, and you are welcome to give more according to your wishes and means. Together, we can work towards a future with more opportunities to earn.
+        Explore how your skills and willingness to listen can become part of the community
+        livelihood mission.
       </p>
-      <div class="banner-actions">
-        <button class="btn btn-primary" (click)="causeService.navigateTo('calculator')">
-          <span class="material-symbols-outlined">calculate</span> Calculate My Zakat
-        </button>
-        <button class="btn btn-outline" style="color: white; border-color: rgba(255,255,255,0.4);" (click)="causeService.navigateTo('apply')">
-          Refer a Deserving Beneficiary
-        </button>
-      </div>
     </div>
+    <button type="button" class="btn" (click)="causeService.navigateTo('volunteer')">
+      Explore volunteering ↗
+    </button>
   </div>
 </section>

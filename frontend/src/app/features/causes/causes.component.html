@@ -1,83 +1,191 @@
-<section class="page-container container">
-  <div class="page-heading">
-    <span class="badge badge-navy">Browse Verified Needs</span>
-    <h1>Explore Verified Causes</h1>
-    <p>Every case listed on Young Helpers Foundation has undergone rigorous background checks, quotation verifications, and Shariah eligibility approval.</p>
-  </div>
-
-  <!-- Filters -->
-  <div class="filter-bar">
-    <div class="filter-chips">
-      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'all'" (click)="setCategory('all')">
-        All Causes ({{ causeService.causes().length }})
-      </button>
-      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'rozgaar'" (click)="setCategory('rozgaar')">
-        Ek Rozgaar Livelihood
-      </button>
-      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'medical'" (click)="setCategory('medical')">
-        Medical Emergency
-      </button>
-      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'education'" (click)="setCategory('education')">
-        Education Scholarships
-      </button>
-      <button class="chip" [class.chip-active]="causeService.selectedCategory() === 'emergency'" (click)="setCategory('emergency')">
-        Disaster & Ration Relief
-      </button>
-    </div>
-  </div>
-
-  <!-- Grid -->
-  <div class="causes-cards-grid">
-    @for (cause of causeService.filteredCauses(); track cause.id) {
-      <div class="cause-card">
-        <div class="cause-thumb-wrap">
-          <img [src]="cause.coverImage" [alt]="cause.title" class="cause-thumb" />
-          <span class="cause-badge" [class.badge-green]="cause.category === 'rozgaar'" [class.badge-navy]="cause.category === 'medical'" [class.badge-gold]="cause.category === 'education'" [class.badge-magenta]="cause.category === 'emergency'">
-            {{ cause.category | uppercase }}
-          </span>
-          <span class="cause-fund-badge">{{ cause.fundType }} Fund</span>
+<div class="yhf-page explore-page">
+  <section class="page-intro">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <button type="button" (click)="causeService.navigateTo('home')">Home</button
+        ><span aria-hidden="true">/</span><span>Explore</span>
+      </nav>
+      <div class="intro-split">
+        <div>
+          <span class="eyebrow">FIND A PURPOSE THAT CONNECTS WITH YOU</span>
+          <h1>Discover a need.<br /><em>Understand the possibility.</em></h1>
         </div>
-        <div class="cause-card-body">
-          <div class="cause-meta-top">
-            <span><span class="material-symbols-outlined" style="font-size: 14px;">location_on</span> {{ cause.location }}</span>
-            <span>Case #{{ cause.id }}</span>
-          </div>
-          <h4 class="cause-card-title">{{ cause.title }}</h4>
-          <p class="cause-card-desc">{{ cause.story }}</p>
-
-          @if (cause.rozgaarPlan) {
-            <div class="rozgaar-spec-box">
-              <div class="spec-row">
-                <strong>Asset:</strong> <span>{{ cause.rozgaarPlan.toolName }}</span>
-              </div>
-              <div class="spec-row">
-                <strong>Expected Income:</strong> <span class="income-badge">₹{{ cause.rozgaarPlan.expectedMonthlyIncome }}/month</span>
-              </div>
-            </div>
+        <p>
+          Start with livelihoods, or explore supporting areas. Read each example to understand the
+          need, the proposed plan and what would happen next.
+        </p>
+      </div>
+      <div class="intro-bottom">
+        <span class="small-pill">Rozgaar-first. People always.</span
+        ><button type="button" class="inline-link" (click)="causeService.navigateTo('categories')">
+          Browse programme guides ↗
+        </button>
+      </div>
+    </div>
+  </section>
+  <section class="catalogue-section container">
+    <div class="collection-tabs" role="group" aria-label="Cause collection">
+      @for (collection of collections; track collection[0]) {
+        <button
+          type="button"
+          [class.selected]="causeService.query().collection === collection[0]"
+          [attr.aria-pressed]="causeService.query().collection === collection[0]"
+          (click)="setCollection(collection[0])"
+        >
+          <strong>{{ collection[1] }}</strong
+          ><small>{{ collection[2] }}</small>
+        </button>
+      }
+    </div>
+    <aside class="preview-disclosure">
+      <span class="material-symbols-outlined" aria-hidden="true">info</span>
+      <p>
+        <strong>Preview catalogue, not live campaigns.</strong> All records and figures below are
+        illustrative. Trending uses sample activity; Featured is an editorial example; Latest uses
+        example publication dates. No payment is collected.
+      </p>
+    </aside>
+    <div class="catalogue-layout">
+      <aside class="filter-panel">
+        <div class="filter-heading">
+          <h2>Refine your search</h2>
+          <button type="button" (click)="causeService.clearFilters()">Reset</button>
+        </div>
+        <button
+          type="button"
+          class="filter-toggle"
+          [attr.aria-expanded]="filtersOpen()"
+          aria-controls="explore-filter-fields"
+          (click)="toggleFilters()"
+        >
+          Filters
+          @if (activeFilters()) {
+            ({{ activeFilters() }})
           }
-
-          <!-- Progress -->
-          <div class="progress-wrap">
-            <div class="progress-labels">
-              <span class="raised-amt">₹{{ cause.raisedAmount.toLocaleString('en-IN') }}</span>
-              <span class="target-amt">Goal: ₹{{ cause.targetAmount.toLocaleString('en-IN') }}</span>
-            </div>
-            <div class="progress-track">
-              <div class="progress-fill" [style.width.%]="(cause.raisedAmount / cause.targetAmount) * 100"></div>
-            </div>
-            <div class="progress-sub">
-              <span>{{ Math.round((cause.raisedAmount / cause.targetAmount) * 100) }}% Collected</span>
-              <span>{{ cause.donorCount }} Backers</span>
-            </div>
+          <span aria-hidden="true">{{ filtersOpen() ? '−' : '+' }}</span>
+        </button>
+        <div id="explore-filter-fields" class="filter-fields" [class.expanded]="filtersOpen()">
+          <label for="cause-search">Search by need or city</label>
+          <div class="search-field">
+            <input
+              id="cause-search"
+              type="search"
+              maxlength="200"
+              placeholder="Try tools, tailoring or Bhopal"
+              [value]="causeService.query().search"
+              (input)="change('search', $event)"
+            />
           </div>
-
-          <div class="cause-card-footer">
-            <button class="btn btn-primary btn-sm" style="flex: 1;" (click)="onDonate(cause)">
-              Donate Directly
+          <label for="programme-filter">Programme</label
+          ><select
+            id="programme-filter"
+            [value]="causeService.query().category"
+            (change)="change('category', $event)"
+          >
+            <option value="all">All programmes</option>
+            @for (programme of causeService.programmes; track programme.id) {
+              <option [value]="programme.id">{{ programme.name }}</option>
+            }
+          </select>
+          <label for="city-filter">Location</label
+          ><select
+            id="city-filter"
+            [value]="causeService.query().city"
+            (change)="change('city', $event)"
+          >
+            <option value="all">All locations</option>
+            @for (city of cities; track city) {
+              <option [value]="city">{{ city }}</option>
+            }
+          </select>
+          <label for="status-filter">Example status</label
+          ><select
+            id="status-filter"
+            [value]="causeService.query().status"
+            (change)="change('status', $event)"
+          >
+            <option value="all">All example statuses</option>
+            <option value="open">Open example</option>
+            <option value="completed">Completed example</option>
+          </select>
+        </div>
+        <div class="filter-mission">
+          <small>OUR EVERYDAY MISSION</small
+          ><strong>₹100 a month.<br />A stronger beginning.</strong
+          ><button type="button" (click)="causeService.navigateTo('home')">
+            Discover the mission ↗
+          </button>
+        </div>
+      </aside>
+      <div class="catalogue-results" id="explore-results">
+        <div class="results-heading">
+          <p role="status" aria-live="polite">
+            <strong>{{ causeService.catalogue().length }}</strong> illustrative
+            {{ causeService.catalogue().length === 1 ? 'example' : 'examples' }}
+            @if (activeFilters()) {
+              <span>· {{ activeFilters() }} active filters</span>
+            }
+          </p>
+          <div>
+            <label for="cause-sort">Sort</label
+            ><select
+              id="cause-sort"
+              [value]="causeService.query().sort"
+              (change)="change('sort', $event)"
+            >
+              <option value="recommended">Collection order</option>
+              <option value="newest">Newest first</option>
+              <option value="remaining">Sample remaining: low to high</option>
+            </select>
+          </div>
+        </div>
+        @if (causeService.query().search) {
+          <div class="filter-chips">
+            <span
+              >Search: {{ causeService.query().search }}
+              <button
+                type="button"
+                aria-label="Clear search"
+                (click)="causeService.updateQuery({ search: '' })"
+              >
+                ×
+              </button></span
+            >
+          </div>
+        }
+        @if (results().length) {
+          <div class="results-grid">
+            @for (cause of results(); track cause.id) {
+              <app-cause-card [cause]="cause" />
+            }
+          </div>
+          <nav class="pagination" aria-label="Explore result pages">
+            <button
+              type="button"
+              [disabled]="currentPage() === 1"
+              (click)="page(currentPage() - 1)"
+            >
+              ← Previous</button
+            ><span>Page {{ currentPage() }} of {{ pageCount() }}</span
+            ><button
+              type="button"
+              [disabled]="currentPage() === pageCount()"
+              (click)="page(currentPage() + 1)"
+            >
+              Next →
+            </button>
+          </nav>
+        } @else {
+          <div class="public-empty">
+            <span class="material-symbols-outlined" aria-hidden="true">travel_explore</span>
+            <h2>No examples match these filters.</h2>
+            <p>Try another search or clear the filters to see the full catalogue.</p>
+            <button type="button" class="public-button" (click)="causeService.clearFilters()">
+              Clear filters
             </button>
           </div>
-        </div>
+        }
       </div>
-    }
-  </div>
-</section>
+    </div>
+  </section>
+</div>

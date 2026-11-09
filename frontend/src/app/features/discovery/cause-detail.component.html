@@ -1,0 +1,162 @@
+<div class="yhf-page">
+  @if (cause(); as c) {
+    <section class="detail-heading container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <button type="button" (click)="nav.navigateTo('causes')">Explore</button><span>/</span
+        ><button type="button" (click)="nav.openCategory(c.category)">
+          {{ c.category === 'rozgaar' ? 'Livelihoods' : c.category }}</button
+        ><span>/</span><span>Example</span>
+      </nav>
+      <span class="eyebrow">UNDERSTAND THE NEED. SEE THE PROPOSED PLAN.</span>
+      <h1>{{ c.title }}</h1>
+      <p>{{ c.tagline }}</p>
+      <div class="detail-meta">
+        <span>{{ c.location }} · Illustrative location</span
+        ><span>Example record · Not verified for fundraising</span
+        ><span>Example publication: {{ c.publishedAt | date: 'd MMM y' }}</span>
+      </div>
+    </section>
+    <section class="container detail-layout">
+      <div>
+        <figure class="detail-cover">
+          <img
+            [src]="c.coverImage"
+            alt="Illustrative programme scene, not an actual beneficiary"
+            width="1536"
+            height="1024"
+            fetchpriority="high"
+          />
+          <figcaption>
+            Conceptual imagery. No beneficiary identity or private documents are published.
+          </figcaption>
+        </figure>
+        <div class="detail-tabs" role="group" aria-label="Example sections">
+          @for (
+            item of [
+              ['story', 'The need'],
+              ['plan', 'Proposed support'],
+              ['updates', 'Updates'],
+            ];
+            track item[0]
+          ) {
+            <button
+              type="button"
+              [class.selected]="tab() === item[0]"
+              [attr.aria-pressed]="tab() === item[0]"
+              (click)="tab.set(item[0])"
+            >
+              {{ item[1] }}
+            </button>
+          }
+        </div>
+        <article class="detail-story">
+          @switch (tab()) {
+            @case ('story') {
+              <h2>A possible beginning.</h2>
+              <p>{{ c.story }}</p>
+              <p>
+                Before any real cause could be published, the foundation would need to review the
+                request, confirm appropriate consent and approve a public-safe account of the need.
+                Illustrative budgets are not evidence of funds received.
+              </p>
+            }
+            @case ('plan') {
+              <h2>From a need to considered support.</h2>
+              <ol class="detail-plan">
+                <li>Understand the request and available alternatives.</li>
+                <li>Review evidence privately and record an authorised decision.</li>
+                <li>Confirm the approved budget, fund restrictions and support method.</li>
+                <li>Record delivery and arrange programme-appropriate follow-up.</li>
+              </ol>
+              <p>
+                For livelihoods, follow-up at 30, 90 and 180 days is part of the proposed blueprint.
+                No outcome or income is guaranteed.
+              </p>
+            }
+            @case ('updates') {
+              <h2>No published updates yet.</h2>
+              <p>
+                This is a catalogue example, so there are no verified milestones, delivery records
+                or financial updates to display.
+              </p>
+            }
+          }
+        </article>
+        <div class="privacy-callout">
+          <span class="material-symbols-outlined" aria-hidden="true">shield</span>
+          <div>
+            <strong>Dignity is part of the process.</strong>
+            <p>
+              Personal contact details, bank information, identity records and medical documents do
+              not belong on a public cause page.
+            </p>
+          </div>
+        </div>
+      </div>
+      <aside class="support-summary">
+        <span class="small-pill">ILLUSTRATIVE FUNDING SUMMARY</span>
+        <h2>A sample budget.<br />Not a live collection.</h2>
+        <div class="summary-raised">
+          <strong>{{ money(c.raisedAmount) }}</strong
+          ><span>example raised · of {{ money(c.targetAmount) }} example goal</span>
+        </div>
+        <div
+          class="summary-progress"
+          role="progressbar"
+          [attr.aria-valuenow]="progress()"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-label="Illustrative funding progress"
+        >
+          <span [style.width.%]="progress()"></span>
+        </div>
+        <div class="summary-row">
+          <span>Sample progress</span><b>{{ progress() | number: '1.0-0' }}%</b>
+        </div>
+        <div class="summary-row">
+          <span>Example remaining</span><b>{{ money(remaining()) }}</b>
+        </div>
+        <p class="caption">
+          No donation, verification, eligibility or tax approval is implied by these sample figures.
+        </p>
+        <button type="button" class="public-button" (click)="support()">
+          Contribution availability ↗</button
+        ><button type="button" class="public-button secondary" (click)="share()">
+          Share this example
+        </button>
+        <p class="caption" role="status">{{ shareStatus() }}</p>
+        <div class="summary-note">
+          <strong>Prefer the community mission?</strong>
+          <p>Learn about the voluntary ₹100/month livelihood effort.</p>
+          <button type="button" class="inline-link" (click)="nav.navigateTo('home')">
+            Our main mission →
+          </button>
+        </div>
+      </aside>
+    </section>
+    @if (related().length) {
+      <section class="container related-section">
+        <div class="section-title-row">
+          <div>
+            <span class="eyebrow">MORE IN THIS PROGRAMME</span>
+            <h2>Other possibilities to understand.</h2>
+          </div>
+          <button type="button" class="inline-link" (click)="nav.explore('all', c.category)">
+            Explore the programme ↗
+          </button>
+        </div>
+        <div class="related-grid">
+          @for (item of related(); track item.id) {
+            <app-cause-card [cause]="item" />
+          }
+        </div>
+      </section>
+    }
+  } @else {
+    <section class="container public-empty">
+      <h1>This example could not be found.</h1>
+      <p>The link may be incorrect or the example may no longer be in the catalogue.</p>
+      <button type="button" class="public-button" (click)="nav.explore()">Back to Explore</button>
+    </section>
+  }
+</div>

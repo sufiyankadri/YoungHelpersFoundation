@@ -1,46 +1,69 @@
 <div class="site-wrapper">
-  <!-- Shared Top Bar & Main Navigation Header -->
-  <app-navbar></app-navbar>
-
-  <!-- Modular Active Tab Feature Routing -->
+  <app-navbar />
   <main class="main-content" id="main-content" tabindex="-1">
     @switch (causeService.activeTab()) {
       @case ('home') {
-        <app-home></app-home>
+        <app-home />
       }
-      @case ('causes') {
-        <app-causes></app-causes>
+      @case ('categories') {
+        <app-categories />
+      }
+      @case ('category') {
+        <app-category />
       }
       @case ('rozgaar') {
-        <app-rozgaar></app-rozgaar>
+        <app-category />
+      }
+      @case ('causes') {
+        <app-causes />
+      }
+      @case ('cause') {
+        <app-cause-detail />
       }
       @case ('calculator') {
-        <app-calculator></app-calculator>
+        <app-calculator />
+      }
+      @case ('info') {
+        <app-info />
       }
       @case ('about') {
-        <app-about></app-about>
-      }
-      @case ('volunteer') {
-        <app-volunteer></app-volunteer>
+        <app-info />
       }
       @case ('transparency') {
-        <app-transparency></app-transparency>
+        <app-info />
       }
       @case ('faq') {
-        <app-faq></app-faq>
-      }
-      @case ('apply') {
-        <app-apply></app-apply>
+        <app-info />
       }
       @case ('admin') {
-        <app-admin></app-admin>
+        <app-info />
+      }
+      @case ('volunteer') {
+        <app-volunteer />
+      }
+      @case ('apply') {
+        <section class="yhf-page">
+          <div class="container public-empty">
+            <span class="eyebrow">PRIVATE INTAKE IS BEING PREPARED</span>
+            <h1>Applications are not open online yet.</h1>
+            <p>
+              Our main mission is helping people find a way to earn. A secure intake service,
+              approved policies and authorised review must be in place before personal information
+              can be collected here.
+            </p>
+            <button type="button" class="public-button" (click)="causeService.openInfo('process')">
+              Understand the proposed process ↗</button
+            ><br /><button
+              type="button"
+              class="inline-link"
+              (click)="causeService.navigateTo('categories')"
+            >
+              Explore programme guides →
+            </button>
+          </div>
+        </section>
       }
     }
   </main>
-
-  <!-- Universal Contribution Modal -->
-  <app-donate-modal></app-donate-modal>
-
-  <!-- Shared Global Footer -->
-  <app-footer></app-footer>
+  <app-donate-modal /><app-footer />
 </div>

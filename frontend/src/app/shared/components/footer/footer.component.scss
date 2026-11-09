@@ -1,111 +1,105 @@
-.site-footer {
-  background: #061d36;
-  color: #cbd5e1;
-  padding-top: 4.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1.2fr;
-    gap: 3rem;
-    padding-bottom: 3.5rem;
+:host {
+  display: block;
+}
+.public-footer {
+  background: #082e45;
+  color: #e2ecec;
+  padding: 60px 0 15px;
+  border-top: 4px solid #709b64;
+}
+.public-footer-grid {
+  max-width: 1360px;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1.2fr;
+  gap: 45px;
+}
+.public-footer-brand img {
+  width: 150px;
+  height: 100px;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  display: block;
+}
+.public-footer-brand h2 {
+  font-size: 27px;
+  color: #fff;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin: 24px 0 15px;
+}
+.public-footer-brand p {
+  color: #bacfd0;
+  font-size: 12px;
+  line-height: 1.9;
+  max-width: 300px;
+}
+.public-footer-grid h3 {
+  color: #fff;
+  font-size: 14px;
+  margin: 10px 0 20px;
+}
+.public-footer-grid > div > button:not(:first-child),
+.public-footer-grid > div:not(:first-child) > button {
+  display: block;
+  min-height: 42px;
+  color: #c2d5d4;
+  font-size: 12px;
+  text-align: left;
+  line-height: 1.6;
+}
+.public-footer-grid button:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.public-footer-bottom {
+  max-width: 1360px;
+  border-top: 1px solid #ffffff1c;
+  margin-top: 40px;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 11px;
+  color: #b5c9ca;
+}
+.public-footer-bottom button {
+  color: #cfe0dc;
+  min-height: 44px;
+  font-size: 12px;
+}
+button:focus-visible {
+  outline: 3px solid #b9d592;
+  outline-offset: 4px;
+}
+@media (max-width: 1000px) {
+  .public-footer-grid {
+    grid-template-columns: 1.5fr 1fr;
+    gap: 35px;
   }
-
-  .footer-brand {
-    .brand-row {
-      margin-bottom: 1.25rem;
-      .brand-logo {
-        height: 54px;
-        background: white;
-        padding: 4px;
-        border-radius: var(--radius-sm);
-      }
-    }
-
-    .footer-desc {
-      font-size: 0.9rem;
-      line-height: 1.6;
-      color: #94a3b8;
-      margin-bottom: 1.5rem;
-      max-width: 360px;
-    }
-
-    .footer-badges {
-      display: flex;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-    }
-  }
-
-  .footer-col {
-    h4 {
-      color: #ffffff;
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 1.25rem;
-      letter-spacing: -0.01em;
-    }
-
-    ul {
-      list-style: none;
-
-      li {
-        margin-bottom: 0.75rem;
-
-        a {
-          color: #94a3b8;
-          font-size: 0.9rem;
-          cursor: pointer;
-          transition: color 0.2s, padding-left 0.2s;
-
-          &:hover {
-            color: #ffffff;
-            padding-left: 4px;
-          }
-        }
-      }
-    }
-
-    .contact-line {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.9rem;
-      color: #94a3b8;
-      margin-bottom: 0.75rem;
-
-      .material-symbols-outlined {
-        color: var(--hope-green-light);
-        font-size: 18px;
-      }
-    }
-  }
-
-  .footer-bottom {
-    background: #031122;
-    padding: 1.5rem 0;
-    font-size: 0.85rem;
-    color: #64748b;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-
-    .bottom-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 1rem;
-    }
-
-    .motto-tag {
-      color: var(--hope-green-light);
-      font-weight: 500;
-    }
+  .public-footer-bottom {
+    flex-wrap: wrap;
   }
 }
-
-@media (max-width: 900px) {
-  .site-footer .footer-grid {
+@media (max-width: 540px) {
+  .public-footer {
+    padding-top: 40px;
+  }
+  .public-footer-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 25px;
+  }
+  .public-footer-brand p {
+    max-width: 100%;
+  }
+  .public-footer-bottom {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .public-footer-grid > div:not(:first-child) > button {
+    font-size: 14px;
   }
 }

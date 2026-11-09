@@ -1,0 +1,67 @@
+<div class="yhf-page">
+  <section class="page-intro">
+    <div class="container">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <button type="button" (click)="nav.navigateTo('home')">Home</button><span>/</span
+        ><span>Programmes</span>
+      </nav>
+      <div class="intro-split">
+        <div>
+          <span class="eyebrow">DIFFERENT NEEDS. ONE COMMUNITY.</span>
+          <h1>Start with a purpose.<br /><em>Find a path forward.</em></h1>
+        </div>
+        <p>
+          Livelihoods are at the heart of our work. Understand the approach to each programme before
+          exploring the illustrative cause catalogue.
+        </p>
+      </div>
+    </div>
+  </section>
+  <section class="container programme-directory">
+    @for (programme of nav.programmes; track programme.id; let i = $index) {
+      <article class="programme-feature" [class.primary-programme]="i === 0">
+        <div class="programme-visual">
+          <img
+            [src]="programme.image"
+            alt="Illustrative programme image"
+            width="1536"
+            height="1024"
+            [loading]="i === 0 ? 'eager' : 'lazy'"
+          /><span class="programme-label">{{ programme.kicker }}</span>
+        </div>
+        <div class="programme-copy">
+          <span class="programme-index">0{{ i + 1 }} / {{ programme.label }}</span>
+          <h2>{{ programme.name }}</h2>
+          <p class="programme-summary">{{ programme.summary }}</p>
+          <p>{{ programme.purpose }}</p>
+          <div class="programme-actions">
+            <button type="button" class="public-button" (click)="nav.openCategory(programme.id)">
+              Understand the programme ↗</button
+            ><button type="button" class="inline-link" (click)="nav.explore('all', programme.id)">
+              Explore examples →
+            </button>
+          </div>
+        </div>
+      </article>
+    }
+    <p class="caption">
+      Images are illustrative. Education, scholarships and other categories are not part of this
+      release.
+    </p>
+  </section>
+  <section class="container">
+    <div class="community-callout">
+      <div>
+        <span class="eyebrow">SMALL CONTRIBUTIONS. SHARED POSSIBILITY.</span>
+        <h2>Help someone take<br />the next step towards earning.</h2>
+        <p>
+          Our main mission invites voluntary support of ₹100 a month, with larger contributions
+          welcome.
+        </p>
+      </div>
+      <button type="button" class="public-button" (click)="nav.navigateTo('home')">
+        Our ₹100/month mission ↗
+      </button>
+    </div>
+  </section>
+</div>

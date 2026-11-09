@@ -1,10 +1,4 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
-
-export const appConfig: ApplicationConfig = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-    provideRouter(routes)
-  ]
-};
+// Public query navigation is owned by CauseService so static-host refreshes and
+// native back/forward restore the same screen without an unused competing router.
+export const appConfig: ApplicationConfig = { providers: [provideBrowserGlobalErrorListeners()] };

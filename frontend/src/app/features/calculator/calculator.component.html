@@ -1,142 +1,137 @@
-<section class="page-container container">
-  <div class="page-heading text-center">
-    <span class="badge badge-gold">Interactive Tool</span>
-    <h1>Shariah Zakat Calculator</h1>
-    <p>Calculate your annual 2.5% Zakat obligations easily and accurately according to classic Fiqh principles.</p>
-  </div>
-
-  <!-- Nisab Standard Selector -->
-  <div class="nisab-selector-card glass-panel">
-    <div class="nisab-header">
-      <div>
-        <h4>Select Nisab Threshold Standard</h4>
-        <p>Nisab is the minimum wealth you must possess for one full lunar year before Zakat becomes mandatory.</p>
-      </div>
-      <div class="nisab-pill-group">
-        <button 
-          class="nisab-btn" 
-          [class.active]="donationService.nisabStandard() === 'silver'" 
-          (click)="donationService.nisabStandard.set('silver')">
-          Silver Standard (₹68,000)
-        </button>
-        <button 
-          class="nisab-btn" 
-          [class.active]="donationService.nisabStandard() === 'gold'" 
-          (click)="donationService.nisabStandard.set('gold')">
-          Gold Standard (₹6,85,000)
-        </button>
+<div class="yhf-page">
+  <section class="page-intro">
+    <div class="container">
+      <span class="eyebrow">A CLEARER WAY TO PLAN</span>
+      <div class="intro-split">
+        <div>
+          <h1>Zakat planning.<br /><em>With the workings visible.</em></h1>
+        </div>
+        <p>
+          A private, browser-only worksheet. Enter the values and Nisab threshold you have reviewed
+          with a qualified adviser. No live metal prices or approved ruling are assumed.
+        </p>
       </div>
     </div>
-  </div>
-
-  <div class="calc-grid">
-    <div class="calc-inputs-panel glass-panel">
-      <h3 class="panel-title">Your Assets & Wealth (Held for 1 Lunar Year)</h3>
-      <p class="panel-sub">Enter wealth held in your possession for 1 lunar year (Hawl):</p>
-
-      <div class="form-group">
-        <label>Gold Value (Jewellery / Coins / Bars in possession)</label>
-        <div class="input-with-currency">
-          <span>₹</span>
-          <input 
-            type="number" 
-            [ngModel]="donationService.goldValue()" 
-            (ngModelChange)="donationService.goldValue.set($event)" 
-            placeholder="0" />
+  </section>
+  <section class="container calculator-layout">
+    <div>
+      <aside class="preview-disclosure">
+        <span class="material-symbols-outlined" aria-hidden="true">info</span>
+        <p>
+          This worksheet illustrates a simple 2.5% calculation only. Asset treatment, liabilities,
+          Nisab basis and lunar-year conditions need appropriate review. It is not a Shariah
+          certification or a payment instruction.
+        </p>
+      </aside>
+      <div class="calculator-fields">
+        <div class="section-title-row">
+          <h2>Your reviewed values</h2>
+          <button type="button" class="inline-link" (click)="reset()">Reset</button>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label>Silver Value (Jewellery / Utensils / Bars)</label>
-        <div class="input-with-currency">
-          <span>₹</span>
-          <input 
-            type="number" 
-            [ngModel]="donationService.silverValue()" 
-            (ngModelChange)="donationService.silverValue.set($event)" 
-            placeholder="0" />
+        <p class="caption">
+          Values stay in this page’s memory. They are not submitted or added to the URL.
+        </p>
+        <div class="calculator-grid">
+          @for (label of labels; track label; let i = $index) {
+            <div>
+              <label [for]="'asset-' + i">{{ label }} (INR)</label
+              ><input
+                [id]="'asset-' + i"
+                type="text"
+                inputmode="decimal"
+                placeholder="0.00"
+                [value]="assets()[i]"
+                (input)="asset(i, $event)"
+              />
+            </div>
+          }
+          <div>
+            <label for="reviewed-liability">Reviewed deductible liabilities (INR)</label
+            ><input
+              id="reviewed-liability"
+              type="text"
+              inputmode="decimal"
+              placeholder="0.00"
+              [value]="liability()"
+              (input)="liability.set(text($event))"
+            />
+          </div>
+          <div>
+            <label for="reviewed-nisab">Your reviewed Nisab threshold (INR)</label
+            ><input
+              id="reviewed-nisab"
+              type="text"
+              inputmode="decimal"
+              placeholder="Enter a confirmed threshold"
+              [value]="threshold()"
+              (input)="threshold.set(text($event))"
+              aria-describedby="nisab-help"
+            /><small id="nisab-help"
+              >Use your chosen basis and valuation date; no default market value is supplied.</small
+            >
+          </div>
+          <div>
+            <label for="valuation-date">Valuation date (optional)</label
+            ><input
+              id="valuation-date"
+              type="date"
+              [value]="valuationDate()"
+              (input)="valuationDate.set(text($event))"
+            />
+          </div>
         </div>
-      </div>
-
-      <div class="form-group">
-        <label>Cash in Bank Accounts & In Hand</label>
-        <div class="input-with-currency">
-          <span>₹</span>
-          <input 
-            type="number" 
-            [ngModel]="donationService.cashInHand()" 
-            (ngModelChange)="donationService.cashInHand.set($event)" 
-            placeholder="0" />
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Business Merchandise & Trading Inventory</label>
-        <div class="input-with-currency">
-          <span>₹</span>
-          <input 
-            type="number" 
-            [ngModel]="donationService.businessStock()" 
-            (ngModelChange)="donationService.businessStock.set($event)" 
-            placeholder="0" />
-        </div>
-      </div>
-
-      <hr class="calc-hr" />
-
-      <h3 class="panel-title">Immediate Liabilities & Debts Due</h3>
-      <div class="form-group">
-        <label>Short-term bills & debts due immediately</label>
-        <div class="input-with-currency">
-          <span>₹</span>
-          <input 
-            type="number" 
-            [ngModel]="donationService.liabilities()" 
-            (ngModelChange)="donationService.liabilities.set($event)" 
-            placeholder="0" />
-        </div>
+        <label class="public-checkbox"
+          ><input
+            type="checkbox"
+            [checked]="yearReviewed()"
+            (change)="yearReviewed.set(checked($event))"
+          /><span>I have reviewed the applicable lunar-year condition with my adviser.</span></label
+        >
       </div>
     </div>
-
-    <div class="calc-results-panel glass-dark">
-      <div class="results-header">
-        <span class="badge badge-green">Net Assessment</span>
-        <h3>Summary of Zakat</h3>
-      </div>
-
-      <div class="results-breakdown">
-        <div class="res-row">
-          <span>Net Eligible Wealth:</span>
-          <strong>₹{{ donationService.calculatedNetWealth().toLocaleString('en-IN') }}</strong>
-        </div>
-        <div class="res-row">
-          <span>Nisab Threshold:</span>
-          <strong>₹{{ donationService.currentNisab().toLocaleString('en-IN') }}</strong>
-        </div>
-        <div class="res-row">
-          <span>Zakat Applicable?</span>
-          <strong>{{ donationService.isZakatEligible() ? 'YES (Above Nisab)' : 'NO (Below Nisab)' }}</strong>
-        </div>
-        <div class="res-total-box">
-          <span class="res-total-label">Your Total Zakat Payable (2.5%)</span>
-          <span class="res-total-value">₹{{ donationService.calculatedZakatPayable().toLocaleString('en-IN') }}</span>
-        </div>
-      </div>
-
-      <div class="results-note">
-        <span class="material-symbols-outlined" style="font-size: 18px;">info</span>
-        <p>Young Helpers Foundation maintains a dedicated, audit-proof Zakat ledger. 100% of your Zakat funds only eligible beneficiaries (Mustahiqeen) for Rozgaar, Medical, & Education needs.</p>
-      </div>
-
-      @if (donationService.calculatedZakatPayable() > 0) {
-        <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" (click)="payCalculatedZakat()">
-          Pay Calculated Zakat (₹{{ donationService.calculatedZakatPayable().toLocaleString('en-IN') }})
-        </button>
+    <aside class="estimate-panel" aria-live="polite">
+      <span class="eyebrow">PLANNING SUMMARY</span>
+      <h2>See the calculation.</h2>
+      @if (result().value; as value) {
+        <dl>
+          <div>
+            <dt>Total entered assets</dt>
+            <dd>{{ money(value.total) }}</dd>
+          </div>
+          <div>
+            <dt>Reviewed liabilities</dt>
+            <dd>− {{ money(value.due) }}</dd>
+          </div>
+          <div>
+            <dt>Net entered wealth</dt>
+            <dd>{{ money(value.net) }}</dd>
+          </div>
+          <div>
+            <dt>Entered Nisab threshold</dt>
+            <dd>{{ money(value.nisab) }}</dd>
+          </div>
+        </dl>
+        @if (!value.ready) {
+          <p class="estimate-status">Review the lunar-year condition before showing an estimate.</p>
+        } @else {
+          <div class="estimate-total">
+            <small>Illustrative estimate at 2.5%</small><strong>{{ money(value.estimate) }}</strong>
+          </div>
+          <p class="caption">
+            {{
+              value.belowThreshold
+                ? 'Net entered wealth is below your entered threshold.'
+                : 'Net entered wealth × 2.5%, rounded to the nearest paise.'
+            }}
+          </p>
+        }
       } @else {
-        <button class="btn btn-outline" style="width: 100%; margin-top: 1.5rem; color: white; border-color: rgba(255,255,255,0.4);" (click)="giveSadaqah()">
-          Give Voluntary Sadaqah Instead
-        </button>
+        <p class="estimate-status">{{ result().error }}</p>
       }
-    </div>
-  </div>
-</section>
+      <p class="caption">
+        No payment or recurring debit is created. Confirm your individual treatment with a qualified
+        adviser before acting.
+      </p>
+    </aside>
+  </section>
+</div>

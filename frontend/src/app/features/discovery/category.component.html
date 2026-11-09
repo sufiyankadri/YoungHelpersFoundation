@@ -1,0 +1,84 @@
+@if (programme(); as p) {
+  <div class="yhf-page">
+    <section class="category-hero">
+      <div class="container">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <button type="button" (click)="nav.navigateTo('categories')">Programmes</button
+          ><span>/</span><span>{{ p.label }}</span>
+        </nav>
+        <div class="category-hero-grid">
+          <div>
+            <span class="eyebrow">{{ p.kicker }}</span>
+            <h1>{{ p.name }}</h1>
+            <p class="large-copy">{{ p.summary }}</p>
+            <p>{{ p.purpose }}</p>
+            <div class="programme-actions">
+              <button type="button" class="public-button" (click)="nav.explore('all', p.id)">
+                Explore {{ p.label.toLowerCase() }} examples ↗</button
+              ><button type="button" class="inline-link" (click)="nav.openInfo('process')">
+                Understand our process →
+              </button>
+            </div>
+          </div>
+          <figure>
+            <img [src]="p.image" alt="Illustrative programme scene" width="1536" height="1024" />
+            <figcaption>Illustrative image. Not a beneficiary record.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+    <section class="container guide-section">
+      <div class="guide-copy">
+        <span class="eyebrow">BEFORE A REQUEST CAN MOVE FORWARD</span>
+        <h2>Understand the need.<br />Plan the support.</h2>
+        <p>
+          Final eligibility and programme policies must be approved before services open. Reading
+          this guide does not create an application or guarantee assistance.
+        </p>
+      </div>
+      <div class="guide-checklist">
+        <h3>What the review would consider</h3>
+        @for (need of p.needs; track need) {
+          <p><span aria-hidden="true">✓</span>{{ need }}</p>
+        }
+        <small
+          >Share sensitive documents only through a verified, private intake service when it becomes
+          available.</small
+        >
+      </div>
+    </section>
+    <section class="process-band">
+      <div class="container">
+        <span class="eyebrow">A PROPOSED PATH, NOT A PROMISE</span>
+        <h2>Care at every step.</h2>
+        <ol class="process-row">
+          @for (step of p.steps; track step; let i = $index) {
+            <li>
+              <span>0{{ i + 1 }}</span>
+              <h3>{{ step }}</h3>
+            </li>
+          }
+        </ol>
+      </div>
+    </section>
+    <section class="container related-section">
+      <div class="section-title-row">
+        <div>
+          <span class="eyebrow">READ THE NEED AND THE PLAN</span>
+          <h2>{{ p.label }} examples</h2>
+        </div>
+        <button type="button" class="inline-link" (click)="nav.explore('all', p.id)">
+          View this collection ↗
+        </button>
+      </div>
+      <p class="caption">
+        Illustrative examples only. No live fundraising or verified beneficiaries.
+      </p>
+      <div class="related-grid">
+        @for (cause of examples(); track cause.id) {
+          <app-cause-card [cause]="cause" />
+        }
+      </div>
+    </section>
+  </div>
+}

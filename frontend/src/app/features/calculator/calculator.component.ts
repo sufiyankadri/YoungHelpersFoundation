@@ -1,30 +1,57 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { DonationService } from '../../core/services/donation.service';
-
-/**
- * Shariah Zakat Calculator component with silver/gold Nisab toggles and instant 2.5% calculation.
- */
+import { Component, computed, signal } from '@angular/core';
+import { planningEstimate, formatPaise } from '../../core/models/zakat-estimate';
 @Component({
   selector: 'app-calculator',
   standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: './calculator.component.html',
-  styleUrl: './calculator.component.scss'
+  styles: [':host{display:block}'],
 })
 export class CalculatorComponent {
-  constructor(public donationService: DonationService) {}
-
-  payCalculatedZakat(): void {
-    const amount = this.donationService.calculatedZakatPayable();
-    this.donationService.setAmount(amount);
-    this.donationService.selectedFundType.set('Zakat');
-    this.donationService.openDonateModal();
+  readonly labels = [
+    'Cash in hand',
+    'Bank balances',
+    'Gold value you consider applicable',
+    'Silver value you consider applicable',
+    'Business inventory you consider applicable',
+    'Other reviewed applicable assets',
+  ];
+  readonly assets = signal(['', '', '', '', '', '']);
+  readonly liability = signal('');
+  readonly threshold = signal('');
+  readonly yearReviewed = signal(false);
+  readonly valuationDate = signal('');
+  readonly result = computed(() => {
+    try {
+      return {
+        value: planningEstimate(
+          this.assets(),
+          this.liability(),
+          this.threshold(),
+          this.yearReviewed(),
+        ),
+        error: '',
+      };
+    } catch (error) {
+      return { value: null, error: (error as Error).message };
+    }
+  });
+  readonly money = formatPaise;
+  asset(index: number, event: Event) {
+    const next = [...this.assets()];
+    next[index] = (event.target as HTMLInputElement).value;
+    this.assets.set(next);
   }
-
-  giveSadaqah(): void {
-    this.donationService.selectedFundType.set('Sadaqah');
-    this.donationService.openDonateModal();
+  text(event: Event) {
+    return (event.target as HTMLInputElement).value;
+  }
+  checked(event: Event) {
+    return (event.target as HTMLInputElement).checked;
+  }
+  reset() {
+    this.assets.set(['', '', '', '', '', '']);
+    this.liability.set('');
+    this.threshold.set('');
+    this.yearReviewed.set(false);
+    this.valuationDate.set('');
   }
 }
